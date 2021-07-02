@@ -1,0 +1,33 @@
+Muy buenas, equipo;
+
+Os adjunto el diseño del scoring que debe obtener la aplicación en su conjunto:
+Parte de preguntas. De 0.25 a 1 punto según la respuesta cerrada. El valor máximo de esta parte del test es de 9 puntos.
+Parte de conversación, palabras: si aparece alguna de estas palabras se añade la puntuación que corresponde, según la tabla de valores de las mismas. El valor máximo de esta parte es de 3 puntos. 
+Parte de conversación, patrones: Si se detecta alguno de estos patrones, se añade directamente el punto a la puntuación. El valor máximo de esta parte es de 3 puntos.
+Esto hace que el valor máximo del test sea de 15 puntos y sobre eso se definan 3 escalas: 
+<5 No se aprecian rasgos depresivos
+de 5 a 10 Rasgos depresivos leves. Se recomienda consultar con un especialista
+de 11 a 15 Rasgos depresivos severos. Es necesaria la consulta urgente con un especialista. 
+
+Preguntas: 
+
+Durante las últimas 2 semanas, ¿con qué frecuencia... 
+has sentido poco interés o placer en hacer cosas?
+te has sentido decaído/decaída, deprimido/deprimida o sin esperanzas?
+te has sentido ansioso/a alterado/a?
+no has podido dejar de preocuparte?
+te has preocupado excesivamente por diferentes cosas?
+has tenido dificultad para relajarte?
+te has sentido tan intranquilo/intranquila que no podías estarte quieto/quieta?
+te has irritado o enfadado con facilidad?
+has sentido miedo, como si fuera a suceder algo terrible?
+
+Respuestas:
+
+Ningun día 
+menos de 7 días 
+Mas de 7 dias
+Casi todos los días
+
+
+Respecto a los patrones hay que diseñar un sistema que contabilice los pronombres y deduzca si hay más de la primera persona del singular o de las segundas y terceras personas, que detecte la repetición de palabras de una manera que se salga de la norma ( evitando las palabras que se repiten de por si en el lenguaje ) y por último que detecte si se ha tardado un tiempo excesivo es escribir las respuestas ( habria que hacer la media de lo que se tarda en responder al bot ) 

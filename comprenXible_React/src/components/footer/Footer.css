@@ -1,0 +1,20 @@
+.footer{
+    background-color: var(--dark-turquoise-color);
+    padding-left: 10px;
+    padding-right: 10px;
+    font-size:x-small;
+}
+
+.footerContainer{
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+}
+.footer a{
+    text-decoration: none;
+    color: var(--white-color)
+}
+
+@media (min-width: 767px) {
+    
+}

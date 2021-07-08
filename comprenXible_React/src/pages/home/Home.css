@@ -1,0 +1,63 @@
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans&display=swap');
+
+.initTestContainer{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    font-size: 1em;    
+    margin: 4em 0;
+}
+
+.textSection{
+    color: #ffffff;
+}
+
+.textSection hr{
+    border: solid white 2px;
+    background-color: #ffffff;
+    border-radius: 20px;
+}
+
+#finalLine{
+    display: none;
+}
+
+.infoContainer{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.infoContainer img{
+    margin-top: 20px;
+}
+
+.infoContainer p{
+    font-weight: bold;
+    font-style: italic;
+    margin-bottom: 1px;
+}
+
+.infoContainer hr{
+    width: 60%;
+}
+
+.profilePicture{
+    width: 50%;
+}
+
+
+
+/* Con min-width: 767px creamos los estilos de escritorio */
+@media (min-width: 767px) {
+
+    .picturesContainer{
+        display: flex;
+        flex-direction: row;
+    }
+
+    #finalLine{
+        display:block;
+    }
+}

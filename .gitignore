@@ -22,6 +22,16 @@ comprenXible_API/coverage
 # production
 comprenXible_API/build
 
+# dependencies
+comprenXible_React/node_modules
+comprenXible_React/.pnp
+
+# testing
+comprenXible_React/coverage
+
+# production
+comprenXible_React/build
+
 # misc
 .DS_Store
 .env.local

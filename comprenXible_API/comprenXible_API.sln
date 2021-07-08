@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.31205.134
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "comprenXible_API", "comprenXible_API.csproj", "{46052A3D-EC80-45D9-ADF6-4BD12743E9EE}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{46052A3D-EC80-45D9-ADF6-4BD12743E9EE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{46052A3D-EC80-45D9-ADF6-4BD12743E9EE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{46052A3D-EC80-45D9-ADF6-4BD12743E9EE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{46052A3D-EC80-45D9-ADF6-4BD12743E9EE}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {92134262-6C90-4A1B-B616-6DA87B55CB64}
+	EndGlobalSection
+EndGlobal

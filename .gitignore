@@ -23,14 +23,14 @@ comprenXible_API/coverage
 comprenXible_API/build
 
 # dependencies
-React/node_modules
-React/.pnp
+comprenXible_React/node_modules
+comprenXible_React/.pnp
 
 # testing
-React/coverage
+comprenXible_React/coverage
 
 # production
-React/build
+comprenXible_React/build
 
 # misc
 .DS_Store

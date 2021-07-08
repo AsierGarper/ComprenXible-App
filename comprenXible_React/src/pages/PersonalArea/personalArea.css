@@ -1,0 +1,29 @@
+.userDataForm input{
+    border-radius: 10px;
+    margin: 10px 0;
+}
+
+#testRecords {
+    border-collapse: collapse;
+    width: 100%;
+}
+
+#testRecords td, #testRecords th {
+    padding: 8px;
+  }
+  
+  /* #testRecords tr:nth-child(even){background-color: #f2f2f2;} */
+  
+  #testRecords tr:hover {background-color: #ddd;}
+  
+  #testRecords th {
+    padding-top: 12px;
+    padding-bottom: 12px;
+    text-align: left;
+    background-color: #F0EDE9;;
+    color: var(--light-turquoise-color);
+  }
+
+  tr a{
+      color: #ffffff;
+  }

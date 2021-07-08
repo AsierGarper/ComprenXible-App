@@ -22,6 +22,16 @@ comprenXible_API/coverage
 # production
 comprenXible_API/build
 
+# dependencies
+React/node_modules
+React/.pnp
+
+# testing
+React/coverage
+
+# production
+React/build
+
 # misc
 .DS_Store
 .env.local

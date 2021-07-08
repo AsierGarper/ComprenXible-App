@@ -4,7 +4,8 @@
 
 .vs/
 .vs/*
-comprenXible_API/obj/
+comprenXible_API/obj
+comprenXible_API/bin/
 comprenXible_API/obj/*
 comprenXible_API/obj/Debug/*
 

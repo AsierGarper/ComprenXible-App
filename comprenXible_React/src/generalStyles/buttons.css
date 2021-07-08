@@ -1,0 +1,51 @@
+.button{
+    display: inline-block;
+    text-align:center;
+    text-decoration: none;
+    padding: 0.5em 2em 0.6em;
+    font-weight: bold;
+    position: relative;
+    transition: all .2s;
+    z-index: 0;
+}
+
+.button::before{
+    content: "";
+    left: -1px;
+    top: -1px;
+    position: absolute;
+    width: 102%;
+    height: 0%;
+    display: block;
+    transition: all 0.2s;
+    z-index: -1;
+}
+.button:hover::before{
+    height: 105%;
+}
+
+.button--bgTransparent-white{
+    background-color: transparent;
+    border: solid white 3px;
+    color: #ffffff;
+}
+.button--bgTransparent-white:hover{
+    color: var(--dark-turquoise-color);
+}
+
+.button--bgTransparent-white::before{
+    background: white;
+}
+
+.button--bgSolid-turquoise{
+    background-color: transparent;
+    border: solid  var(--dark-turquoise-color) 3px;
+    color:  var(--dark-turquoise-color);
+}
+.button--bgSolid-turquoise:hover{
+    color: #ffffff;
+}
+
+.button--bgSolid-turquoise::before{
+    background:  var(--dark-turquoise-color);
+}

@@ -13,6 +13,9 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using comprenXible_API.Data;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using comprenXible_API.Authentication_;
+using comprenXible_API.ExtensionMethods;
 
 namespace comprenXible_API
 {
@@ -30,13 +33,29 @@ namespace comprenXible_API
         {
 
             services.AddControllers();
+
+            //Swagger -- this will be removed at some point
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "comprenXible_API", Version = "v1" });
             });
 
+            //NOTE: I changed this line's "configuration" to uppercase "Configuration" -- I don't know what will happen
+            IConfigurationSection settingsSection = Configuration.GetSection("AppSettings");
+            AppSettings settings = settingsSection.Get<AppSettings>();
+            byte[] signingKey = System.Text.Encoding.UTF8.GetBytes(settings.EncryptionKey);
+
+            //This adds the Auth service to the App container.
+            //An extension AddAuthentication method have been created
+            services.AddAuthentication(signingKey);
+
+            //Services configured for the dependency injection
             services.AddDbContext<ApplicationDbContext>(options =>
                     options.UseSqlServer(Configuration.GetConnectionString("ApplicationDbContext")));
+            services.Configure<AppSettings>(settingsSection);
+            services.AddTransient<Auth>();
+            services.AddTransient<UserService>();
+            services.AddTransient<TokenService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -55,10 +74,14 @@ namespace comprenXible_API
 
             app.UseAuthorization();
 
+            //I added this fot authentication
+            app.UseAuthentication();
+
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
             });
         }
+       
     }
 }

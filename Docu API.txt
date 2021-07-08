@@ -1,0 +1,36 @@
+
+comprenXible API -- Documentation
+
+This is a Query -- https://localhost:44350*/api/name_of_model/
+
+*This is an example. Here you should type the port that VS uses in your case.
+Please note that:
+1) this number could change from one execution to another
+2) the API program must be running 
+3) at a final stage, you'll have to change this route for the stable, online one.
+
+FOR EXAMPLE:
+
+GET https://localhost:XXXXX/api/answers - get all answers in an object list
+GET https://Localhost:XXXXX/api/answers/id - get an answer by id
+
+don't forget to check with postman before running code. This is for avoiding despair and hopelessness
+
+the same for POST (add new answer),
+	PUT (modify answer)
+	and DELETE (I have no idea what this command is supposed to do)
+	don't forget to specify the id when targeting a concrete element
+
+in order to POST, you need to send a JSON object like this:
+
+{
+  "value": "1 o 2 veces",
+  "score": 0.25
+}
+remember that you shouldn't specify the id when posting
+
+
+please check database info for object attributes
+also, use of Swagger may be helpful. Run it simply by executing the API proyect from VS
+contact the API developer only in case of extreme necessity
+

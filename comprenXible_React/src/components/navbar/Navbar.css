@@ -1,0 +1,62 @@
+.navbar{
+    display: flex;
+    font-style:italic;
+    justify-content: space-between;
+    background-color: var(--dark-turquoise-color);
+}
+
+.logoAnsiedapp{
+  width: 100px;
+  border-radius: 10px;
+  object-fit: cover;
+}
+
+/* -----------------------------Hamburguesaaaaa---------------------- */
+
+
+
+
+
+/* --------------------------------------------------- */
+
+/* .navbarLinks a, .credentials{
+  display: none;
+} */
+
+.navbarLinks a:hover {
+  background-color: #B5E3D8;
+  border-radius: 20px;
+}
+
+.credentials a{
+  text-decoration: none;
+  padding-left: 5px;;
+  padding-right: 5px;;
+}
+
+.credentials a:hover{
+  background-color: #B5E3D8;
+  border-radius: 20px;
+}
+
+
+  @media (min-width: 767px) {
+    .navbarLinks a {
+      float: left;
+      font-size: 16px;
+      color: black;
+      text-align: center;
+      padding: 20px 16px;
+      text-decoration: none;
+    }
+
+    .credentials{
+      display: flex;
+      flex-direction: column;
+      text-align: end;
+      border: solid black 1px;
+      border-radius: 10px;
+      padding: 10px;
+      text-decoration: none;
+  }
+  }

@@ -1,0 +1,34 @@
+.questionSection{
+display: flex;
+flex-direction: column;
+align-items: center;
+}
+
+.quitTest, .close{
+    margin-top: 20px;
+    font-size: 1.5em;
+    color: #ffffff;
+    display: flex;
+    justify-content:flex-end;
+}
+.questionText{
+    padding: 10px;
+    font-size:small;
+    margin: 20px;
+    background-color: #ffffff;
+    border-radius: 20px;
+}
+
+progress{
+    margin: 20px 0;
+    width: 100%;
+}
+.questionButtons{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between; 
+    max-width: 80%;
+    width: 100%;
+    margin: 50px auto 20px;
+}
+

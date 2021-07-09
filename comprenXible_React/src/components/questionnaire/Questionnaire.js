@@ -18,7 +18,7 @@ function Question() {
     const [questionListCount, setquestionListCount] = useState(0);
 
     //Como la progress bar hará 8 movimientos, aumentará un 12.5% por cada uno para llegar al 100%
-    const [progressBarStatus, moveProgressBar] = useState(12.5);
+    const [progressBarStatus, moveProgressBar] = useState(0);
 
     const [choosedOptionIndex, setchoosedOptionIndex] = useState(0);
 

@@ -1,0 +1,30 @@
+comprenXible API -- Documentation page 2 -- USER AUTHENTICATION
+
+HOW DOES IT WORK?
+
+When the user tries to log in, send email and password to the API
+if they're correct, the API will send back a JSON Web Token (long string of letters and numbers)
+then you'll have to include this token as a bearer token in every call to the API for what user should be logged
+
+
+STEP BY STEP
+
+1 - Ask for Token => 
+POST https://localhost:XXXX/api/Authentication -- and send a UserCredentials object, wich looks like this:
+
+{
+  "UserEmail": "john.doe@mail.net",
+  "Password": "123456"
+}
+
+If everything goes alrighty, you'll get something like:  
+eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYmYiOjE2MjU3NTg3OTAsImV4cCI6MTYyNjM2MzU5MCwiaWF0IjoxNjI1NzU4NzkwfQ.LDSWCQLhqFUsQzasulLW4chlr_NZfWvJiLADmxfXvRw
+
+
+2 - Ask for Authorization =>
+POST https://localhost:XXXX/api/Validation
+
+you'll have to include the bearer token in the authorization, like that:
+Authorization: Bearer f4f4994a875f461ca4d7708b9e027df4
+
+Validation is a testing controller that only returns a 200 OK Status when the bearer is correct

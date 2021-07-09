@@ -99,7 +99,7 @@ function Question() {
                         <input type="radio" id="optionD" name="option" value="D" />
                         <label htmlFor="optionD"> Casi todos los días.</label><br></br>
                     </form>
-
+                    <p>Mira que barrita:</p>
                     <progress max="100" value={progressBarStatus}></progress>
                 </div>
                 <div className="questionButtons">

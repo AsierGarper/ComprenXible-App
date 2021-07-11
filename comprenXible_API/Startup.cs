@@ -28,6 +28,9 @@ namespace comprenXible_API
 
         public IConfiguration Configuration { get; }
 
+        //This is for setting the CORS allowed origins
+        readonly string CorsOrigins = "_corsOrigins";
+
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
@@ -35,15 +38,29 @@ namespace comprenXible_API
             services.AddControllers();
 
             //Swagger -- this will be removed at some point
-            services.AddSwaggerGen(c =>
+            //services.AddSwaggerGen(c =>
+            //{
+            //    c.SwaggerDoc("v1", new OpenApiInfo { Title = "comprenXible_API", Version = "v1" });
+            //});
+
+            //This is for adding the CORS policy
+            services.AddCors(options =>
             {
-                c.SwaggerDoc("v1", new OpenApiInfo { Title = "comprenXible_API", Version = "v1" });
+                options.AddPolicy(name: CorsOrigins,
+                                  builder =>
+                                  {
+                                      //By now the CORS policy is - open for everybody -
+                                      builder.AllowAnyHeader().AllowAnyMethod().AllowAnyOrigin();
+                                  });
             });
 
             //NOTE: I changed this line's "configuration" to uppercase "Configuration" -- I don't know what will happen
             IConfigurationSection settingsSection = Configuration.GetSection("AppSettings");
             AppSettings settings = settingsSection.Get<AppSettings>();
             byte[] signingKey = System.Text.Encoding.UTF8.GetBytes(settings.EncryptionKey);
+
+            //This is here for adding the cors controllers
+            services.AddControllers();
 
             //This adds the Auth service to the App container.
             //An extension AddAuthentication method have been created
@@ -64,8 +81,8 @@ namespace comprenXible_API
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
-                app.UseSwagger();
-                app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "comprenXible_API v1"));
+                //app.UseSwagger();
+                //app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "comprenXible_API v1"));
             }
 
             app.UseHttpsRedirection();
@@ -76,6 +93,9 @@ namespace comprenXible_API
 
             //I added this fot authentication
             app.UseAuthentication();
+
+            //& this guy enables the CORS policy created before
+            app.UseCors(CorsOrigins);
 
             app.UseEndpoints(endpoints =>
             {

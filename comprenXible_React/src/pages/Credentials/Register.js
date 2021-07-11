@@ -8,11 +8,10 @@ import Footer from '../../components/footer/Footer.js';
 import axios from 'axios';
 
 function Register() {
-
-
     const [newUser, setUserData] = useState();
-
     useEffect(() => {
+        console.log("Tu objeto que pasas por post es newUser, que es: ")
+        console.log(newUser);
         axios.post('https://localhost:44350/api/users/', newUser)
             .then(function (response) {
                 console.log("Esta es la respuesta al post:")
@@ -23,7 +22,6 @@ function Register() {
             })
     }, [newUser])
 
-
     function getCheckedSex() {
         var ele = document.getElementsByName('userSex');
         for (var i = 0; i < ele.length; i++) {
@@ -31,22 +29,16 @@ function Register() {
                 return ele[i].value;
         }
     }
-
     function createUserObject() {
         var userName = document.getElementById("userName").value;
         var userEmail = document.getElementById("userEmail").value;
         var userPassword = document.getElementById("userPassword").value;
         var userSex = getCheckedSex();
         let tempUserObject = { Name: userName, Gender: userSex, Mail: userEmail, Password: userPassword };
+        console.log("Tu objeto temUserObject es: ")
+        console.log(tempUserObject);
         setUserData(tempUserObject);
     }
-
-    // function setUserData() {
-    //     console.log("Este es tu macroObjeto de user:")
-    //     console.log(createUserObject())
-    // }
-
-
     return (<>
         <div className="SignIn">
             <Navbar />
@@ -62,11 +54,11 @@ function Register() {
                         <label htmlFor="userEmail">Password:</label><br></br>
                         <input type="password" id="userPassword" name="userPassword" /><br></br>
                         <label htmlFor="userSex">Sexo:</label><br></br>
-                        <input type="radio" id="userSex" name="userSex" value="man" />
+                        <input type="radio" className="userSex" name="userSex" value="man" />
                         <label htmlFor="H">Hombre</label><br></br>
-                        <input type="radio" id="userSex" name="userSex" value="woman" />
+                        <input type="radio" className="userSex" name="userSex" value="woman" />
                         <label htmlFor="M">Mujer</label><br></br>
-                        <input type="radio" id="userSex" name="userSex" value="other" />
+                        <input type="radio" className="userSex" name="userSex" value="other" />
                         <label htmlFor="O">Otro</label><br></br>
                     </form>
                     <button className="button button--bgTransparent-white" onClick={() => createUserObject()} >Registrarse</button>

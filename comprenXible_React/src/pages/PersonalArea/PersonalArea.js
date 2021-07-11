@@ -1,30 +1,31 @@
-import React, { useEffect, useState } from "react";
+// import React, { useEffect, useState } from "react";
+import React from "react";
 // import {
 //     Link
 // } from "react-router-dom";
 import './personalArea.css';
 import Navbar from '../../components/navbar/Navbar';
 import Footer from '../../components/footer/Footer.js';
-import axios from 'axios';
+// import axios from 'axios';
 
 function PersonalArea() {
 
     // const [questionList, setquestionList] = useState([]);
 
-    useEffect(() => {
-        axios.get('https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=-33.8670522,151.1957362&radius=1500&type=restaurant&keyword=cruise&key=AIzaSyAJj6Uf5qPhtO62rz12qcz_JPW_E0fq7vU')
-            .then(function (response) {
-                console.log(response);
-                // let provisionalQuestionList = [];
-                // response.data.forEach((data) => {
-                //     provisionalQuestionList.push(<p>{data.value}</p>)
-                // });
-                // setquestionList(provisionalQuestionList);
-            })
-            .catch(function (error) {
-                console.log(error);
-            })
-    }, [])
+    // useEffect(() => {
+    //     axios.get('https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=-33.8670522,151.1957362&radius=1500&type=restaurant&keyword=cruise&key=AIzaSyAJj6Uf5qPhtO62rz12qcz_JPW_E0fq7vU')
+    //         .then(function (response) {
+    //             console.log(response);
+    //             // let provisionalQuestionList = [];
+    //             // response.data.forEach((data) => {
+    //             //     provisionalQuestionList.push(<p>{data.value}</p>)
+    //             // });
+    //             // setquestionList(provisionalQuestionList);
+    //         })
+    //         .catch(function (error) {
+    //             console.log(error);
+    //         })
+    // }, [])
 
 
 

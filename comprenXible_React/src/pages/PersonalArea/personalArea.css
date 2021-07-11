@@ -14,7 +14,6 @@
   
   /* #testRecords tr:nth-child(even){background-color: #f2f2f2;} */
   
-  #testRecords tr:hover {background-color: #ddd;}
   
   #testRecords th {
     padding-top: 12px;
@@ -24,6 +23,12 @@
     color: var(--light-turquoise-color);
   }
 
+  tr{
+      /* display: flex;
+      align-items:center */
+      vertical-align:text-bottom;
+      text-align: center;
+  }
   tr a{
       color: #ffffff;
   }

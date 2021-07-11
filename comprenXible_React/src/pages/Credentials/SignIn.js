@@ -7,6 +7,10 @@ import Navbar from '../../components/navbar/Navbar';
 import Footer from '../../components/footer/Footer.js';
 
 function SignIn() {
+
+    // user={Email: email.value, Password: password.value}
+    // httpPost
+
     return (<>
         <div className="SignIn">
             <Navbar />
@@ -19,7 +23,7 @@ function SignIn() {
                         <input type="mail" id="email" name="userForm" /><br></br>
                         <label htmlFor="userSex">Contraseña:</label><br></br>
                         <input type="password" id="password" name="userForm" /><br></br>
-                        <input type="submit" class="button button--bgTransparent-white" value="Iniciar sesión" />
+                        <button type="submit" className="button button--bgTransparent-white">Iniciar Sesión</button>
                     </form>
                     <br></br>
                 </div>

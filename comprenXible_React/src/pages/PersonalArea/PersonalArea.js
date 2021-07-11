@@ -1,12 +1,33 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 // import {
 //     Link
 // } from "react-router-dom";
 import './personalArea.css';
 import Navbar from '../../components/navbar/Navbar';
 import Footer from '../../components/footer/Footer.js';
+import axios from 'axios';
 
 function PersonalArea() {
+
+    // const [questionList, setquestionList] = useState([]);
+
+    useEffect(() => {
+        axios.get('https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=-33.8670522,151.1957362&radius=1500&type=restaurant&keyword=cruise&key=AIzaSyAJj6Uf5qPhtO62rz12qcz_JPW_E0fq7vU')
+            .then(function (response) {
+                console.log(response);
+                // let provisionalQuestionList = [];
+                // response.data.forEach((data) => {
+                //     provisionalQuestionList.push(<p>{data.value}</p>)
+                // });
+                // setquestionList(provisionalQuestionList);
+            })
+            .catch(function (error) {
+                console.log(error);
+            })
+    }, [])
+
+
+
     return (<>
         <div className="PersonalArea">
             <Navbar />
@@ -27,7 +48,7 @@ function PersonalArea() {
                         <label htmlFor="M">Mujer</label><br></br>
                         <input type="radio" id="userSex" name="userForm" />
                         <label htmlFor="O">Otro</label><br></br>
-                        <input type="submit" class="button button--bgTransparent-white" value="Guardar cambios" />
+                        <button type="submit" className="button button--bgTransparent-white">Guardar cambios</button>
                     </form>
 
                     <br></br>
@@ -44,13 +65,13 @@ function PersonalArea() {
                             <td>20/04/2020</td>
                             <td>12/15</td>
                             <td>Necesita atención médica.</td>
-                            <a href="/">Enviar Resultados</a>
+                            <button className="button button--bgTransparent-white">Enviar resultados</button>
                         </tr>
                         <tr>
                             <td>20/05/2021</td>
                             <td>3/15</td>
                             <td>No necesita atención médica.</td>
-                            <a href="/">Enviar Resultados</a>
+                            <button className="button button--bgTransparent-white">Enviar resultados</button>
                         </tr>
                     </table>
 

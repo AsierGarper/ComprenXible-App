@@ -1,12 +1,52 @@
-import React from "react";
+import React, { useEffect, useState } from 'react';
 // import {
 //     Link
 // } from "react-router-dom";
 import './signIn.css';
 import Navbar from '../../components/navbar/Navbar';
 import Footer from '../../components/footer/Footer.js';
+import axios from 'axios';
 
 function Register() {
+
+
+    const [newUser, setUserData] = useState();
+
+    useEffect(() => {
+        axios.post('https://localhost:44350/api/users/', newUser)
+            .then(function (response) {
+                console.log("Esta es la respuesta al post:")
+                console.log(response);
+            })
+            .catch(function (error) {
+                console.log(error);
+            })
+    }, [newUser])
+
+
+    function getCheckedSex() {
+        var ele = document.getElementsByName('userSex');
+        for (var i = 0; i < ele.length; i++) {
+            if (ele[i].checked)
+                return ele[i].value;
+        }
+    }
+
+    function createUserObject() {
+        var userName = document.getElementById("userName").value;
+        var userEmail = document.getElementById("userEmail").value;
+        var userPassword = document.getElementById("userPassword").value;
+        var userSex = getCheckedSex();
+        let tempUserObject = { Name: userName, Gender: userSex, Mail: userEmail, Password: userPassword };
+        setUserData(tempUserObject);
+    }
+
+    // function setUserData() {
+    //     console.log("Este es tu macroObjeto de user:")
+    //     console.log(createUserObject())
+    // }
+
+
     return (<>
         <div className="SignIn">
             <Navbar />
@@ -16,18 +56,20 @@ function Register() {
                     <hr></hr>
                     <form action="modifyUserData" className="userDataForm">
                         <label htmlFor="userName">Nombre:</label><br></br>
-                        <input type="text" id="optionA" name="userForm" /><br></br>
+                        <input type="text" id="userName" name="userName" /><br></br>
                         <label htmlFor="userEmail">Email:</label><br></br>
-                        <input type="mail" id="optionB" name="userForm" /><br></br>
+                        <input type="mail" id="userEmail" name="userEmail" /><br></br>
+                        <label htmlFor="userEmail">Password:</label><br></br>
+                        <input type="password" id="userPassword" name="userPassword" /><br></br>
                         <label htmlFor="userSex">Sexo:</label><br></br>
-                        <input type="radio" id="userSex" name="userForm" />
+                        <input type="radio" id="userSex" name="userSex" value="man" />
                         <label htmlFor="H">Hombre</label><br></br>
-                        <input type="radio" id="userSex" name="userForm" />
+                        <input type="radio" id="userSex" name="userSex" value="woman" />
                         <label htmlFor="M">Mujer</label><br></br>
-                        <input type="radio" id="userSex" name="userForm" />
+                        <input type="radio" id="userSex" name="userSex" value="other" />
                         <label htmlFor="O">Otro</label><br></br>
-                        <input type="submit" class="button button--bgTransparent-white" value="Registrarse" />
                     </form>
+                    <button className="button button--bgTransparent-white" onClick={() => createUserObject()} >Registrarse</button>
                 </div>
                 <br></br>
             </div>

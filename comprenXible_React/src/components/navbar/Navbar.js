@@ -31,8 +31,8 @@ function Navbar() {
                 {/* <a href="#PersonalArea">Area Personal</a> */}
             </div>
             <div className="credentials">
-                <a href="#SignIn">Iniciar Sesion</a>
-                <a href="#Register">Registrarse</a>
+                <Link to="/SignIn">Iniciar Sesion</Link>
+                <Link to="/Register">Registrarse</Link>
             </div>
         </div>
 

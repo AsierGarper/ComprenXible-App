@@ -11,13 +11,14 @@ import Questionnaire from "./components/questionnaire/Questionnaire";
 import TestStart from "./components/testStart/TestStart";
 import TestResult from "./components/testResult/TestResult";
 import PersonalArea from "./pages/PersonalArea/PersonalArea";
-
+import SingIn from "./pages/Credentials/SignIn";
+import Register from "./pages/Credentials/Register";
 
 
 function App() {
-  return (
 
-    <Router>
+  return (
+    < Router >
       <div className="App">
         <Switch>
           <Route path="/TestStart">
@@ -28,6 +29,12 @@ function App() {
           </Route>
           <Route path="/TestResult">
             <TestResult />
+          </Route>
+          <Route path="/SignIn">
+            <SingIn />
+          </Route>
+          <Route path="/Register">
+            <Register />
           </Route>
           <Route path="/PersonalArea">
             <PersonalArea />

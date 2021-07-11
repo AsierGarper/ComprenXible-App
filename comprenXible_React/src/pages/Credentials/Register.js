@@ -2,19 +2,18 @@ import React from "react";
 // import {
 //     Link
 // } from "react-router-dom";
-import './personalArea.css';
+import './signIn.css';
 import Navbar from '../../components/navbar/Navbar';
 import Footer from '../../components/footer/Footer.js';
 
-function PersonalArea() {
+function Register() {
     return (<>
-        <div className="PersonalArea">
+        <div className="SignIn">
             <Navbar />
             <div className="wrapper">
                 <div className="textContainer">
-                    <h4>Modifica tus datos:</h4>
+                    <h4>Registro:</h4>
                     <hr></hr>
-
                     <form action="modifyUserData" className="userDataForm">
                         <label htmlFor="userName">Nombre:</label><br></br>
                         <input type="text" id="optionA" name="userForm" /><br></br>
@@ -27,39 +26,14 @@ function PersonalArea() {
                         <label htmlFor="M">Mujer</label><br></br>
                         <input type="radio" id="userSex" name="userForm" />
                         <label htmlFor="O">Otro</label><br></br>
-                        <input type="submit" class="button button--bgTransparent-white" value="Guardar cambios" />
+                        <input type="submit" class="button button--bgTransparent-white" value="Registrarse" />
                     </form>
-
-                    <br></br>
-                    <h4>Análisis realizados:</h4>
-                    <hr></hr>
-                    <table id="testRecords">
-                        <tr>
-                            <th>Fecha</th>
-                            <th>Indicadores</th>
-                            <th>Conclusión</th>
-                            <th>Resultados</th>
-                        </tr>
-                        <tr>
-                            <td>20/04/2020</td>
-                            <td>12/15</td>
-                            <td>Necesita atención médica.</td>
-                            <a href="/">Enviar Resultados</a>
-                        </tr>
-                        <tr>
-                            <td>20/05/2021</td>
-                            <td>3/15</td>
-                            <td>No necesita atención médica.</td>
-                            <a href="/">Enviar Resultados</a>
-                        </tr>
-                    </table>
-
                 </div>
-
+                <br></br>
             </div>
             <Footer />
         </div>
     </>)
 }
 
-export default PersonalArea;
+export default Register;

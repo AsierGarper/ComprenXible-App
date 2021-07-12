@@ -29,12 +29,22 @@ function Register() {
                 return ele[i].value;
         }
     }
+
+    function checkCredentials(emailInput, passwordImput) {
+        var regexEmail = /(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,}/;
+        var regexPassword = /(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,}/;
+        var OKEmail = regexEmail.exec(emailInput.value);
+        var OKPassword = regexPassword.exec(passwordImput.value);
+        if (OKPassword && OKEmail) {
+            createUserObject();
+        }
+    }
     function createUserObject() {
         var userName = document.getElementById("userName").value;
         var userEmail = document.getElementById("userEmail").value;
         var userPassword = document.getElementById("userPassword").value;
         var userSex = getCheckedSex();
-        let tempUserObject = { Name: userName, Gender: userSex, Mail: userEmail, Password: userPassword };
+        let tempUserObject = { Name: userName, Gender: userSex, Email: userEmail, Password: userPassword };
         console.log("Tu objeto temUserObject es: ")
         console.log(tempUserObject);
         setUserData(tempUserObject);
@@ -50,18 +60,18 @@ function Register() {
                         <label htmlFor="userName">Nombre:</label><br></br>
                         <input type="text" id="userName" name="userName" /><br></br>
                         <label htmlFor="userEmail">Email:</label><br></br>
-                        <input type="mail" id="userEmail" name="userEmail" /><br></br>
+                        <input type="email" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" id="userEmail" name="userEmail" /><br></br>
                         <label htmlFor="userEmail">Password:</label><br></br>
-                        <input type="password" id="userPassword" name="userPassword" /><br></br>
+                        <input type="password" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,}" title="Debe contener al menos un número y una letra mayúscula y minúscula, y al menos 6 o más caracteres" id="userPassword" name="userPassword" /><br></br>
                         <label htmlFor="userSex">Sexo:</label><br></br>
                         <input type="radio" className="userSex" name="userSex" value="man" />
                         <label htmlFor="H">Hombre</label><br></br>
                         <input type="radio" className="userSex" name="userSex" value="woman" />
                         <label htmlFor="M">Mujer</label><br></br>
-                        <input type="radio" className="userSex" name="userSex" value="other" />
+                        <input type="radio" className="userSex" name="userSex" value="other" checked="checked" />
                         <label htmlFor="O">Otro</label><br></br>
+                        <button type="submit" className="button button--bgTransparent-white" onClick={() => checkCredentials(document.getElementById('userEmail'), document.getElementById('userPassword'))} >Registrarse</button>
                     </form>
-                    <button className="button button--bgTransparent-white" onClick={() => createUserObject()} >Registrarse</button>
                 </div>
                 <br></br>
             </div>

@@ -7,6 +7,7 @@ import './personalArea.css';
 import Navbar from '../../components/navbar/Navbar';
 import Footer from '../../components/footer/Footer.js';
 // import axios from 'axios';
+// import iframe from 'react-iframe';
 
 function PersonalArea() {
 
@@ -26,8 +27,6 @@ function PersonalArea() {
     //             console.log(error);
     //         })
     // }, [])
-
-
 
     return (<>
         <div className="PersonalArea">
@@ -75,7 +74,13 @@ function PersonalArea() {
                             <button className="button button--bgTransparent-white">Enviar resultados</button>
                         </tr>
                     </table>
-
+                    <iframe title="map"
+                        width="600"
+                        height="450"
+                        loading="lazy"
+                        allowfullscreen
+                        src="https://www.google.com/maps/embed/v1/place?key=AIzaSyAJj6Uf5qPhtO62rz12qcz_JPW_E0fq7vU&q=current+location">
+                    </iframe>
                 </div>
 
             </div>

@@ -10,30 +10,26 @@ class MessageParser {
     parse(message) {
         const lowerCaseMessage = " " + message.toLowerCase() + " ";
         let wordsInMessage = lowerCaseMessage.split();
-        
-        chatbotResponses = chatbotResponses.concat(wordsInMessage);
-        
-        let chatbotResponsesObj = {
-            response: chatbotResponses
-        }
-        chatbotResponsesObj = JSON.stringify(chatbotResponsesObj);
 
-        console.log(chatbotResponsesObj)
+        let answers = sessionStorage.getItem("answers");
+        
+        chatbotResponses = chatbotResponses.concat(lowerCaseMessage);
+        
+        let date = new Date();
+        let endTime = date.getTime();
+        let startTime = sessionStorage.getItem("startTime");
+        let timeSpan = endTime-startTime;
+        var timeSpanMinutes = timeSpan / 60000;
+
+        let chatbotResponsesObj = {
+            response: chatbotResponses,
+            timeSpan: timeSpanMinutes,
+            // answersScore: answersScore
+        }
+        
         axios.post("https://localhost:44350/api/chatbotResponses", chatbotResponsesObj)
-            .then(function (response) {
-                console.log(response)
-                if (response) {
-                    let date = new Date();
-                    let endTime = date.getTime();
-                    let startTime = sessionStorage.getItem("startTime");
-                    let chatbotTimer = {
-                        timerStartTime: startTime,
-                        timerEndTime: endTime
-                    }
-                    axios.post("https://localhost:44350/api/chatbotResponses", chatbotTimer)
-                        .then(function(response2){
-                            console.log(response2);
-                        })
+            .then(function (response) {               
+                if (response) {                 
                     this.actionProvider.endConversation()
                 }
                 else if (lowerCaseMessage.includes("y tu") ||

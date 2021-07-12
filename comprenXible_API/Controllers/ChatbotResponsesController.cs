@@ -20,9 +20,8 @@ namespace comprenXible_API.Controllers
         {
 
             //Deprecated -- this is currently done at front
-            //string sentencesWithoutPunctuation = new string(chatbotResponse.Response.Where(c => !char.IsPunctuation(c)).ToArray());
+            //string[] sentencesWithoutPunctuation = new string(chatbotResponse.Response.Where(c => !char.IsPunctuation(c)).ToArray());
             //string[] words = sentencesWithoutPunctuation.Split(' ');
-            //
             double Score = WordsScoreCalc(chatbotResponse.Response);
 
             if (Score >= 3)

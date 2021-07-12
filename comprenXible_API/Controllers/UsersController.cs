@@ -78,6 +78,8 @@ namespace comprenXible_API.Controllers
         [HttpPost]
         public async Task<ActionResult<User>> PostUser(User user)
         {
+            //HERE WE NEED THE HASHED EMAIL TO BE ACTUALLY HASHED
+            user.HashedEmail = user.Email;
             _context.User.Add(user);
             await _context.SaveChangesAsync();
 

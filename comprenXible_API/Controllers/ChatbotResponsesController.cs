@@ -7,6 +7,7 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
 namespace comprenXible_API.Controllers
@@ -16,41 +17,81 @@ namespace comprenXible_API.Controllers
     public class ChatbotResponsesController : ControllerBase
     {
         private readonly IEmailService _emailService;
-        private readonly User _user;
-        public ChatbotResponsesController(IEmailService emailService, User user)
+        
+        public ChatbotResponsesController(IEmailService emailService)
         {
             _emailService = emailService;
-            _user = user;
         }
 
         // GET: api/ChatbotResponse
         [HttpPost]
         public bool GetChatbotResponses([FromBody] ChatbotResponse chatbotResponse)
         {
-            //string chatbotResponseWithoutPunctuation = new string(chatbotResponse.Response.Where(c => !char.IsPunctuation(c))());
-            //string[] chatbotResponseWords = chatbotResponseWithoutPunctuation.Split(' ');
-
-            double wordsScore = WordsScoreCalc(chatbotResponse.Response);
-            double totalResults;
-            EmailInfo emailInfo = new EmailInfo()
+            string chatbotResponseWithoutPunctuation = string.Empty;
+            foreach (var response in chatbotResponse.Response)
             {
-                EmailTo = _user.Email,
-                Body = "<p>Hola Mireia<p>",
-                Subject = "Prueba envío mail PORDIOSFUNCIONA"
-            };
+                chatbotResponseWithoutPunctuation = Regex.Replace(response, @"[^\w\s]", "");
+
+            }
+            string[] chatbotResponseWords = chatbotResponseWithoutPunctuation.Split(' ');
+
+            double wordsScore = WordsScoreCalc(chatbotResponseWords);
+            double totalResults;
+            EmailInfo emailInfo = new EmailInfo();
+
 
             if (wordsScore >= 3)
             {
-
                 wordsScore = 3;
-                totalResults = ChatbotScoreCalculation(chatbotResponse.Response, wordsScore, chatbotResponse.TimeSpan) + Convert.ToDouble(chatbotResponse.AnswersScore);
+                totalResults = ChatbotScoreCalculation(chatbotResponse.Response, wordsScore, Convert.ToDouble(chatbotResponse.TimeSpan)) + Convert.ToDouble(chatbotResponse.AnswersScore);
+                if (totalResults <= 5)
+                {
+                    //emailInfo.EmailTo = _user.Email;
+                    emailInfo.Subject = "<p>Resultados Test<p>";
+                    emailInfo.Body = "No se aprecian rasgos depresivos.";
 
+                }
+                else if (totalResults > 5 && totalResults <= 10)
+                {
+                    //emailInfo.EmailTo = _user.Email;
+                    emailInfo.Subject = "<p>Resultados Test<p>";
+                    emailInfo.Body = "Rasgos depresivos leves. Se recomienda consultar con un especialista.";
+
+                }
+                else if (totalResults > 10 && totalResults <= 15)
+                {
+                    //emailInfo.EmailTo = _user.Email;
+                    emailInfo.Subject = "<p>Resultados Test<p>";
+                    emailInfo.Body = "Rasgos depresivos severos. Es necesaria la consulta urgente con un especialista.";
+
+                }
                 _emailService.SendEmailAsync(emailInfo, totalResults);
                 return true;
             }
             else if (chatbotResponse.Response.Length > 200)
             {
-                totalResults = ChatbotScoreCalculation(chatbotResponse.Response, wordsScore, chatbotResponse.TimeSpan) + Convert.ToDouble(chatbotResponse.AnswersScore);
+                totalResults = ChatbotScoreCalculation(chatbotResponse.Response, wordsScore, Convert.ToDouble(chatbotResponse.TimeSpan)) + Convert.ToDouble(chatbotResponse.AnswersScore);
+                if (totalResults <= 5)
+                {
+                    //emailInfo.EmailTo = _user.Email;
+                    emailInfo.Subject = "<p>Resultados Test<p>";
+                    emailInfo.Body = "No se aprecian rasgos depresivos.";
+
+                }
+                else if (totalResults > 5 && totalResults <= 10)
+                {
+                    //emailInfo.EmailTo = _user.Email;
+                    emailInfo.Subject = "<p>Resultados Test<p>";
+                    emailInfo.Body = "Rasgos depresivos leves. Se recomienda consultar con un especialista..";
+
+                }
+                else if (totalResults > 10 && totalResults <= 15)
+                {
+                    //emailInfo.EmailTo = _user.Email;
+                    emailInfo.Subject = "<p>Resultados Test<p>";
+                    emailInfo.Body = "Rasgos depresivos severos. Es necesaria la consulta urgente con un especialista.";
+
+                }
 
                 _emailService.SendEmailAsync(emailInfo, totalResults);
                 return true;
@@ -61,7 +102,6 @@ namespace comprenXible_API.Controllers
             }
 
         }
-
 
         static double ChatbotScoreCalculation(Array words, double chatbotWordsScore, double elapsedTime)
         {
@@ -225,21 +265,6 @@ namespace comprenXible_API.Controllers
             return chatbotWordsScore;
         }
 
-        //string evaluation = string.Empty;
-        //axios questionsscore//
-        //double totalScore = chatbotScore + questionsScore;
-        //if (totalscore < 5)
-        //{
-        //evaluation = "no se aprecian rasgos depresivos.";
-        //}
-        //else if (totalscore > 5 && totalscore < 10)
-        //{
-        //evaluation = "rasgos depresivos leves, se recomienda consultar con un especialista.";
-        //}
-        //else if (totalscore > 10 && totalscore <= 15)
-        //{
-        //    evaluation = "rasgos depresivos severos. es necesaria la consulta urgente con un especialista.";
-        //}
 
     }
 }

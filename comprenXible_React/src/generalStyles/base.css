@@ -1,0 +1,24 @@
+/* Este va a ser la plantilla con los margenes sobre los que se meteran mis componentes */
+*{
+    box-sizing: border-box;
+}
+body{
+    font-family: 'Open Sans', sans-serif;
+    background-color: var( --light-turquoise-color);
+    min-height: 100vh;
+    margin: 0px;
+  }
+  
+.wrapper{
+    width: 100%;
+    max-width: 80%;
+    margin: auto;
+}
+
+@media (min-width: 1024px) {
+    .wrapper{
+        /* Para version de escritorio, quiero que se mantenga ocupando el 90% de la pantalla, pero que nunca supere el 90% de 1080p  */
+        width: 80%;
+        max-width: 1728px;
+    }
+}

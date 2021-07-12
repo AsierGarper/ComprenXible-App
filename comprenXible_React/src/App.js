@@ -11,6 +11,7 @@ import Questionnaire from "./components/questionnaire/Questionnaire";
 import TestStart from "./components/testStart/TestStart";
 import TestResult from "./components/testResult/TestResult";
 import PersonalArea from "./pages/PersonalArea/PersonalArea";
+import BertaChatbot from "./pages/BertaChatbot/BertaChatbot";
 
 
 
@@ -25,6 +26,9 @@ function App() {
           </Route>
           <Route path="/InitTest">
             <Questionnaire />
+          </Route>
+          <Route path="/Chatbot">
+            <BertaChatbot />
           </Route>
           <Route path="/TestResult">
             <TestResult />

@@ -13,6 +13,8 @@ import TestResult from "./components/testResult/TestResult";
 import PersonalArea from "./pages/PersonalArea/PersonalArea";
 import SingIn from "./pages/Credentials/SignIn";
 import Register from "./pages/Credentials/Register";
+import BertaChatbot from "./pages/BertaChatbot/BertaChatbot";
+
 
 
 function App() {
@@ -26,6 +28,9 @@ function App() {
           </Route>
           <Route path="/InitTest">
             <Questionnaire />
+          </Route>
+          <Route path="/Chatbot">
+            <BertaChatbot />
           </Route>
           <Route path="/TestResult">
             <TestResult />

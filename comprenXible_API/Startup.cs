@@ -16,6 +16,10 @@ using comprenXible_API.Data;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using comprenXible_API.Authentication_;
 using comprenXible_API.ExtensionMethods;
+using MailKit.Net.Smtp;
+using MimeKit;
+using comprenXible_API.Models;
+using comprenXible_API.Services;
 
 namespace comprenXible_API
 {
@@ -73,6 +77,8 @@ namespace comprenXible_API
             services.AddTransient<Auth>();
             services.AddTransient<UserService>();
             services.AddTransient<TokenService>();
+            services.Configure<EmailSettings>(Configuration.GetSection("EmailSettings"));
+            services.AddTransient<IEmailService, EmailService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

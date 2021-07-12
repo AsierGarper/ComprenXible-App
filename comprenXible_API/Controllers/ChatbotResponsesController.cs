@@ -1,4 +1,6 @@
 ﻿using comprenXible_API.DTO;
+using comprenXible_API.Models;
+using comprenXible_API.Services;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -13,36 +15,55 @@ namespace comprenXible_API.Controllers
     [ApiController]
     public class ChatbotResponsesController : ControllerBase
     {
+        private readonly IEmailService _emailService;
+        private readonly User _user;
+        public ChatbotResponsesController(IEmailService emailService, User user)
+        {
+            _emailService = emailService;
+            _user = user;
+        }
 
         // GET: api/ChatbotResponse
         [HttpPost]
-        public bool GetChatbotResponses(ChatbotResponse chatbotResponse)
+        public bool GetChatbotResponses([FromBody] ChatbotResponse chatbotResponse)
         {
+            //string chatbotResponseWithoutPunctuation = new string(chatbotResponse.Response.Where(c => !char.IsPunctuation(c))());
+            //string[] chatbotResponseWords = chatbotResponseWithoutPunctuation.Split(' ');
 
-            //Deprecated -- this is currently done at front
-            //string[] sentencesWithoutPunctuation = new string(chatbotResponse.Response.Where(c => !char.IsPunctuation(c)).ToArray());
-            //string[] words = sentencesWithoutPunctuation.Split(' ');
-            double Score = WordsScoreCalc(chatbotResponse.Response);
-
-            if (Score >= 3)
+            double wordsScore = WordsScoreCalc(chatbotResponse.Response);
+            double totalResults;
+            EmailInfo emailInfo = new EmailInfo()
             {
-                //Score = 3;
-                //double chatbotScore = ChatbotScoreCalculation(chatbotResponse.Response, Score, 0);
+                EmailTo = _user.Email,
+                Body = "<p>Hola Mireia<p>",
+                Subject = "Prueba envío mail PORDIOSFUNCIONA"
+            };
+
+            if (wordsScore >= 3)
+            {
+
+                wordsScore = 3;
+                totalResults = ChatbotScoreCalculation(chatbotResponse.Response, wordsScore, chatbotResponse.TimeSpan) + Convert.ToDouble(chatbotResponse.AnswersScore);
+
+                _emailService.SendEmailAsync(emailInfo, totalResults);
                 return true;
             }
             else if (chatbotResponse.Response.Length > 200)
             {
-                //double chatbotScore = ChatbotScoreCalculation(chatbotResponse.Response, Score, elapsedTime);
+                totalResults = ChatbotScoreCalculation(chatbotResponse.Response, wordsScore, chatbotResponse.TimeSpan) + Convert.ToDouble(chatbotResponse.AnswersScore);
+
+                _emailService.SendEmailAsync(emailInfo, totalResults);
                 return true;
             }
             else
             {
                 return false;
-            }             
-  
+            }
+
         }
 
-        static double ChatbotScoreCalculation(Array words, double chatbotWordsScore, TimeSpan elapsedTime)
+
+        static double ChatbotScoreCalculation(Array words, double chatbotWordsScore, double elapsedTime)
         {
             int amountOfFirstPersonSingularPronouns = 0;
             int amountOfOtherPronouns = 0;
@@ -121,8 +142,8 @@ namespace comprenXible_API.Controllers
             }
 
             //stopwatch
-            double minutes = elapsedTime.TotalSeconds / 60;
-            if (minutes >= 7)
+
+            if (elapsedTime >= 7)
             {
                 chatbotPatternsScore = +1;
             }

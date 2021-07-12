@@ -8,19 +8,19 @@
     "net5.0": []
   },
   "packageFolders": {
-    "C:\\Users\\Catalina\\.nuget\\packages\\": {}
+    "C:\\Users\\asier\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Catalina\\Documents\\GitHub\\Ansiedapp\\WebApplication1\\WebApplication1.csproj",
+      "projectUniqueName": "C:\\Programacion\\ProyectoFinalBBKBootcamp\\WebApplication1\\WebApplication1.csproj",
       "projectName": "WebApplication1",
-      "projectPath": "C:\\Users\\Catalina\\Documents\\GitHub\\Ansiedapp\\WebApplication1\\WebApplication1.csproj",
-      "packagesPath": "C:\\Users\\Catalina\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Catalina\\Documents\\GitHub\\Ansiedapp\\WebApplication1\\obj\\",
+      "projectPath": "C:\\Programacion\\ProyectoFinalBBKBootcamp\\WebApplication1\\WebApplication1.csproj",
+      "packagesPath": "C:\\Users\\asier\\.nuget\\packages\\",
+      "outputPath": "C:\\Programacion\\ProyectoFinalBBKBootcamp\\WebApplication1\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\Catalina\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\asier\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -63,7 +63,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.202\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.300\\RuntimeIdentifierGraph.json"
       }
     }
   }

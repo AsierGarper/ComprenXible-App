@@ -17,7 +17,7 @@ namespace comprenXible_API.Services
         {
             _mailSettings = mailSettings.Value;
         }
-        public async Task SendEmailAsync(EmailInfo emailInfo)
+        public async Task SendEmailAsync(EmailInfo emailInfo, double totalResults)
         {
             var email = new MimeMessage();
             email.Sender = MailboxAddress.Parse(_mailSettings.Email);
@@ -43,10 +43,18 @@ namespace comprenXible_API.Services
             builder.HtmlBody = emailInfo.Body;
             email.Body = builder.ToMessageBody();
             using var smtp = new SmtpClient();
-            smtp.Connect(_mailSettings.Host, _mailSettings.Port, SecureSocketOptions.StartTls);
-            smtp.Authenticate(_mailSettings.Email, _mailSettings.Password);
-            await smtp.SendAsync(email);
-            smtp.Disconnect(true);
+            try
+            {
+
+                smtp.Connect(_mailSettings.Host, _mailSettings.Port, SecureSocketOptions.StartTls);
+                smtp.Authenticate(_mailSettings.Email, _mailSettings.Password);
+                await smtp.SendAsync(email);
+                smtp.Disconnect(true);
+            }
+            catch (Exception _)
+            {
+                throw new Exception(_.Message);
+            }
         }
 
         public async Task SendEmailTemplateAsync(EmailSource emailSource)

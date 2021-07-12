@@ -11,7 +11,7 @@ class MessageParser {
         const lowerCaseMessage = " " + message.toLowerCase() + " ";
         let wordsInMessage = lowerCaseMessage.split();
 
-        let answers = sessionStorage.getItem("answers");
+        // let answersScore = sessionStorage.getItem("answersScore");
         
         chatbotResponses = chatbotResponses.concat(lowerCaseMessage);
         
@@ -23,12 +23,15 @@ class MessageParser {
 
         let chatbotResponsesObj = {
             response: chatbotResponses,
-            timeSpan: timeSpanMinutes,
-            // answersScore: answersScore
+            timeSpan: timeSpanMinutes.toString(),
+            answersScore: "9"
+            // user: 
         }
-        
+        console.log(chatbotResponsesObj)
+        debugger
         axios.post("https://localhost:44350/api/chatbotResponses", chatbotResponsesObj)
-            .then(function (response) {               
+            .then(function (response) {       
+                debugger        
                 if (response) {                 
                     this.actionProvider.endConversation()
                 }

@@ -31,7 +31,7 @@ function PersonalArea() {
     return (<>
         <div className="PersonalArea">
             <Navbar />
-            <div className="wrapper">
+            <div className="wrapper wrapper-filled">
                 <div className="textContainer">
                     <h4>Modifica tus datos:</h4>
                     <hr></hr>
@@ -74,13 +74,13 @@ function PersonalArea() {
                             <button className="button button--bgTransparent-white">Enviar resultados</button>
                         </tr>
                     </table>
-                    <iframe title="map"
+                    {/* <iframe title="map"
                         width="600"
                         height="450"
                         loading="lazy"
                         allowfullscreen
                         src="https://www.google.com/maps/embed/v1/place?key=AIzaSyD9ecVzHiRU3frlwA9-R-q40p5GlVEXilU&q=current+location">
-                    </iframe>
+                    </iframe> */}
                 </div>
 
             </div>

@@ -11,17 +11,16 @@ function TestResult() {
     return (
         <div className="testSection">
             <div className="wrapper">
-                <Modals />
+                <Modals close={true} text="¿Estás seguro de que quieres salir? Perderás todos tus progresos." url="/" urlText="Abandonar test" />
                 <div className="testContainer">
                     <div className="testWelcome">
-                        <h3>Análisis realizado correctamente.</h3>
-                        <p>Gracias por utilizar nuestro servicio, tu resultado ha sido registrado. Puedes verlo en todo momento en tu Área Personal.
+                        <h3>Análisis completado.</h3>
+                        <p> Gracias por utilizar nuestro servicio, tu resultado ha sido registrado. Comprueba tu bandeja de entrada para ver los resultados con más detalle.
                         </p>
-                        <p>Puedes ver el historial de tus resultados en tu area personal.</p>
+                        <p>Puedes ver el historial de tus resultados en todo momento desde tu area personal.</p>
                     </div>
                     <div className="startTestButton">
                         <Link to="/PersonalArea" className="button button--bgTransparent-white">Visita tu Area Personal</Link>
-                        {/* HAY QUE CAMBIAR ESTE LINK */}
                     </div>
                 </div>
             </div>

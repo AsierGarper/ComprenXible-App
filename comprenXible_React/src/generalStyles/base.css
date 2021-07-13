@@ -15,6 +15,10 @@ body{
     margin: auto;
 }
 
+.wrapper-filled{
+    min-height: calc(100vh - 130px);
+}
+
 @media (min-width: 1024px) {
     .wrapper{
         /* Para version de escritorio, quiero que se mantenga ocupando el 90% de la pantalla, pero que nunca supere el 90% de 1080p  */

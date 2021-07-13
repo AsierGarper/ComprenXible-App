@@ -11,7 +11,7 @@ function TestStart() {
     return (
         <div className="testSection">
             <div className="wrapper">
-                <Modals />
+                <Modals close={true} text="¿Estás seguro de que quieres salir? Perderás todos tus progresos." url="/" urlText="Abandonar test" />
                 <div className="testContainer">
                     <div className="testWelcome">
                         <h3>Bienvenido al análisis de Ansiedapp:</h3>

@@ -5,6 +5,7 @@ import React, { useEffect, useState } from 'react';
 import './signIn.css';
 import Navbar from '../../components/navbar/Navbar';
 import Footer from '../../components/footer/Footer.js';
+import Modals from '../../components/modals/Modals.js';
 import axios from 'axios';
 
 function Register() {
@@ -53,7 +54,7 @@ function Register() {
     return (<>
         <div className="SignIn">
             <Navbar />
-            <div className="wrapper">
+            <div className="wrapper wrapper-filled">
                 <div className="textContainer">
                     <h4>Registro:</h4>
                     <hr></hr>
@@ -75,6 +76,7 @@ function Register() {
                     </form>
                 </div>
                 <br></br>
+                <Modals close={false} text="¿Estás seguro de que quieres salir? Perderás todos tus progresos." url="/" urlText="Abandonar test" />
             </div>
             <Footer />
         </div>

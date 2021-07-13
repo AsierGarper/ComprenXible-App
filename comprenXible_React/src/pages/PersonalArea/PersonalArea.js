@@ -79,7 +79,7 @@ function PersonalArea() {
                         height="450"
                         loading="lazy"
                         allowfullscreen
-                        src="https://www.google.com/maps/embed/v1/place?key=AIzaSyAJj6Uf5qPhtO62rz12qcz_JPW_E0fq7vU&q=current+location">
+                        src="https://www.google.com/maps/embed/v1/place?key=AIzaSyD9ecVzHiRU3frlwA9-R-q40p5GlVEXilU&q=current+location">
                     </iframe>
                 </div>
 

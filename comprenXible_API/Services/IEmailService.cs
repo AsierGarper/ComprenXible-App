@@ -7,7 +7,7 @@ namespace comprenXible_API.Services
 {
     public interface IEmailService
     {
-        Task SendEmailAsync(EmailInfo emailInfo, double totalResults, string emailType);
+        Task SendEmailAsync(EmailInfo emailInfo, double totalResults, string emailType, string userName);
         Task SendEmailTemplateAsync(EmailSource emailSource);
     }
 }

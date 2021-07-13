@@ -17,7 +17,7 @@ namespace comprenXible_API.Controllers
     public class ChatbotResponsesController : ControllerBase
     {
         private readonly IEmailService _emailService;
-        
+
         public ChatbotResponsesController(IEmailService emailService)
         {
             _emailService = emailService;
@@ -31,69 +31,45 @@ namespace comprenXible_API.Controllers
             foreach (var response in chatbotResponse.Response)
             {
                 chatbotResponseWithoutPunctuation = Regex.Replace(response, @"[^\w\s]", "");
-
             }
-            string[] chatbotResponseWords = chatbotResponseWithoutPunctuation.Split(' ');
+
+            string[] chatbotResponseStrings = chatbotResponseWithoutPunctuation.Split(' ');
+
+            List<string> chatbotResponseWords = new List<string>();
+            foreach (var item in chatbotResponseStrings)
+            {
+                if (item != "")
+                {
+                    chatbotResponseWords.Add(item);
+                }
+            }
 
             double wordsScore = WordsScoreCalc(chatbotResponseWords);
+            double questionsScore = QuestionsScoreCalculation(chatbotResponse.AnswersToQuestionnaire);
             double totalResults;
             EmailInfo emailInfo = new EmailInfo();
+            string emailType = string.Empty;
 
-
-            if (wordsScore >= 3)
+            if (wordsScore >= 3 || chatbotResponse.Response.Length > 200)
             {
                 wordsScore = 3;
-                totalResults = ChatbotScoreCalculation(chatbotResponse.Response, wordsScore, Convert.ToDouble(chatbotResponse.TimeSpan)) + Convert.ToDouble(chatbotResponse.AnswersScore);
+                totalResults = ChatbotScoreCalculation(chatbotResponse.Response, wordsScore, Convert.ToDouble(chatbotResponse.TimeSpan)) + questionsScore;
                 if (totalResults <= 5)
                 {
-                    //emailInfo.EmailTo = _user.Email;
-                    emailInfo.Subject = "<p>Resultados Test<p>";
-                    emailInfo.Body = "No se aprecian rasgos depresivos.";
-
+                    emailInfo.EmailTo = chatbotResponse.UserEmail;
+                    emailType = "no symptoms";
                 }
                 else if (totalResults > 5 && totalResults <= 10)
                 {
-                    //emailInfo.EmailTo = _user.Email;
-                    emailInfo.Subject = "<p>Resultados Test<p>";
-                    emailInfo.Body = "Rasgos depresivos leves. Se recomienda consultar con un especialista.";
-
+                    emailInfo.EmailTo = chatbotResponse.UserEmail;
+                    emailType = "mild symptoms";
                 }
                 else if (totalResults > 10 && totalResults <= 15)
                 {
-                    //emailInfo.EmailTo = _user.Email;
-                    emailInfo.Subject = "<p>Resultados Test<p>";
-                    emailInfo.Body = "Rasgos depresivos severos. Es necesaria la consulta urgente con un especialista.";
-
+                    emailInfo.EmailTo = "mireitab@gmail.com";//CHANGE THIS!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+                    emailType = "severe symptoms";
                 }
-                _emailService.SendEmailAsync(emailInfo, totalResults);
-                return true;
-            }
-            else if (chatbotResponse.Response.Length > 200)
-            {
-                totalResults = ChatbotScoreCalculation(chatbotResponse.Response, wordsScore, Convert.ToDouble(chatbotResponse.TimeSpan)) + Convert.ToDouble(chatbotResponse.AnswersScore);
-                if (totalResults <= 5)
-                {
-                    //emailInfo.EmailTo = _user.Email;
-                    emailInfo.Subject = "<p>Resultados Test<p>";
-                    emailInfo.Body = "No se aprecian rasgos depresivos.";
-
-                }
-                else if (totalResults > 5 && totalResults <= 10)
-                {
-                    //emailInfo.EmailTo = _user.Email;
-                    emailInfo.Subject = "<p>Resultados Test<p>";
-                    emailInfo.Body = "Rasgos depresivos leves. Se recomienda consultar con un especialista..";
-
-                }
-                else if (totalResults > 10 && totalResults <= 15)
-                {
-                    //emailInfo.EmailTo = _user.Email;
-                    emailInfo.Subject = "<p>Resultados Test<p>";
-                    emailInfo.Body = "Rasgos depresivos severos. Es necesaria la consulta urgente con un especialista.";
-
-                }
-
-                _emailService.SendEmailAsync(emailInfo, totalResults);
+                _emailService.SendEmailAsync(emailInfo, totalResults, emailType);
                 return true;
             }
             else
@@ -102,6 +78,43 @@ namespace comprenXible_API.Controllers
             }
 
         }
+        static double QuestionsScoreCalculation(string[] answersArray)
+        {
+            //GET RID OF THE CATCH WHEN LINK TO FRONT WORKS
+            double questionsScore = 0;
+           
+                if (answersArray != null)
+                {
+                    foreach (var answer in answersArray)
+                    {
+                        if (answer == "A")
+                        {
+                            questionsScore = +0.25;
+                        }
+                        else if (answer == "B")
+                        {
+                            questionsScore = +0.5;
+                        }
+                        else if (answer == "C")
+                        {
+                            questionsScore = +0.75;
+                        }
+                        else
+                        {
+                            questionsScore = +1;
+                        }
+                    }
+                }
+            else
+            {
+                questionsScore = 9;
+
+            }
+            return questionsScore;
+        }
+         
+        
+
 
         static double ChatbotScoreCalculation(Array words, double chatbotWordsScore, double elapsedTime)
         {
@@ -193,7 +206,7 @@ namespace comprenXible_API.Controllers
             return chatbotScore;
         }
 
-        public double WordsScoreCalc(string[] response)
+        public double WordsScoreCalc(List<string> responseWords)
         {
             int amountOfMatchingKeywordsX02 = 0;
             int amountOfMatchingKeywordsX03 = 0;
@@ -203,7 +216,7 @@ namespace comprenXible_API.Controllers
 
             //This to the DBB
             //keywords
-            foreach (var word in response)
+            foreach (var word in responseWords)
             {
                 if (word == "miserable" ||
                     word == "despreciable" ||

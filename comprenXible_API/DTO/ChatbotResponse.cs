@@ -9,6 +9,7 @@ namespace comprenXible_API.DTO
     {
         public string[] Response { get; set; }
         public string TimeSpan { get; set; }
-        public string AnswersScore { get; set; }
+        public string[] AnswersToQuestionnaire { get; set; }
+        public string UserEmail { get; set; }
     }
 }

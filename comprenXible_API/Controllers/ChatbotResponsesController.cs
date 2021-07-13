@@ -67,12 +67,12 @@ namespace comprenXible_API.Controllers
                 }
                 else if (totalResults > 5 && totalResults <= 10)
                 {
-                    emailInfo.EmailTo = chatbotResponse.UserEmail;
+                    emailInfo.EmailTo = "mireitab@gmail.com";
                     resultType = "mild symptoms";
                 }
                 else if (totalResults > 10 && totalResults <= 15)
                 {
-                    emailInfo.EmailTo = chatbotResponse.UserEmail;//CHANGE THIS!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+                    emailInfo.EmailTo = "mireitab@gmail.com";//CHANGE THIS TO chatbotResponse.UserEmail!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
                     resultType = "severe symptoms";
                 }
                 chatbotResponse.UserName = "Mireia";
@@ -87,7 +87,6 @@ namespace comprenXible_API.Controllers
         }
         static double QuestionsScoreCalculation(string answersToQuestionnaireString)
         {
-            //GET RID OF THE CATCH WHEN LINK TO FRONT WORKS
             double questionsScore = 0;
             string[] answersToQuestionnaireArray = answersToQuestionnaireString.Split(",");
 
@@ -97,32 +96,25 @@ namespace comprenXible_API.Controllers
                 {
                     if (answer == "A")
                     {
-                        questionsScore = +0.25;
+                        questionsScore += 0.25;
                     }
                     else if (answer == "B")
                     {
-                        questionsScore = +0.5;
+                        questionsScore += 0.5;
                     }
                     else if (answer == "C")
                     {
-                        questionsScore = +0.75;
+                        questionsScore += 0.75;
                     }
                     else
                     {
-                        questionsScore = +1;
+                        questionsScore += 1;
                     }
                 }
             }
-            else
-            {
-                questionsScore = 9;
-
-            }
+            
             return questionsScore;
         }
-
-
-
 
         static double ChatbotScoreCalculation(Array words, double chatbotWordsScore, double elapsedTime)
         {

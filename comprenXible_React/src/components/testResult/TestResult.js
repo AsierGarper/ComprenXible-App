@@ -11,7 +11,7 @@ function TestResult() {
     return (
         <div className="testSection">
             <div className="wrapper">
-                <Modals />
+                <Modals close={true} text="¿Estás seguro de que quieres salir? Perderás todos tus progresos." url="/" urlText="Abandonar test" />
                 <div className="testContainer">
                     <div className="testWelcome">
                         <h3>Análisis completado.</h3>

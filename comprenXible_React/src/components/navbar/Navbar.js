@@ -5,7 +5,7 @@ import {
     Link
 } from "react-router-dom";
 
-import Photo from './images/LogoDemo.gif'
+import Photo from './images/comprenxible_logo.png'
 
 import './Navbar.css';
 
@@ -36,6 +36,7 @@ function Navbar() {
             <div className="navbar">
                 <Link to="/">
                     <img src={Photo} className="logoAnsiedapp" alt="logoAnsiedapp" />
+                    {/* <p className="logoSubtitle">Una app de acceXible.</p> */}
                 </Link>
                 <div className="credentials">
                     <div id="menuToggle">
@@ -49,10 +50,10 @@ function Navbar() {
                 </div>
             </div>
             <ul id="menu" className={showMenu === true ? "menu--show" : ""}>
-                <Link to="/SignIn"><li>Iniciar Sesion</li></Link>
-                <Link to="/Register"><li>Registrarse</li></Link>
-                <Link to="/PersonalArea"><li>Area Personal</li></Link>
-                <Link to="/PersonalArea"><li>Contacto</li></Link>
+                <li><Link to="/SignIn">Iniciar Sesion</Link></li>
+                <li><Link to="/Register">Registrarse</Link></li>
+                <li><Link to="/PersonalArea">Area Personal</Link></li>
+                <li><Link to="/PersonalArea">Contacto</Link></li>
             </ul>
 
         </header>

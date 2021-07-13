@@ -83,7 +83,7 @@ function Question() {
     return (
         <div className="questionSection">
             <div className="wrapper">
-                <Modals />
+                <Modals close={true} text="¿Estás seguro de que quieres salir? Perderás todos tus progresos." url="/" urlText="Abandonar test" />
                 <div className="questionText">
                     <h5>{questionListCount + 1}. Durante las últimas 2 semanas, ¿con qué frecuencia... </h5>
                     <h4>{questionList[questionListCount]}</h4>

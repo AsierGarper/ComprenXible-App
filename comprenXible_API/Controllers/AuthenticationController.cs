@@ -1,6 +1,8 @@
 ﻿using comprenXible_API.Authentication_;
 using comprenXible_API.Data;
 using comprenXible_API.DTO;
+using comprenXible_API.Encryptation;
+using comprenXible_API.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -33,20 +35,31 @@ namespace comprenXible_API.Controllers
         {
             try
             {
-                string token = authenticationService.Authenticate(userCredentials);
-                if(await _context.User.Where(u => u.Email == userCredentials.UserEmail && u.Password == userCredentials.Password).FirstOrDefaultAsync() != null)
+                byte[] email = pbkdf2.Hash(userCredentials.UserEmail);
+
+                if (_context.User.Any(u => u.HashedEmail == email))
                 {
-                //if everything's allright, this will return an OK with the token! Marvelous!
-                return Ok(token);
+                    CryptographicEntry keys = await _context.CryptographicEntry.Where(c => c.UserEmail == email).FirstOrDefaultAsync();
+
+                    if (keys != null && _context.User.Any(u => u.Password == pbkdf2.Hash(keys.SecSalt, userCredentials.UserPassword)))
+                    {
+                        string token = authenticationService.Authenticate();
+                        //User found! this will return an OK with the token! Marvelous!
+                        return Ok(token);
+                    }
+                    else
+                    {
+                        return Unauthorized("Password seems to be incorrect");
+                    }
                 }
                 else
                 {
-                return Unauthorized();
+                return Unauthorized("No account found with this email");
                 }
             }
-            catch (InvalidCredentialsException)
+            catch (Exception)
             {
-                return Unauthorized();
+                return Unauthorized("Oops! And unknown error happened");
             }
         }
 

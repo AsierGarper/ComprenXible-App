@@ -34,9 +34,9 @@ namespace comprenXible_API.Controllers
             double totalResults;
             EmailInfo emailInfo = new EmailInfo()
             {
-                EmailTo = _user.Email,
-                Body = "<p>Hola Mireia<p>",
-                Subject = "Prueba envío mail PORDIOSFUNCIONA"
+                EmailTo = "ortega.cabello.7@gmail.com",
+                Body = "<p>Hola Enrique<p>",
+                Subject = "Prueba envío mail PORDIOSFUNCIONA lol"
             };
 
             if (wordsScore >= 3)

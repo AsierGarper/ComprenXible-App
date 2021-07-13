@@ -21,7 +21,7 @@ namespace comprenXible_API.Authentication_
             new UserCredentials
             {
                 UserEmail = "john.doe",
-                Password = "john.password"
+                UserPassword = "john.password"
             }
         };
         }
@@ -32,7 +32,7 @@ namespace comprenXible_API.Authentication_
             bool isValid =
             users.Any(u =>
                 u.UserEmail == userCredentials.UserEmail &&
-                u.Password == userCredentials.Password);
+                u.UserPassword == userCredentials.UserPassword);
 
 
             if (!isValid)

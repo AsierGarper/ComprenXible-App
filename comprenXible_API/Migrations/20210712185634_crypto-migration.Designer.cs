@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using comprenXible_API.Data;
 
 namespace comprenXible_API.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20210712185634_crypto-migration")]
+    partial class cryptomigration
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -86,11 +88,8 @@ namespace comprenXible_API.Migrations
                     b.Property<byte[]>("KekSalt")
                         .HasColumnType("varbinary(max)");
 
-                    b.Property<byte[]>("SecSalt")
-                        .HasColumnType("varbinary(max)");
-
-                    b.Property<byte[]>("UserEmail")
-                        .HasColumnType("varbinary(max)");
+                    b.Property<string>("UserEmail")
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 
@@ -215,11 +214,11 @@ namespace comprenXible_API.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<byte[]>("Date")
-                        .HasColumnType("varbinary(max)");
+                    b.Property<string>("Date")
+                        .HasColumnType("nvarchar(max)");
 
-                    b.Property<byte[]>("Score")
-                        .HasColumnType("varbinary(max)");
+                    b.Property<string>("Score")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("UserId")
                         .HasColumnType("nvarchar(max)");

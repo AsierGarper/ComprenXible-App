@@ -66,7 +66,7 @@ namespace comprenXible_API.Migrations
                     b.ToTable("ChatResult");
                 });
 
-            modelBuilder.Entity("comprenXible_API.Models.CriptographicEntry", b =>
+            modelBuilder.Entity("comprenXible_API.Models.CryptographicEntry", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -93,7 +93,7 @@ namespace comprenXible_API.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("CriptographicEntry");
+                    b.ToTable("CryptographicEntry");
                 });
 
             modelBuilder.Entity("comprenXible_API.Models.KeyWord", b =>

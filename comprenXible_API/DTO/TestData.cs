@@ -5,10 +5,9 @@ using System.Threading.Tasks;
 
 namespace comprenXible_API.DTO
 {
-    public class UserCredentials
+    public class TestData
     {
-            public string UserEmail { get; set; }
-            public string UserPassword { get; set; }
-        
+        public double Score { get; set; }
+        public DateTime Date { get; set; }
     }
 }

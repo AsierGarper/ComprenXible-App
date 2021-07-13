@@ -54,7 +54,7 @@ namespace comprenXible_API
                                   builder =>
                                   {
                                       //By now the CORS policy is - open for everybody -
-                                      builder.AllowAnyHeader().AllowAnyMethod().AllowAnyOrigin();
+                                      builder.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader();
                                   });
             });
 

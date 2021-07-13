@@ -10,8 +10,8 @@ namespace comprenXible_API.Models
     {
         [Key]
         public int Id { get; set; }
-        public string Score { get; set; }
-        public string Date { get; set; }
+        public byte[] Score { get; set; }
+        public byte[] Date { get; set; }
 
         public string UserId { get; set; }
         public User User { get; set; }

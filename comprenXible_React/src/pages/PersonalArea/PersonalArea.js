@@ -31,7 +31,7 @@ function PersonalArea() {
     return (<>
         <div className="PersonalArea">
             <Navbar />
-            <div className="wrapper">
+            <div className="wrapper wrapper-filled">
                 <div className="textContainer">
                     <h4>Modifica tus datos:</h4>
                     <hr></hr>

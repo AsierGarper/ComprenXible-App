@@ -53,7 +53,7 @@ function Register() {
     return (<>
         <div className="SignIn">
             <Navbar />
-            <div className="wrapper">
+            <div className="wrapper wrapper-filled">
                 <div className="textContainer">
                     <h4>Registro:</h4>
                     <hr></hr>

@@ -51,7 +51,7 @@ function SignIn() {
     return (<>
         <div className="SignIn">
             <Navbar />
-            <div className="wrapper">
+            <div className="wrapper wrapper-filled">
                 <div className="textContainer">
                     <h4>Introduce tus datos:</h4>
                     <hr></hr>

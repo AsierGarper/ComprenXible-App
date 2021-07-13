@@ -79,6 +79,7 @@ namespace comprenXible_API
             services.AddTransient<TokenService>();
             services.Configure<EmailSettings>(Configuration.GetSection("EmailSettings"));
             services.AddTransient<IEmailService, EmailService>();
+            services.AddTransient<ITestService, TestService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

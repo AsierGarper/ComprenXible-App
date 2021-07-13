@@ -1,4 +1,5 @@
-﻿using comprenXible_API.DTO;
+﻿using comprenXible_API.Data;
+using comprenXible_API.DTO;
 using comprenXible_API.Models;
 using comprenXible_API.Services;
 using Microsoft.AspNetCore.Http;
@@ -16,11 +17,15 @@ namespace comprenXible_API.Controllers
     [ApiController]
     public class ChatbotResponsesController : ControllerBase
     {
+        //private readonly ApplicationDbContext _context;
         private readonly IEmailService _emailService;
+        private readonly ITestService _testService;
 
-        public ChatbotResponsesController(IEmailService emailService)
+        public ChatbotResponsesController(IEmailService emailService,/* ApplicationDbContext context,*/ ITestService testService)
         {
             _emailService = emailService;
+            _testService = testService;
+            //_context = context;
         }
 
         // GET: api/ChatbotResponse
@@ -76,6 +81,10 @@ namespace comprenXible_API.Controllers
                     resultType = "severe symptoms";
                 }
                 chatbotResponse.UserName = "Mireia";
+
+                //Now we need to save all this to the database
+                _testService.TestStorageAsync(totalResults, new UserCredentials(chatbotResponse.UserEmail, chatbotResponse.UserPassword));
+                //And send the email
                 _emailService.SendEmailAsync(emailInfo, totalResults, resultType, chatbotResponse.UserName);
                 return true;
             }

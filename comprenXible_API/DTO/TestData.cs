@@ -9,5 +9,11 @@ namespace comprenXible_API.DTO
     {
         public double Score { get; set; }
         public DateTime Date { get; set; }
+
+        public TestData(double score, DateTime date)
+        {
+            Score = score;
+            Date = date;
+        }
     }
 }

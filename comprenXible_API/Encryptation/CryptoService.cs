@@ -40,6 +40,40 @@ namespace comprenXible_API.Encryptation
 
         }
 
+        public static Test EncryptTest(UserCredentials credentials, CryptographicEntry keys, double score)
+        {
+            //1) Get SecretKek from password and kekSalt
+            byte[] SecretKek = pbkdf2.Hash(keys.KekSalt, credentials.UserPassword);
+            //2) Get Dek from secretKek and KekiV
+            string Dek = AES.Decrypt(keys.Dek, SecretKek, keys.KekIv);
+            //3) Get SecretDek from dek and DekSalt
+            byte[] SecretDek = pbkdf2.Hash(keys.DekSalt, Dek);
+            //4) And encrypt data with SecretDek + DekIv
+
+            Test test = new Test(
+                score: AES.Encrypt(Convert.ToString(score), SecretDek, keys.DekIv),
+                date: AES.Encrypt(Convert.ToString(DateTime.Today), SecretDek, keys.DekIv),
+                userEmail: pbkdf2.Hash(credentials.UserEmail)
+                );
+
+            return test;
+        }
+
+        public static TestData DecryptTest(UserCredentials credentials, CryptographicEntry keys, Test test)
+        {
+            //1) Get SecretKek from password and kekSalt
+            byte[] SecretKek = pbkdf2.Hash(keys.KekSalt, credentials.UserPassword);
+            //2) Get Dek from secretKek and KekiV
+            string Dek = AES.Decrypt(keys.Dek, SecretKek, keys.KekIv);
+            //3) Get SecretDek from dek and DekSalt
+            byte[] SecretDek = pbkdf2.Hash(keys.DekSalt, Dek);
+            //4) And encrypt data with SecretDek + DekIv
+
+            TestData test = new TestData()
+
+            return test;
+        }
+
         public static UserData Decrypt(User user, CryptographicEntry keys, UserCredentials credentials)
         {
             //1) Get SecretKek from password and kekSalt

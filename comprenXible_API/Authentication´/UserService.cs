@@ -14,17 +14,17 @@ namespace comprenXible_API.Authentication_
     {
         private readonly IEnumerable<UserCredentials> users;
 
-        public UserService()
-        {
-            users = new List<UserCredentials>
-        {
-            new UserCredentials
-            {
-                UserEmail = "john.doe",
-                UserPassword = "john.password"
-            }
-        };
-        }
+        //public UserService()
+        //{
+        //    users = new List<UserCredentials>
+        //{
+        //    new UserCredentials
+        //    {
+        //        UserEmail = "john.doe",
+        //        UserPassword = "john.password"
+        //    }
+        //};
+        //}
 
         public void ValidateCredentials(UserCredentials userCredentials)
         {

@@ -13,7 +13,14 @@ namespace comprenXible_API.Models
         public byte[] Score { get; set; }
         public byte[] Date { get; set; }
 
-        public string UserId { get; set; }
+        public byte[] UserEmail { get; set; }
         public User User { get; set; }
+
+        public Test(byte[] score, byte[] date, byte[] userEmail)
+        {
+            this.Score = score;
+            this.Date = date;
+            this.UserEmail = userEmail;
+        }
     }
 }

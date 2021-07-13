@@ -17,7 +17,7 @@ namespace comprenXible_API.Authentication_
         }
 
         //This method gets the UserCredentials, validates them via the userServices & creates a token with the tokenService
-        public string Authenticate(UserCredentials userCredentials)
+        public string Authenticate()
         {
             //ValidationService.ValidateCredentials(userCredentials);
             string securityToken = TokenService.GetToken();

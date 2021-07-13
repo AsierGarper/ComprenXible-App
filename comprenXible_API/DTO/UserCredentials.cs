@@ -8,7 +8,7 @@ namespace comprenXible_API.DTO
     public class UserCredentials
     {
             public string UserEmail { get; set; }
-            public string Password { get; set; }
+            public string UserPassword { get; set; }
         
     }
 }

@@ -12,5 +12,6 @@ namespace comprenXible_API.DTO
         public string AnswersToQuestionnaire { get; set; }
         public string UserEmail { get; set; }
         public string UserName { get; set; }
+        public string UserPassword { get; set; }
     }
 }

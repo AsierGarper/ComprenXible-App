@@ -1,4 +1,5 @@
-﻿using comprenXible_API.DTO;
+﻿using comprenXible_API.Data;
+using comprenXible_API.DTO;
 using comprenXible_API.Models;
 using comprenXible_API.Services;
 using Microsoft.AspNetCore.Http;
@@ -16,11 +17,15 @@ namespace comprenXible_API.Controllers
     [ApiController]
     public class ChatbotResponsesController : ControllerBase
     {
+        //private readonly ApplicationDbContext _context;
         private readonly IEmailService _emailService;
+        private readonly ITestService _testService;
 
-        public ChatbotResponsesController(IEmailService emailService)
+        public ChatbotResponsesController(IEmailService emailService,/* ApplicationDbContext context,*/ ITestService testService)
         {
             _emailService = emailService;
+            _testService = testService;
+            //_context = context;
         }
 
         // GET: api/ChatbotResponse
@@ -67,15 +72,22 @@ namespace comprenXible_API.Controllers
                 }
                 else if (totalResults > 5 && totalResults <= 10)
                 {
-                    emailInfo.EmailTo = chatbotResponse.UserEmail;
+                    emailInfo.EmailTo = "mireitab@gmail.com";
                     resultType = "mild symptoms";
                 }
                 else if (totalResults > 10 && totalResults <= 15)
                 {
-                    emailInfo.EmailTo = chatbotResponse.UserEmail;//CHANGE THIS!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+                    emailInfo.EmailTo = "mireitab@gmail.com";//CHANGE THIS TO chatbotResponse.UserEmail!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
                     resultType = "severe symptoms";
                 }
                 chatbotResponse.UserName = "Mireia";
+                UserCredentials credentials = new UserCredentials();
+                credentials.UserEmail = chatbotResponse.UserEmail;
+                credentials.UserPassword = chatbotResponse.UserPassword;
+
+                //Now we need to save all this to the database
+                _testService.TestStorageAsync(totalResults, credentials);
+                //And send the email
                 _emailService.SendEmailAsync(emailInfo, totalResults, resultType, chatbotResponse.UserName);
                 return true;
             }
@@ -87,7 +99,6 @@ namespace comprenXible_API.Controllers
         }
         static double QuestionsScoreCalculation(string answersToQuestionnaireString)
         {
-            //GET RID OF THE CATCH WHEN LINK TO FRONT WORKS
             double questionsScore = 0;
             string[] answersToQuestionnaireArray = answersToQuestionnaireString.Split(",");
 
@@ -97,32 +108,25 @@ namespace comprenXible_API.Controllers
                 {
                     if (answer == "A")
                     {
-                        questionsScore = +0.25;
+                        questionsScore += 0.25;
                     }
                     else if (answer == "B")
                     {
-                        questionsScore = +0.5;
+                        questionsScore += 0.5;
                     }
                     else if (answer == "C")
                     {
-                        questionsScore = +0.75;
+                        questionsScore += 0.75;
                     }
                     else
                     {
-                        questionsScore = +1;
+                        questionsScore += 1;
                     }
                 }
             }
-            else
-            {
-                questionsScore = 9;
-
-            }
+            
             return questionsScore;
         }
-
-
-
 
         static double ChatbotScoreCalculation(Array words, double chatbotWordsScore, double elapsedTime)
         {

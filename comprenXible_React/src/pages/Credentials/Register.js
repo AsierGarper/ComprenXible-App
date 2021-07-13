@@ -32,11 +32,12 @@ function Register() {
     }
 
     function checkCredentials(emailInput, passwordImput) {
+        debugger
         var regexEmail = /(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,}/;
         var regexPassword = /(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,}/;
         var OKEmail = regexEmail.exec(emailInput.value);
         var OKPassword = regexPassword.exec(passwordImput.value);
-        if (OKPassword && OKEmail) {
+        if (OKPassword != null && OKEmail) {
             sessionStorage.setItem("email", OKEmail)
             createUserObject();
         }
@@ -70,10 +71,11 @@ function Register() {
                         <label htmlFor="H">Hombre</label><br></br>
                         <input type="radio" className="userSex" name="userSex" value="woman" />
                         <label htmlFor="M">Mujer</label><br></br>
-                        <input type="radio" className="userSex" name="userSex" value="other" checked="checked" />
+                        <input type="radio" className="userSex" name="userSex" value="other" />
                         <label htmlFor="O">Otro</label><br></br>
-                        <button type="submit" className="button button--bgTransparent-white" onClick={() => checkCredentials(document.getElementById('userEmail'), document.getElementById('userPassword'))} >Registrarse</button>
                     </form>
+                    {/* <button type="submit" className="button button--bgTransparent-white" onClick={() => checkCredentials(document.getElementById('userEmail'), document.getElementById('userPassword'))} >Registrarse</button> */}
+                    <button type="submit" className="button button--bgTransparent-white" onClick={() => createUserObject()} >Registrarse</button>
                 </div>
                 <br></br>
                 <Modals close={false} text="¿Estás seguro de que quieres salir? Perderás todos tus progresos." url="/" urlText="Abandonar test" />

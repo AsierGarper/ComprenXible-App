@@ -19,7 +19,7 @@ function SignIn() {
                 console.log("Esta es la respuesta al post:")
                 console.log(response);
                 //Si esta bien metido, que nos meta a sessionstorage
-                // sessionStorage.setItem("sessionUserCredentials", choosedOption)
+                sessionStorage.setItem("sessionUserCredentials", user)
             })
             .catch(function (error) {
                 console.log(error);

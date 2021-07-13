@@ -17,13 +17,36 @@ namespace comprenXible_API.Services
         {
             _mailSettings = mailSettings.Value;
         }
-        public async Task SendEmailAsync(EmailInfo emailInfo, double totalResults)
+        public async Task SendEmailAsync(EmailInfo emailInfo, double totalResults, string emailType)
         {
             var email = new MimeMessage();
             email.Sender = MailboxAddress.Parse(_mailSettings.Email);
             email.To.Add(MailboxAddress.Parse(emailInfo.EmailTo));
-            email.Subject = emailInfo.Subject;
             var builder = new BodyBuilder();
+
+            if (emailType == "no symptoms")
+            {
+                email.Subject = "Resultados Test";
+                builder.HtmlBody = "No se aprecian rasgos depresivos.";
+                email.Body = builder.ToMessageBody();
+            }
+            else if(emailType == "mild symptoms")
+            {
+                email.Subject = "Resultados Test";
+                builder.HtmlBody = "Rasgos depresivos leves. Se recomienda consultar con un especialista.";
+                email.Body = builder.ToMessageBody();
+            }
+            else
+            {
+                email.Subject = "Resultados Test";
+                builder.HtmlBody = "" +
+                    "<div>" +
+                    "   <p>Rasgos depresivos severos.</p> " +
+                    "   <p>Es necesaria la consulta urgente con un especialista.</p>" +
+                    "</div>";
+                email.Body = builder.ToMessageBody();
+            }
+            
             if (emailInfo.Attachments != null)
             {
                 byte[] fileBytes;
@@ -40,8 +63,7 @@ namespace comprenXible_API.Services
                     }
                 }
             }
-            builder.HtmlBody = emailInfo.Body;
-            email.Body = builder.ToMessageBody();
+            
             using var smtp = new SmtpClient();
             try
             {

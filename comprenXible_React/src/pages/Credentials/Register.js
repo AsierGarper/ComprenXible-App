@@ -36,6 +36,7 @@ function Register() {
         var OKEmail = regexEmail.exec(emailInput.value);
         var OKPassword = regexPassword.exec(passwordImput.value);
         if (OKPassword && OKEmail) {
+            sessionStorage.setItem("email", OKEmail)
             createUserObject();
         }
     }

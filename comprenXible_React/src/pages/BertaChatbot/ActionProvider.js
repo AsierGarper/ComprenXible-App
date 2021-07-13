@@ -1,3 +1,5 @@
+
+
 let responsesToHowAreYou = [
     "Estoy bien, gracias. Pero cuéntame más sobre que tal estás tú.",
     "Yo bien, gracias. Pero cuéntame más sobre ti, ¿cómo te encuentras?",
@@ -385,7 +387,7 @@ class ActionProvider {
         this.updateChatbotState(responseToNoKeywordsMessage)
     }
     endConversation() {
-        const endConversationMessage = this.createChatBotMessage("Ya tengo suficiente información para hacer una evaluación de tu estado. Gracias por compartir este rato conmigo, ¡hasta la próxima!")
+        const endConversationMessage = this.createChatBotMessage("Ya tengo suficiente información para hacer una evaluación de tu estado. Para finalizar el test, por favor, haz click en Finalizar Test. Gracias por compartir este rato conmigo, ¡hasta la próxima!", { widget: "EndTest" })
         this.updateChatbotState(endConversationMessage)
     }
 

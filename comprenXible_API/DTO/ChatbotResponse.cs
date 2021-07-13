@@ -8,7 +8,8 @@ namespace comprenXible_API.DTO
     public class ChatbotResponse
     {
         public string[] Response { get; set; }
-        public double TimeSpan { get; set; }
-        public string AnswersScore { get; set; }
+        public string TimeSpan { get; set; }
+        public string[] AnswersToQuestionnaire { get; set; }
+        public string UserEmail { get; set; }
     }
 }

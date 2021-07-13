@@ -7,6 +7,7 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
 namespace comprenXible_API.Controllers
@@ -16,43 +17,59 @@ namespace comprenXible_API.Controllers
     public class ChatbotResponsesController : ControllerBase
     {
         private readonly IEmailService _emailService;
-        private readonly User _user;
-        public ChatbotResponsesController(IEmailService emailService, User user)
+
+        public ChatbotResponsesController(IEmailService emailService)
         {
             _emailService = emailService;
-            _user = user;
         }
 
         // GET: api/ChatbotResponse
         [HttpPost]
         public bool GetChatbotResponses([FromBody] ChatbotResponse chatbotResponse)
         {
-            //string chatbotResponseWithoutPunctuation = new string(chatbotResponse.Response.Where(c => !char.IsPunctuation(c))());
-            //string[] chatbotResponseWords = chatbotResponseWithoutPunctuation.Split(' ');
-
-            double wordsScore = WordsScoreCalc(chatbotResponse.Response);
-            double totalResults;
-            EmailInfo emailInfo = new EmailInfo()
+            string chatbotResponseWithoutPunctuation = string.Empty;
+            foreach (var response in chatbotResponse.Response)
             {
-                EmailTo = "ortega.cabello.7@gmail.com",
-                Body = "<p>Hola Enrique<p>",
-                Subject = "Prueba envío mail PORDIOSFUNCIONA lol"
-            };
-
-            if (wordsScore >= 3)
-            {
-
-                wordsScore = 3;
-                totalResults = ChatbotScoreCalculation(chatbotResponse.Response, wordsScore, chatbotResponse.TimeSpan) + Convert.ToDouble(chatbotResponse.AnswersScore);
-
-                _emailService.SendEmailAsync(emailInfo, totalResults);
-                return true;
+                chatbotResponseWithoutPunctuation = Regex.Replace(response, @"[^\w\s]", "");
             }
-            else if (chatbotResponse.Response.Length > 200)
-            {
-                totalResults = ChatbotScoreCalculation(chatbotResponse.Response, wordsScore, chatbotResponse.TimeSpan) + Convert.ToDouble(chatbotResponse.AnswersScore);
 
-                _emailService.SendEmailAsync(emailInfo, totalResults);
+            string[] chatbotResponseStrings = chatbotResponseWithoutPunctuation.Split(' ');
+
+            List<string> chatbotResponseWords = new List<string>();
+            foreach (var item in chatbotResponseStrings)
+            {
+                if (item != "")
+                {
+                    chatbotResponseWords.Add(item);
+                }
+            }
+
+            double wordsScore = WordsScoreCalc(chatbotResponseWords);
+            double questionsScore = QuestionsScoreCalculation(chatbotResponse.AnswersToQuestionnaire);
+            double totalResults;
+            EmailInfo emailInfo = new EmailInfo();
+            string emailType = string.Empty;
+
+            if (wordsScore >= 3 || chatbotResponse.Response.Length > 200)
+            {
+                wordsScore = 3;
+                totalResults = ChatbotScoreCalculation(chatbotResponse.Response, wordsScore, Convert.ToDouble(chatbotResponse.TimeSpan)) + questionsScore;
+                if (totalResults <= 5)
+                {
+                    emailInfo.EmailTo = chatbotResponse.UserEmail;
+                    emailType = "no symptoms";
+                }
+                else if (totalResults > 5 && totalResults <= 10)
+                {
+                    emailInfo.EmailTo = chatbotResponse.UserEmail;
+                    emailType = "mild symptoms";
+                }
+                else if (totalResults > 10 && totalResults <= 15)
+                {
+                    emailInfo.EmailTo = "mireitab@gmail.com";//CHANGE THIS!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+                    emailType = "severe symptoms";
+                }
+                _emailService.SendEmailAsync(emailInfo, totalResults, emailType);
                 return true;
             }
             else
@@ -61,6 +78,42 @@ namespace comprenXible_API.Controllers
             }
 
         }
+        static double QuestionsScoreCalculation(string[] answersArray)
+        {
+            //GET RID OF THE CATCH WHEN LINK TO FRONT WORKS
+            double questionsScore = 0;
+           
+                if (answersArray != null)
+                {
+                    foreach (var answer in answersArray)
+                    {
+                        if (answer == "A")
+                        {
+                            questionsScore = +0.25;
+                        }
+                        else if (answer == "B")
+                        {
+                            questionsScore = +0.5;
+                        }
+                        else if (answer == "C")
+                        {
+                            questionsScore = +0.75;
+                        }
+                        else
+                        {
+                            questionsScore = +1;
+                        }
+                    }
+                }
+            else
+            {
+                questionsScore = 9;
+
+            }
+            return questionsScore;
+        }
+         
+        
 
 
         static double ChatbotScoreCalculation(Array words, double chatbotWordsScore, double elapsedTime)
@@ -153,7 +206,7 @@ namespace comprenXible_API.Controllers
             return chatbotScore;
         }
 
-        public double WordsScoreCalc(string[] response)
+        public double WordsScoreCalc(List<string> responseWords)
         {
             int amountOfMatchingKeywordsX02 = 0;
             int amountOfMatchingKeywordsX03 = 0;
@@ -163,7 +216,7 @@ namespace comprenXible_API.Controllers
 
             //This to the DBB
             //keywords
-            foreach (var word in response)
+            foreach (var word in responseWords)
             {
                 if (word == "miserable" ||
                     word == "despreciable" ||
@@ -225,21 +278,6 @@ namespace comprenXible_API.Controllers
             return chatbotWordsScore;
         }
 
-        //string evaluation = string.Empty;
-        //axios questionsscore//
-        //double totalScore = chatbotScore + questionsScore;
-        //if (totalscore < 5)
-        //{
-        //evaluation = "no se aprecian rasgos depresivos.";
-        //}
-        //else if (totalscore > 5 && totalscore < 10)
-        //{
-        //evaluation = "rasgos depresivos leves, se recomienda consultar con un especialista.";
-        //}
-        //else if (totalscore > 10 && totalscore <= 15)
-        //{
-        //    evaluation = "rasgos depresivos severos. es necesaria la consulta urgente con un especialista.";
-        //}
 
     }
 }

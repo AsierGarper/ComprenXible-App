@@ -27,12 +27,13 @@ function Question() {
             })
     }, [])
 
+
     useEffect(() => {
-        console.log("Updatear bdbdd");
         if (choosedOption[questionListCount] !== undefined) {
             document.querySelector('#option' + choosedOption[questionListCount]).checked = true;
         }
     }, [questionListCount, choosedOption])
+
 
     function resetForm() {
         var ele = document.getElementsByName("option");
@@ -42,10 +43,14 @@ function Question() {
 
     function next() {
         if (questionListCount < 8) {
-            updateChoosenArray();
-            setquestionListCount(questionListCount + 1)
-            moveProgressBar(progressBarStatus + 12.5);
-            resetForm();
+            document.querySelectorAll('input[type="radio"]').forEach((elemnt) => {
+                if (elemnt.checked) {
+                    setquestionListCount(questionListCount + 1)
+                    updateChoosenArray();
+                    moveProgressBar(progressBarStatus + 12.5);
+                    resetForm();
+                }
+            })
         }
         else {
             //Esto me lanza al componente TestResult, cuando pulsa en siguiente y no hay mas preguntas.
@@ -67,9 +72,13 @@ function Question() {
                 let provisionalChoosedOption = choosedOption;
                 provisionalChoosedOption[questionListCount] = elemnt.value;
                 setChoosedOption(provisionalChoosedOption);
+                console.log(choosedOption);
+                sessionStorage.setItem("userAsnwersString", choosedOption)
             }
         })
     }
+
+
 
     return (
         <div className="questionSection">
@@ -94,7 +103,7 @@ function Question() {
                 <div className="questionButtons">
                     {/* Esto es una condicion ternaria (condición ? expr1 : expr2 ), es un atajo de un If en javascript */}
                     {questionListCount > 0 ? <button className="button button--bgTransparent-white" onClick={() => back()}>Anterior</button> : <span></span>}
-                    <button className="button button--bgTransparent-white" onClick={() => next()}>Siguiente</button>
+                    {questionListCount < 8 ? <button className="button button--bgTransparent-white" onClick={() => next()}>Siguiente</button> : <button className="button button--bgTransparent-white" onClick={() => history.push('/Chatbot')}>Hablar con Berta</button>}
                 </div>
             </div>
         </div>

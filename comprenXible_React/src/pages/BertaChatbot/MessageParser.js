@@ -12,13 +12,13 @@ class MessageParser {
         let wordsInMessage = lowerCaseMessage.split();
 
         let answers = sessionStorage.getItem("answers");
-        
+
         chatbotResponses = chatbotResponses.concat(lowerCaseMessage);
-        
+
         let date = new Date();
         let endTime = date.getTime();
         let startTime = sessionStorage.getItem("startTime");
-        let timeSpan = endTime-startTime;
+        let timeSpan = endTime - startTime;
         var timeSpanMinutes = timeSpan / 60000;
 
         let chatbotResponsesObj = {
@@ -26,10 +26,10 @@ class MessageParser {
             timeSpan: timeSpanMinutes,
             // answersScore: answersScore
         }
-        
+
         axios.post("https://localhost:44350/api/chatbotResponses", chatbotResponsesObj)
-            .then(function (response) {               
-                if (response) {                 
+            .then(function (response) {
+                if (response) {
                     this.actionProvider.endConversation()
                 }
                 else if (lowerCaseMessage.includes("y tu") ||
@@ -359,10 +359,10 @@ class MessageParser {
                     this.actionProvider.responseToNoKeywords()
                 }
             })
-            .catch(function(error){
+            .catch(function (error) {
                 console.log(error);
             })
-        
+
     }
 }
 

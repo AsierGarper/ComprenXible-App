@@ -19,7 +19,7 @@ function SignIn() {
                 console.log("Esta es la respuesta al post:")
                 console.log(response);
                 //Si esta bien metido, que nos meta a sessionstorage
-                // sessionStorage.setItem("userAsnwersString", choosedOption)
+                sessionStorage.setItem("sessionUserCredentials", user)
             })
             .catch(function (error) {
                 console.log(error);
@@ -30,7 +30,7 @@ function SignIn() {
     function checkUser() {
         var userEmail = document.getElementById("userEmail").value;
         var userPassword = document.getElementById("userPassword").value;
-        let tempUserObject = { userEmail: userEmail, userPassword: userPassword };
+        let tempUserObject = { useremail: userEmail, userpassword: userPassword };
         console.log("Tu objeto temUserObject es: ")
         console.log(tempUserObject);
         setUserData(tempUserObject);

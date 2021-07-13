@@ -10,10 +10,12 @@ class MessageParser {
     parse(message) {
         var self = this;
         const lowerCaseMessage = " " + message.toLowerCase() + " ";
-        let wordsInMessage = lowerCaseMessage.split();
-
-        let userAnswersString = sessionStorage.getItem("answersScore");
-        let userEmail = sessionStorage.getItem("email");
+        let wordsInMessage = lowerCaseMessage.split(" ");
+        console.log(wordsInMessage)
+        
+        let userAnswersString = sessionStorage.getItem("userAsnwersString");
+        let toEmail = sessionStorage.getItem("userEmail");//DO THIS!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+        let toName = sessionStorage.getItem("name")
         chatbotResponses = chatbotResponses.concat(lowerCaseMessage);
 
         let date = new Date();
@@ -25,13 +27,14 @@ class MessageParser {
         let chatbotResponsesObj = {
             response: chatbotResponses,
             timeSpan: timeSpanMinutes.toString(),
-            answers: userAnswersString,
-            user: userEmail
+            answersToQuestionnaire: userAnswersString,
+            userEmail: toEmail,
+            name: toName
         }
+        console.log(chatbotResponsesObj)
 
         axios.post("https://localhost:44350/api/chatbotResponses", chatbotResponsesObj)
             .then(function (response) { 
-                console.log(this);
                 if (response.data) {                 
                     self.actionProvider.endConversation()
                     document.querySelector(".react-chatbot-kit-chat-input").disabled = true;
@@ -116,8 +119,8 @@ class MessageParser {
                     lowerCaseMessage.includes("lloro") ||
                     lowerCaseMessage.includes("apenad") ||
                     lowerCaseMessage.includes("infeliz") ||
-                    (lowerCaseMessage.includes("content") && !lowerCaseMessage.includes(" no ")) ||
-                    (lowerCaseMessage.includes("alegr") && !lowerCaseMessage.includes(" no "))) {
+                    (lowerCaseMessage.includes("content") && lowerCaseMessage.includes(" no ")) ||
+                    (lowerCaseMessage.includes("alegr") && lowerCaseMessage.includes(" no "))) {
                     self.actionProvider.responseToSadness()
                 }
                 else if (lowerCaseMessage.includes("miserable") ||

@@ -1,5 +1,6 @@
 ﻿using MailKit.Net.Smtp;
 using MailKit.Security;
+using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Options;
 using MimeKit;
 using System;
@@ -13,39 +14,46 @@ namespace comprenXible_API.Services
     public class EmailService : IEmailService
     {
         private readonly EmailSettings _mailSettings;
-        public EmailService(IOptions<EmailSettings> mailSettings)
+        private Microsoft.AspNetCore.Hosting.IWebHostEnvironment _env;
+        public EmailService(IOptions<EmailSettings> mailSettings, Microsoft.AspNetCore.Hosting.IWebHostEnvironment env)
         {
             _mailSettings = mailSettings.Value;
+            _env = env;
         }
-        public async Task SendEmailAsync(EmailInfo emailInfo, double totalResults, string emailType)
+        public async Task SendEmailAsync(EmailInfo emailInfo, double totalResults, string resultType, string userName)
         {
             var email = new MimeMessage();
             email.Sender = MailboxAddress.Parse(_mailSettings.Email);
             email.To.Add(MailboxAddress.Parse(emailInfo.EmailTo));
-            var builder = new BodyBuilder();
 
-            if (emailType == "no symptoms")
+            string templateType;
+            if (resultType == "no symptoms")
             {
-                email.Subject = "Resultados Test";
-                builder.HtmlBody = "No se aprecian rasgos depresivos.";
-                email.Body = builder.ToMessageBody();
+                templateType = "NoSymptomsEmail.html";
             }
-            else if(emailType == "mild symptoms")
+            else if (resultType == "mild symptoms")
             {
-                email.Subject = "Resultados Test";
-                builder.HtmlBody = "Rasgos depresivos leves. Se recomienda consultar con un especialista.";
-                email.Body = builder.ToMessageBody();
+                templateType = "MildSymptomsEmail.html";
             }
             else
             {
-                email.Subject = "Resultados Test";
-                builder.HtmlBody = "" +
-                    "<div>" +
-                    "   <p>Rasgos depresivos severos.</p> " +
-                    "   <p>Es necesaria la consulta urgente con un especialista.</p>" +
-                    "</div>";
-                email.Body = builder.ToMessageBody();
+                templateType = "SevereSymptomsEmail.html";
             }
+            
+            //var emailTemplates = _env.WebRootPath;
+            var pathToFile = _env.WebRootPath
+                            + Path.DirectorySeparatorChar.ToString()
+                            + templateType;
+                           
+            var builder = new BodyBuilder();
+
+            using (StreamReader SourceReader = File.OpenText(pathToFile))
+            {
+                builder.HtmlBody = SourceReader.ReadToEnd();
+                builder.HtmlBody = builder.HtmlBody.Replace("$UserName$", userName);
+                email.Body = builder.ToMessageBody();
+            }            
+
             
             if (emailInfo.Attachments != null)
             {

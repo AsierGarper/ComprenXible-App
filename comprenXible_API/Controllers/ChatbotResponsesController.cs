@@ -25,7 +25,7 @@ namespace comprenXible_API.Controllers
 
         // GET: api/ChatbotResponse
         [HttpPost]
-        public bool GetChatbotResponses([FromBody] ChatbotResponse chatbotResponse, UserCredentials credentials)
+        public bool GetChatbotResponses([FromBody] ChatbotResponse chatbotResponse)
         {
             string chatbotResponseWithoutPunctuation = string.Empty;
             foreach (var response in chatbotResponse.Response)
@@ -76,8 +76,6 @@ namespace comprenXible_API.Controllers
                     resultType = "severe symptoms";
                 }
                 chatbotResponse.UserName = "Mireia";
-                 
-
                 _emailService.SendEmailAsync(emailInfo, totalResults, resultType, chatbotResponse.UserName);
                 return true;
             }

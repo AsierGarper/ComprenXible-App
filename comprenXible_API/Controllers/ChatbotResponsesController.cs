@@ -25,7 +25,7 @@ namespace comprenXible_API.Controllers
 
         // GET: api/ChatbotResponse
         [HttpPost]
-        public bool GetChatbotResponses([FromBody] ChatbotResponse chatbotResponse)
+        public bool GetChatbotResponses([FromBody] ChatbotResponse chatbotResponse, UserCredentials credentials)
         {
             string chatbotResponseWithoutPunctuation = string.Empty;
             foreach (var response in chatbotResponse.Response)
@@ -45,31 +45,40 @@ namespace comprenXible_API.Controllers
             }
 
             double wordsScore = WordsScoreCalc(chatbotResponseWords);
-            double questionsScore = QuestionsScoreCalculation(chatbotResponse.AnswersToQuestionnaire);
+
+            string answersToQuestionnaireString = chatbotResponse.AnswersToQuestionnaire;
+
+            double questionsScore = QuestionsScoreCalculation(answersToQuestionnaireString);
             double totalResults;
             EmailInfo emailInfo = new EmailInfo();
-            string emailType = string.Empty;
+            string resultType = string.Empty;
 
-            if (wordsScore >= 3 || chatbotResponse.Response.Length > 200)
+            if (wordsScore >= 3 || chatbotResponseWords.Count > 200)
             {
-                wordsScore = 3;
+                if (wordsScore >= 3)
+                {
+                    wordsScore = 3;
+                }
                 totalResults = ChatbotScoreCalculation(chatbotResponse.Response, wordsScore, Convert.ToDouble(chatbotResponse.TimeSpan)) + questionsScore;
                 if (totalResults <= 5)
                 {
-                    emailInfo.EmailTo = chatbotResponse.UserEmail;
-                    emailType = "no symptoms";
+                    emailInfo.EmailTo = "mireitab@gmail.com";
+                    resultType = "no symptoms";
                 }
                 else if (totalResults > 5 && totalResults <= 10)
                 {
                     emailInfo.EmailTo = chatbotResponse.UserEmail;
-                    emailType = "mild symptoms";
+                    resultType = "mild symptoms";
                 }
                 else if (totalResults > 10 && totalResults <= 15)
                 {
-                    emailInfo.EmailTo = "mireitab@gmail.com";//CHANGE THIS!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-                    emailType = "severe symptoms";
+                    emailInfo.EmailTo = chatbotResponse.UserEmail;//CHANGE THIS!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+                    resultType = "severe symptoms";
                 }
-                _emailService.SendEmailAsync(emailInfo, totalResults, emailType);
+                chatbotResponse.UserName = "Mireia";
+                 
+
+                _emailService.SendEmailAsync(emailInfo, totalResults, resultType, chatbotResponse.UserName);
                 return true;
             }
             else
@@ -78,33 +87,34 @@ namespace comprenXible_API.Controllers
             }
 
         }
-        static double QuestionsScoreCalculation(string[] answersArray)
+        static double QuestionsScoreCalculation(string answersToQuestionnaireString)
         {
             //GET RID OF THE CATCH WHEN LINK TO FRONT WORKS
             double questionsScore = 0;
-           
-                if (answersArray != null)
+            string[] answersToQuestionnaireArray = answersToQuestionnaireString.Split(",");
+
+            if (answersToQuestionnaireArray != null)
+            {
+                foreach (var answer in answersToQuestionnaireArray)
                 {
-                    foreach (var answer in answersArray)
+                    if (answer == "A")
                     {
-                        if (answer == "A")
-                        {
-                            questionsScore = +0.25;
-                        }
-                        else if (answer == "B")
-                        {
-                            questionsScore = +0.5;
-                        }
-                        else if (answer == "C")
-                        {
-                            questionsScore = +0.75;
-                        }
-                        else
-                        {
-                            questionsScore = +1;
-                        }
+                        questionsScore = +0.25;
+                    }
+                    else if (answer == "B")
+                    {
+                        questionsScore = +0.5;
+                    }
+                    else if (answer == "C")
+                    {
+                        questionsScore = +0.75;
+                    }
+                    else
+                    {
+                        questionsScore = +1;
                     }
                 }
+            }
             else
             {
                 questionsScore = 9;
@@ -112,8 +122,8 @@ namespace comprenXible_API.Controllers
             }
             return questionsScore;
         }
-         
-        
+
+
 
 
         static double ChatbotScoreCalculation(Array words, double chatbotWordsScore, double elapsedTime)

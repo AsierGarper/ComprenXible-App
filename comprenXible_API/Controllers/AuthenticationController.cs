@@ -22,7 +22,7 @@ namespace comprenXible_API.Controllers
             private readonly Auth authenticationService;
         private readonly ApplicationDbContext _context;
 
-            public AuthenticationController(Auth authenticationService, ApplicationDbContext context)
+            public AuthenticationController(Auth authenticationService, ApplicationDbContext context )
             {
                 this.authenticationService = authenticationService;
                 _context = context;
@@ -31,7 +31,7 @@ namespace comprenXible_API.Controllers
 
 
         [HttpPost]
-        public async Task<ActionResult<User>> Authenticate([FromBody] UserCredentials userCredentials)
+        public async Task<ActionResult<UserData>> Authenticate([FromBody] UserCredentials userCredentials)
         {
             try
             {
@@ -43,10 +43,11 @@ namespace comprenXible_API.Controllers
                     User user = await _context.User.Where(u => u.Password == pbkdf2.Hash(keys.SecSalt, userCredentials.UserPassword)).FirstOrDefaultAsync();
 
                     if (keys != null && user != null)
-                    {                        
+                    {
+                        UserData userData = CryptoService.Decrypt(user, keys, userCredentials);
                         //string token = authenticationService.Authenticate();
                         //User found! this will return an OK with the token! Marvelous!
-                        return user;
+                        return userData;
                     }
                     else
                     {

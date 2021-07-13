@@ -96,6 +96,7 @@ class MessageParser {
                     lowerCaseMessage.includes("suicidio") ||
                     (lowerCaseMessage.includes("quitar") && lowerCaseMessage.includes("vida")) ||
                     (lowerCaseMessage.includes("cortar") && lowerCaseMessage.includes("venas")) ||
+                    (lowerCaseMessage.includes("pegar") && lowerCaseMessage.includes("tiro")) ||
                     (lowerCaseMessage.includes("tirar") && lowerCaseMessage.includes("puente")) ||
                     lowerCaseMessage.includes("suicidar")) {
                     self.actionProvider.responseToSuicide()

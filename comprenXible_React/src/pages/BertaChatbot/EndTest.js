@@ -11,7 +11,9 @@ function EndTestWidget(){
     
     return (
         // <button className="widget" onclick={()=>history.push("src/components/testResult/TestResult.js")}>Finalizar Test</button>
-        <Link className="widget" to="/TestResult">Finalizar test</Link>
+        <div className="widgetDiv">
+            <Link className="widget" to="/TestResult"><b>Finalizar test</b></Link>
+        </div>
     )
 }
 

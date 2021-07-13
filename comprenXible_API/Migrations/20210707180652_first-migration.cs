@@ -39,7 +39,7 @@ namespace comprenXible_API.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "CriptographicEntry",
+                name: "CryptographicEntry",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
@@ -53,7 +53,7 @@ namespace comprenXible_API.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_CriptographicEntry", x => x.Id);
+                    table.PrimaryKey("PK_CryptographicEntry", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -226,7 +226,7 @@ namespace comprenXible_API.Migrations
                 name: "Answer");
 
             migrationBuilder.DropTable(
-                name: "CriptographicEntry");
+                name: "CryptographicEntry");
 
             migrationBuilder.DropTable(
                 name: "KeyWordReiteration");

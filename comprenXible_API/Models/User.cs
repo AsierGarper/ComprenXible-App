@@ -10,11 +10,11 @@ namespace comprenXible_API.Models
     {
         [Key]
         public int Id { get; set; }
-        public string Name { get; set; }
-        public string HashedEmail { get; set; }
-        public string Gender { get; set; }
-        public string Email { get; set; }
-        public string Password { get; set; }
+        public byte[] Name { get; set; }
+        public byte[] HashedEmail { get; set; }
+        public byte[] Gender { get; set; }
+        public byte[] Email { get; set; }
+        public byte[] Password { get; set; }
         public List<Test> Tests { get; set; }
     }
 }

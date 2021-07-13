@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using comprenXible_API.Data;
 using comprenXible_API.Models;
+using comprenXible_API.DTO;
 
 namespace comprenXible_API.Controllers
 {
@@ -22,11 +23,17 @@ namespace comprenXible_API.Controllers
         }
 
         // GET: api/Tests
-        [HttpGet]
-        public async Task<ActionResult<IEnumerable<Test>>> GetTest()
-        {
-            return await _context.Test.ToListAsync();
-        }
+        //[HttpGet]
+        //public async Task<ActionResult<IEnumerable<Test>>> GetTest(UserCredentials userCredentials)
+        //{
+
+
+
+
+
+
+        //    return await _context.Test.ToListAsync();
+        //}
 
         // GET: api/Tests/5
         [HttpGet("{id}")]

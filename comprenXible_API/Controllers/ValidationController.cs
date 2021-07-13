@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Authentication.JwtBearer;
+﻿using comprenXible_API.Models;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -13,9 +14,10 @@ namespace comprenXible_API.Controllers
     [ApiController]
     public class ValidationController : ControllerBase
     {
-
+        
         //This is for checking if a token is valid
         [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
+        
         public IActionResult Validate()
         {
             return Ok();

@@ -14,17 +14,17 @@ namespace comprenXible_API.Authentication_
     {
         private readonly IEnumerable<UserCredentials> users;
 
-        public UserService()
-        {
-            users = new List<UserCredentials>
-        {
-            new UserCredentials
-            {
-                UserEmail = "john.doe",
-                Password = "john.password"
-            }
-        };
-        }
+        //public UserService()
+        //{
+        //    users = new List<UserCredentials>
+        //{
+        //    new UserCredentials
+        //    {
+        //        UserEmail = "john.doe",
+        //        UserPassword = "john.password"
+        //    }
+        //};
+        //}
 
         public void ValidateCredentials(UserCredentials userCredentials)
         {
@@ -32,7 +32,7 @@ namespace comprenXible_API.Authentication_
             bool isValid =
             users.Any(u =>
                 u.UserEmail == userCredentials.UserEmail &&
-                u.Password == userCredentials.Password);
+                u.UserPassword == userCredentials.UserPassword);
 
 
             if (!isValid)

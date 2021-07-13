@@ -18,7 +18,7 @@ namespace comprenXible_API.Data
 
         public DbSet<comprenXible_API.Models.ChatResult> ChatResult { get; set; }
 
-        public DbSet<comprenXible_API.Models.CriptographicEntry> CriptographicEntry { get; set; }
+        public DbSet<comprenXible_API.Models.CryptographicEntry> CryptographicEntry { get; set; }
 
         public DbSet<comprenXible_API.Models.KeyWord> KeyWord { get; set; }
 

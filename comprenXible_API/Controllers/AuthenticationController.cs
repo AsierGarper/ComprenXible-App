@@ -31,7 +31,7 @@ namespace comprenXible_API.Controllers
 
 
         [HttpPost]
-        public async Task<IActionResult> Authenticate([FromBody] UserCredentials userCredentials)
+        public async Task<ActionResult<User>> Authenticate([FromBody] UserCredentials userCredentials)
         {
             try
             {
@@ -40,12 +40,13 @@ namespace comprenXible_API.Controllers
                 if (_context.User.Any(u => u.HashedEmail == email))
                 {
                     CryptographicEntry keys = await _context.CryptographicEntry.Where(c => c.UserEmail == email).FirstOrDefaultAsync();
+                    User user = await _context.User.Where(u => u.Password == pbkdf2.Hash(keys.SecSalt, userCredentials.UserPassword)).FirstOrDefaultAsync();
 
-                    if (keys != null && _context.User.Any(u => u.Password == pbkdf2.Hash(keys.SecSalt, userCredentials.UserPassword)))
-                    {
+                    if (keys != null && user != null)
+                    {                        
                         //string token = authenticationService.Authenticate();
                         //User found! this will return an OK with the token! Marvelous!
-                        return Ok("Authorization succesful");
+                        return user;
                     }
                     else
                     {

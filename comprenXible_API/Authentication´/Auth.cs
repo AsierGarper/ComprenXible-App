@@ -10,18 +10,16 @@ namespace comprenXible_API.Authentication_
     {
         //Both token and user services are inyected
         private readonly TokenService TokenService;
-        private readonly UserService UserService;
 
-        public Auth(TokenService tokenService, UserService userService)
+        public Auth(TokenService tokenService)
         {
             this.TokenService = tokenService;
-            this.UserService = userService;
         }
 
         //This method gets the UserCredentials, validates them via the userServices & creates a token with the tokenService
         public string Authenticate(UserCredentials userCredentials)
         {
-            UserService.ValidateCredentials(userCredentials);
+            //ValidationService.ValidateCredentials(userCredentials);
             string securityToken = TokenService.GetToken();
 
             return securityToken;

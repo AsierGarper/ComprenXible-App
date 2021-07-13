@@ -15,11 +15,11 @@ class MessageParser {
         let userAnswersString = sessionStorage.getItem("answersScore");
         let userEmail = sessionStorage.getItem("email");
         chatbotResponses = chatbotResponses.concat(lowerCaseMessage);
-        
+
         let date = new Date();
         let endTime = date.getTime();
         let startTime = sessionStorage.getItem("startTime");
-        let timeSpan = endTime-startTime;
+        let timeSpan = endTime - startTime;
         var timeSpanMinutes = timeSpan / 60000;
 
         let chatbotResponsesObj = {
@@ -28,7 +28,7 @@ class MessageParser {
             answers: userAnswersString,
             user: userEmail
         }
-        
+
         axios.post("https://localhost:44350/api/chatbotResponses", chatbotResponsesObj)
             .then(function (response) { 
                 console.log(this);
@@ -363,10 +363,10 @@ class MessageParser {
                     self.actionProvider.responseToNoKeywords()
                 }
             })
-            .catch(function(error){
+            .catch(function (error) {
                 console.log(error);
             })
-        
+
     }
 }
 

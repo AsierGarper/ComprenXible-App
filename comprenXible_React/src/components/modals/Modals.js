@@ -7,7 +7,7 @@ import { faTimesCircle } from '@fortawesome/free-regular-svg-icons'
 import './modals.css'
 
 
-function Modals() {
+function Modals(props) {
     const [showModal, setShowModal] = useState(false);
     if (showModal) {
         return (
@@ -15,10 +15,10 @@ function Modals() {
                 <span className="quitTest" id="modalButton" onClick={() => setShowModal(true)}><FontAwesomeIcon icon={faTimesCircle} /></span>
                 <div className="modalContainer" id="modal">
                     <div className="modalContent">
-                        <span className="modalClose" onClick={() => setShowModal(false)}><FontAwesomeIcon icon={faTimesCircle} /></span>
-                        <p>¿Estás seguro de que quieres salir? Perderás todos tus progresos.</p>
+                        {props.close === true ? <span className="modalClose" onClick={() => setShowModal(false)}><FontAwesomeIcon icon={faTimesCircle} /></span> : <span></span>}
+                        <p>{props.text}</p>
                         <div className="quitTestButton">
-                            <Link to="/" className="button button--bgSolid-turquoise">Abandonar test</Link>
+                            <Link to={props.url} className="button button--bgSolid-turquoise">{props.urlText}</Link>
                         </div>
                     </div>
                 </div>

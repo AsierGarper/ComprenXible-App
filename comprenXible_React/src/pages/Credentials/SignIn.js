@@ -9,8 +9,6 @@ import axios from 'axios';
 
 function SignIn() {
 
-    // user={Email: email.value, Password: password.value}
-    // httpPost
     const [user, setUserData] = useState();
 
     useEffect(() => {
@@ -20,24 +18,13 @@ function SignIn() {
             .then(function (response) {
                 console.log("Esta es la respuesta al post:")
                 console.log(response);
+                //Si esta bien metido, que nos meta a sessionstorage
+                // sessionStorage.setItem("userAsnwersString", choosedOption)
             })
             .catch(function (error) {
                 console.log(error);
             })
     }, [user])
-
-    // function checkCredentials(emailInput, passwordImput) {
-    //     var regexEmail = /(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,}/;
-    //     var regexPassword = /(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,}/;
-    //     var OKEmail = regexEmail.exec(emailInput.value);
-    //     var OKPassword = regexPassword.exec(passwordImput.value);
-    //     if (!OKPassword && !OKEmail) {
-    //         console.error(emailInput.value + ' or ' + passwordImput.value + ' no son correctos');
-    //     } else {
-    //         checkUser();
-    //         console.log('Email y contrasena correctos ' + OKPassword[0] + OKEmail[0]);
-    //     }
-    // }
 
 
     function checkUser() {
@@ -51,7 +38,7 @@ function SignIn() {
     return (<>
         <div className="SignIn">
             <Navbar />
-            <div className="wrapper">
+            <div className="wrapper wrapper-filled">
                 <div className="textContainer">
                     <h4>Introduce tus datos:</h4>
                     <hr></hr>

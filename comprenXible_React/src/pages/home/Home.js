@@ -14,7 +14,7 @@ function Home() {
 
         <div className="Home">
             <Navbar />
-            <div className="wrapper">
+            <div className="wrapper wrapper-filled">
                 <div className="initTestContainer">
                     <Link to="/TestStart" className="button button--bgTransparent-white">COMENZAR TEST</Link>
                 </div>

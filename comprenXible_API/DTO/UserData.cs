@@ -13,12 +13,12 @@ namespace comprenXible_API.DTO
         public string Password { get; set; }
         public List<TestData> Tests { get; set; }
 
-        public UserData(string? name, string? gender, List<TestData>? tests)
+        public UserData(string? name, string? gender, string? email, string? password, List<TestData>? tests)
         {
             this.Name = name;
             this.Gender = gender;
-            this.Email = null;
-            this.Password = null;
+            this.Email = email;
+            this.Password = password;
             this.Tests = tests;
         }
     }

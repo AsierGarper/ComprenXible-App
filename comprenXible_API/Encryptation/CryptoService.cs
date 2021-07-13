@@ -89,6 +89,8 @@ namespace comprenXible_API.Encryptation
             UserData userData = new UserData(
                 name: AES.Decrypt(user.Name, SecretDek, keys.DekIv),
                 gender: AES.Decrypt(user.Gender, SecretDek, keys.DekIv),
+                email: credentials.UserEmail,
+                password: credentials.UserPassword,
                 tests: null
                 );
 

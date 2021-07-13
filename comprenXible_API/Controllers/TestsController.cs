@@ -23,17 +23,17 @@ namespace comprenXible_API.Controllers
         }
 
         // GET: api/Tests
-        [HttpGet]
-        public async Task<ActionResult<IEnumerable<Test>>> GetTest(UserCredentials userCredentials)
-        {
+        //[HttpGet]
+        //public async Task<ActionResult<IEnumerable<Test>>> GetTest(UserCredentials userCredentials)
+        //{
 
 
 
 
 
 
-            return await _context.Test.ToListAsync();
-        }
+        //    return await _context.Test.ToListAsync();
+        //}
 
         // GET: api/Tests/5
         [HttpGet("{id}")]

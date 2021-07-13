@@ -59,20 +59,22 @@ namespace comprenXible_API.Encryptation
             return test;
         }
 
-        public static TestData DecryptTest(UserCredentials credentials, CryptographicEntry keys, Test test)
-        {
-            //1) Get SecretKek from password and kekSalt
-            byte[] SecretKek = pbkdf2.Hash(keys.KekSalt, credentials.UserPassword);
-            //2) Get Dek from secretKek and KekiV
-            string Dek = AES.Decrypt(keys.Dek, SecretKek, keys.KekIv);
-            //3) Get SecretDek from dek and DekSalt
-            byte[] SecretDek = pbkdf2.Hash(keys.DekSalt, Dek);
-            //4) And encrypt data with SecretDek + DekIv
+        //TODO
 
-            TestData test = new TestData()
+        //public static TestData DecryptTest(UserCredentials credentials, CryptographicEntry keys, Test test)
+        //{
+        //    //1) Get SecretKek from password and kekSalt
+        //    byte[] SecretKek = pbkdf2.Hash(keys.KekSalt, credentials.UserPassword);
+        //    //2) Get Dek from secretKek and KekiV
+        //    string Dek = AES.Decrypt(keys.Dek, SecretKek, keys.KekIv);
+        //    //3) Get SecretDek from dek and DekSalt
+        //    byte[] SecretDek = pbkdf2.Hash(keys.DekSalt, Dek);
+        //    //4) And encrypt data with SecretDek + DekIv
 
-            return test;
-        }
+        //    TestData test = new TestData();
+
+        //    return test;
+        //}
 
         public static UserData Decrypt(User user, CryptographicEntry keys, UserCredentials credentials)
         {

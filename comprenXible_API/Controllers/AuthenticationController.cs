@@ -43,9 +43,9 @@ namespace comprenXible_API.Controllers
 
                     if (keys != null && _context.User.Any(u => u.Password == pbkdf2.Hash(keys.SecSalt, userCredentials.UserPassword)))
                     {
-                        string token = authenticationService.Authenticate();
+                        //string token = authenticationService.Authenticate();
                         //User found! this will return an OK with the token! Marvelous!
-                        return Ok(token);
+                        return Ok("Authorization succesful");
                     }
                     else
                     {

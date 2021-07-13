@@ -10,10 +10,5 @@ namespace comprenXible_API.DTO
             public string UserEmail { get; set; }
             public string UserPassword { get; set; }
         
-            public UserCredentials(string mail , string pass)
-        {
-            UserEmail = mail;
-            UserPassword = pass;
-        }
     }
 }

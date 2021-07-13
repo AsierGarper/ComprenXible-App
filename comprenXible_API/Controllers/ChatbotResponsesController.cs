@@ -81,9 +81,12 @@ namespace comprenXible_API.Controllers
                     resultType = "severe symptoms";
                 }
                 chatbotResponse.UserName = "Mireia";
+                UserCredentials credentials = new UserCredentials();
+                credentials.UserEmail = chatbotResponse.UserEmail;
+                credentials.UserPassword = chatbotResponse.UserPassword;
 
                 //Now we need to save all this to the database
-                _testService.TestStorageAsync(totalResults, new UserCredentials(chatbotResponse.UserEmail, chatbotResponse.UserPassword));
+                _testService.TestStorageAsync(totalResults, credentials);
                 //And send the email
                 _emailService.SendEmailAsync(emailInfo, totalResults, resultType, chatbotResponse.UserName);
                 return true;

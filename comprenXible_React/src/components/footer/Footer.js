@@ -1,12 +1,6 @@
 
 import React from 'react';
-// import {
-//     BrowserRouter as Router,
-//     Switch,
-//     Route,
-//     Link
-// } from "react-router-dom";
-
+import { Link } from 'react-router-dom';
 import './Footer.css';
 
 function Footer() {
@@ -14,7 +8,7 @@ function Footer() {
         <div className="footer">
             <div className="wrapper">
                 <div className="footerContainer"><p>@ComprenXible. Todos los derechos reservados.</p>
-                    <a href="#privacy">Politica de privacidad</a>
+                    <Link to="/Privacy">Politica de privacidad</Link>
                 </div>
             </div>
         </div>

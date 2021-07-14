@@ -14,6 +14,7 @@ import PersonalArea from "./pages/PersonalArea/PersonalArea";
 import SingIn from "./pages/Credentials/SignIn";
 import Register from "./pages/Credentials/Register";
 import BertaChatbot from "./pages/BertaChatbot/BertaChatbot";
+import Privacy from "./pages/Privacy/Privacy";
 
 
 function App() {
@@ -43,6 +44,9 @@ function App() {
           </Route>
           <Route path="/PersonalArea">
             <PersonalArea sessionUserCredentials={sessionUserCredentials} setSessionUserCredentials={setSessionUserCredentials} />
+          </Route>
+          <Route path="/Privacy">
+            <Privacy sessionUserCredentials={sessionUserCredentials} setSessionUserCredentials={setSessionUserCredentials} />
           </Route>
           <Route path="/">
             <Home sessionUserCredentials={sessionUserCredentials} setSessionUserCredentials={setSessionUserCredentials} />

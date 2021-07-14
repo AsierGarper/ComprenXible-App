@@ -6,6 +6,8 @@ import './Home.css';
 import ProfilePicture1 from '../images/mireia.png';
 import ProfilePicture2 from '../images/asier.png';
 import ProfilePicture3 from '../images/enrique.png';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faTimesCircle } from '@fortawesome/free-regular-svg-icons'
 import Navbar from '../../components/navbar/Navbar';
 import Footer from '../../components/footer/Footer.js';
 
@@ -21,7 +23,7 @@ function Home() {
                 <div className="textSection">
                     <h4>¿En que consiste?</h4>
                     <hr></hr>
-                    <p>Ansiedapp es sistema de prueba para la detección de sintomas depresivos, cuadros de ansiedad y demás afecciones derivadas del aislamiento.
+                    <p>ComprenXible App es sistema de prueba para la detección de sintomas depresivos, cuadros de ansiedad y demás afecciones derivadas del aislamiento.
                         Durante la pandemia, la población general ha recibido menos llamadas y se ha incrementado el sentimiento de apatía. El aislamiento ha generado soledad o angustia, y se han incrementado los trastornos alimenticios. «Los jóvenes no podían encontrarse con los amigos, conocer gente, ligar, enamorarse... Todo eso tiene unas consecuencias».
                     </p>
                     <p> La falta de intimidad y no poder separarse de la familia también han sido factores importantes. Se cree que «el no poder exteriorizar los problemas ha generado grandes angustias». Realizando nuestro test podrás comprobar si necesitas o no atención médica, y prevenir cuadros sintomáticos mayores provocados por el aislamiento.</p>
@@ -36,6 +38,8 @@ function Home() {
                             <img src={ProfilePicture1} alt="" className="profilePicture"></img>
                             <p>Mireia Taboada Zapatero</p>
                             <p>taboadamirella@gmail.com</p>
+                            <FontAwesomeIcon icon={faTimesCircle} />
+                            <p>PENDIENTE PONER EMOTICONOOOOOOOOOOOS LINKEDIN Y GITHUB</p>
                             <hr></hr>
                         </div>
                         <div className="infoContainer">

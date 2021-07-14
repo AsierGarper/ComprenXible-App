@@ -13,7 +13,7 @@ function Footer() {
     return (
         <div className="footer">
             <div className="wrapper">
-                <div className="footerContainer"><p>@Ansiedapp. Todos los derechos reservados.</p>
+                <div className="footerContainer"><p>@ComprenXible. Todos los derechos reservados.</p>
                     <a href="#privacy">Politica de privacidad</a>
                 </div>
             </div>

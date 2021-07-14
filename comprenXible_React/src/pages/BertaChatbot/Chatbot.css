@@ -6,6 +6,7 @@
   color: black;
 }
 .userIcon{
+  min-width: 40px;
   width: 40px;
   height: 40px;
   border-radius: 50%;
@@ -45,7 +46,7 @@
 .widget{
   color: white;
   font-size: 12px;
-  background-color: #616ec8;
+  background-color: #5A6BF0;;
   padding: 8px 70px 10px;
   border-radius: 5px;
   height: 30px;
@@ -55,10 +56,29 @@
 .widgetDiv{
   display: flex;
   justify-content: center;
+  margin: 5px;
+  width: 100%;
 }
-/* .App{
+.bertaContainer{
   position: fixed;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-} */
+}
+
+@media (max-width: 767px){
+  .react-chatbot-kit-chat-container {
+    position: relative;
+    width: 100vw;
+  } 
+  .react-chatbot-kit-chat-inner-container {
+    height: 100vh;
+    margin-bottom: 0;
+  }
+  .react-chatbot-kit-chat-bot-message {
+    width: 100%;
+  }
+  .react-chatbot-kit-chat-message-container {
+    height: calc(100% - 75px);
+  }
+}

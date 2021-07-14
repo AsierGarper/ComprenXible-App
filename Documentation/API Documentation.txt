@@ -1,0 +1,62 @@
+
+These are all the calls you may use
+
+
+REGISTER*
+
+-- POST ...api/users 
+
+{
+"Name":"Paco",
+"Gender": "man",
+"Email": "paco@comprenxible.com",
+"Password": "Paco1234"
+}
+
+result: saves user in database
+
+
+
+LOGIN*
+
+-- POST ..api/Authentication
+
+{
+"UserEmail": "paco@comprenxible.com",
+"UserPassword": "Paco1234"
+}
+
+result: gets an UserData object like this
+	{
+	"name": "Luisa",
+    	"gender": "female",
+   	"email": "luisa@gmail.com",
+    	"password": "123",
+    	"tests": []
+	}
+
+CHATBOT*
+
+-- POST ..api/ChatbotResponses
+
+{
+"Response": ["hola mundo", "estoy bien, gracias"],
+"Timespan": "0.0005436",
+"AnswersToQuestionnaire": "A,B,C,B,A,etc",
+"UserEmail": "luisa@gmail.com",
+"UserName": "Enrique",
+"UserPassword": "Paco1234"
+}
+
+It will return true if enough, and send result to the database
+
+GET TESTS*
+
+-- ..api/Tests
+
+{
+"UserEmail": "paco@comprenxible.com",
+"UserPassword": "Paco1234"
+}
+
+returns a list of tests

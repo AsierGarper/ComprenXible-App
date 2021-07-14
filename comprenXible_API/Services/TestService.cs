@@ -31,5 +31,17 @@ namespace comprenXible_API.Services
             _context.SaveChanges();
 
         }
+
+        public List<TestData> GetTests(CryptographicEntry keys, UserCredentials credentials)
+        {
+            List<Test> tests = _context.Test.Where(t => t.UserEmail == pbkdf2.Hash(credentials.UserEmail)).ToList();
+            List<TestData> result = new List<TestData>();
+            foreach (var test in tests)
+            {
+                result.Add(CryptoService.Decrypt(test, keys, credentials));
+            }
+            return result;
+        }
+
     }
 }

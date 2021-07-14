@@ -11,7 +11,7 @@ function BertaChatbot() {
   let startTime = date.getTime();
   sessionStorage.setItem("startTime", startTime);
   return (
-    <header className="App-header">
+    <header className="bertaContainer">
       <Chatbot config={config} actionProvider={ActionProvider} messageParser={MessageParser} placeholderText="Escribe un mensaje" />
     </header>
   );

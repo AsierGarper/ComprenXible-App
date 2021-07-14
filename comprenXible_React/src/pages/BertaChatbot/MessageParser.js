@@ -12,9 +12,9 @@ class MessageParser {
         const lowerCaseMessage = " " + message.toLowerCase() + " ";
         let wordsInMessage = lowerCaseMessage.split(" ");
         
+        let userCredentials = sessionStorage.getItem("sessionUserCredentials");
+        userCredentials = JSON.parse(userCredentials);
         let userAnswersString = sessionStorage.getItem("userAsnwersString");
-        let toEmail = sessionStorage.getItem("userEmail");
-        let toName = sessionStorage.getItem("name")
         chatbotResponses = chatbotResponses.concat(lowerCaseMessage);
 
         let date = new Date();
@@ -67,10 +67,12 @@ class MessageParser {
                         response: chatbotResponses,
                         timeSpan: timeSpanMinutes.toString(),
                         answersToQuestionnaire: userAnswersString,
-                        userEmail: toEmail,
-                        name: toName,
+                        userEmail: userCredentials.email,
+                        userName: userCredentials.name,
+                        userPassword: userCredentials.password,
                         psychologistsInfo : psychologists
                     }
+                    console.log(chatbotResponsesObj);
                     debugger;
                 axios.post("https://localhost:44350/api/chatbotResponses", chatbotResponsesObj)
                     .then(function (response) { 

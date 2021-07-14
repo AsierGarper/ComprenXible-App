@@ -81,7 +81,7 @@ namespace comprenXible_API.Controllers
                     resultType = "severe symptoms";
                 }
 
-                chatbotResponse.UserName = "Enrique";
+               
                 UserCredentials credentials = new UserCredentials();
                 credentials.UserEmail = chatbotResponse.UserEmail;
                 credentials.UserPassword = chatbotResponse.UserPassword;

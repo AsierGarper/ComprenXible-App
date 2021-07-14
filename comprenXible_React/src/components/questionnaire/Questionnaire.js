@@ -79,7 +79,6 @@ function Question() {
     }
 
 
-
     return (
         <div className="questionSection">
             <div className="wrapper">

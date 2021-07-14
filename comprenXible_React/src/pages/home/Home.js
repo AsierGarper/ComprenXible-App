@@ -23,10 +23,11 @@ function Home(props) {
                 <div className="textSection">
                     <h4>¿En que consiste?</h4>
                     <hr></hr>
-                    <p>ComprenXible App es sistema de prueba para la detección de sintomas depresivos, cuadros de ansiedad y demás afecciones derivadas del aislamiento.
-                        Durante la pandemia, la población general ha recibido menos llamadas y se ha incrementado el sentimiento de apatía. El aislamiento ha generado soledad o angustia, y se han incrementado los trastornos alimenticios. «Los jóvenes no podían encontrarse con los amigos, conocer gente, ligar, enamorarse... Todo eso tiene unas consecuencias».
+                    <p>ComprenXible App es un sistema de detección de sintomas depresivos, cuadros de ansiedad y demás afecciones derivadas del aislamiento.
+                        Durante la pandemia, la población general ha tenido menos contacto con sus amigos y conocidos y se ha incrementado el sentimiento de apatía. El aislamiento ha generado soledad y angustia, y se han incrementado los trastornos alimenticios.
                     </p>
-                    <p> La falta de intimidad y no poder separarse de la familia también han sido factores importantes. Se cree que «el no poder exteriorizar los problemas ha generado grandes angustias». Realizando nuestro test podrás comprobar si necesitas o no atención médica, y prevenir cuadros sintomáticos mayores provocados por el aislamiento.</p>
+                    <p> Sobre todo para los más jóvenes, la imposibilidad de estar con sus amigos y desarrollarse en un entorno social normal ha sido devastadora. La incomunicación, la falta de intimidad y el hecho de no poder separarse de la familia han sido factores importantes en este proceso. </p>                        
+                    <p> Comprenxible utiliza la analítica predictiva para detectar posibles cuadros sintomáticos de ansiedad y depresión. Tras hacer nuestro test en dos pasos, los usuarios reciben al instante los análisis junto con la recomendación.</p>
                 </div>
                 <div className="textSection">
                     <h4>¿Quienes somos?</h4>

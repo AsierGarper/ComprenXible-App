@@ -70,33 +70,36 @@ namespace comprenXible_API.Controllers
 
         // PUT: api/Users/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
-        [HttpPut("{id}")]
-        public async Task<IActionResult> PutUser(int id, User user)
+        [HttpPut]
+        public async Task<IActionResult> PutUser(UserData data)
         {
-            if (id != user.Id)
-            {
-                return BadRequest();
-            }
+            byte[] email = pbkdf2.Hash(data.Email);
+            CryptographicEntry keys = await _context.CryptographicEntry.Where(c => c.UserEmail == email).FirstOrDefaultAsync();
+            User user = await _context.User.Where(u => u.Password == pbkdf2.Hash(keys.SecSalt, data.Password)).FirstOrDefaultAsync();
 
-            _context.Entry(user).State = EntityState.Modified;
+            CryptoService.ReEncryptReferences(ref user, ref keys, data);
 
-            try
+            //Note that now we need to change the email of all tests linked with this user, only in case their email has changed
+            if (data.NewEmail != null)
             {
-                await _context.SaveChangesAsync();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!UserExists(id))
+                byte[] hashMail = pbkdf2.Hash(data.NewEmail);
+
+                if (user.HashedEmail != hashMail)
                 {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
+                    List<Test> tests = await _context.Test.Where(t => t.UserEmail == hashMail).ToListAsync();
+
+                    foreach (Test test in tests)
+                    {
+                        test.UserEmail = user.HashedEmail;
+                        _context.Test.Update(test);
+                    }
+
                 }
             }
+            _context.User.Update(user);
+            _context.CryptographicEntry.Update(keys);
+            return AcceptedAtAction("PutUser", new { id = user.Id }, user);
 
-            return NoContent();
         }
 
         // POST: api/Users

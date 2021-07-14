@@ -40,6 +40,25 @@ namespace comprenXible_API.Encryptation
 
         }
 
+        public static void ReEncryptReferences(ref User user, ref CryptographicEntry keys, UserData userData)
+        {
+            //1) Get SecretKek from password and kekSalt
+            byte[] SecretKek = pbkdf2.Hash(keys.KekSalt, userData.Password);
+            //2) Get Dek from secretKek and KekIv
+            string Dek = AES.Decrypt(keys.Dek, SecretKek, keys.KekIv);
+            //3) Get SecretDek from dek and DekSalt
+            byte[] SecretDek = pbkdf2.Hash(keys.DekSalt, Dek);
+            //4) And encrypt data with SecretDek + DekIv
+
+            if (userData.Name != null) user.Name = AES.Encrypt(userData.Name, SecretDek, keys.DekIv);
+            if (userData.Gender != null) user.Gender = AES.Encrypt(userData.Gender, SecretDek, keys.DekIv);
+            if (userData.NewEmail != null) user.Email = AES.Encrypt(userData.NewEmail, SecretDek, keys.DekIv);
+
+            user.HashedEmail = pbkdf2.Hash(userData.NewEmail);
+            keys.UserEmail = user.HashedEmail;
+
+        }
+
         public static Test EncryptTest(UserCredentials credentials, CryptographicEntry keys, double score)
         {
             //1) Get SecretKek from password and kekSalt

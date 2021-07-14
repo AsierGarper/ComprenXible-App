@@ -3,6 +3,7 @@ using comprenXible_API.Data;
 using comprenXible_API.DTO;
 using comprenXible_API.Encryptation;
 using comprenXible_API.Models;
+using comprenXible_API.Services;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -21,11 +22,13 @@ namespace comprenXible_API.Controllers
         //This is the Auth Dependency Inyection
             private readonly Auth authenticationService;
         private readonly ApplicationDbContext _context;
+        private readonly ITestService _testService;
 
-            public AuthenticationController(Auth authenticationService, ApplicationDbContext context )
+            public AuthenticationController(Auth authenticationService, ApplicationDbContext context, ITestService testService )
             {
                 this.authenticationService = authenticationService;
                 _context = context;
+                _testService = testService;
             }
 
 
@@ -45,23 +48,24 @@ namespace comprenXible_API.Controllers
                     if (keys != null && user != null)
                     {
                         UserData userData = CryptoService.Decrypt(user, keys, userCredentials);
+                        userData.Tests = _testService.GetTests(keys, userCredentials);
                         //string token = authenticationService.Authenticate();
                         //User found! this will return an OK with the token! Marvelous!
                         return userData;
                     }
                     else
                     {
-                        return Unauthorized("Password seems to be incorrect");
+                        return Unauthorized("No account found with these credentials");
                     }
                 }
                 else
                 {
-                return Unauthorized("No account found with this email");
+                return Unauthorized("No account found with these credentials");
                 }
             }
             catch (Exception)
             {
-                return Unauthorized("Oops! And unknown error happened");
+                return Unauthorized("And unknown error happened");
             }
         }
 

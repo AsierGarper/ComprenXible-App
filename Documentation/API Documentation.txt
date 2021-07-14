@@ -1,0 +1,78 @@
+
+These are all the calls you may use
+
+
+REGISTER*
+
+-- POST ...api/users 
+
+{
+"Name":"Paco",
+"Gender": "man",
+"Email": "paco@comprenxible.com",
+"Password": "Paco1234"
+}
+
+result: saves user in database
+
+
+
+LOGIN*
+
+-- POST ..api/Authentication
+
+{
+"UserEmail": "paco@comprenxible.com",
+"UserPassword": "Paco1234"
+}
+
+result: gets an UserData object like this
+	{
+	"name": "Luisa",
+    	"gender": "female",
+   	"email": "luisa@gmail.com",
+	"newEmail": null, ----> this should be null!
+    	"password": "123",
+    	"tests": []
+	}
+
+CHATBOT*
+
+-- POST ..api/ChatbotResponses
+
+{
+"Response": ["suicidio suicidio suicidio suicidio suicidio suicidio suicidio suicidio"],
+"Timespan": "0.0005436",
+"AnswersToQuestionnaire": "A,B,C,B,A,C,A,B,C",
+"UserEmail": "luisa@gmail.com",
+"UserName": "Enrique",
+"UserPassword": "Paco1234"
+}
+
+It will return true if enough, and send result to the database
+
+GET TESTS*
+
+--GET  ..api/Tests
+
+{
+"UserEmail": "paco@comprenxible.com",
+"UserPassword": "Paco1234"
+}
+
+returns a list of tests
+
+
+UPDATE USER'S DATA
+
+-- PUT ..api/Users
+
+{
+	"name": "Luisa",
+    	"gender": "female",
+   	"email": "luisa@gmail.com",
+	"newEmail": "luisa@hotmail.com",
+    	"password": "123"
+}                               (all fields are nullable except for the password and email.
+				 newEmail is for changing the email, but email should always be the current email)
+

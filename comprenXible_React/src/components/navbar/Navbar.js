@@ -1,5 +1,5 @@
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
 import {
     Link
@@ -10,24 +10,26 @@ import Photo from './images/comprenxible_logo.png'
 import './Navbar.css';
 
 
-function Navbar() {
-
+function Navbar(props) {
     const [showMenu, setShowMenu] = useState(false);
-    // function myFunction() {
-    //     var x = document.getElementById("myTopnav");
-    //     if (x.className === "topnav") {
-    //         x.className += " responsive";
-    //     } else {
-    //         x.className = "topnav";
-    //     }
-    // }
+
+    useEffect(() => {
+        if (!props.sessionUserCredentials) {
+            if (sessionStorage.getItem("sessionUserCredentials")) {
+                sessionStorage.removeItem("sessionUserCredentials");
+            }
+            console.log("sessionUserCredentials true")
+        } else {
+
+            console.log("sessionUserCredentials false")
+        }
+    }, [props.sessionUserCredentials])
+
     function toogleNavbar() {
         if (showMenu) {
             setShowMenu(false);
-            console.log("false");
         } else {
             setShowMenu(true);
-            console.log("true");
         }
     }
 
@@ -36,7 +38,6 @@ function Navbar() {
             <div className="navbar">
                 <Link to="/">
                     <img src={Photo} className="logoAnsiedapp" alt="logoAnsiedapp" />
-                    {/* <p className="logoSubtitle">Una app de acceXible.</p> */}
                 </Link>
                 <div className="credentials">
                     <div id="menuToggle">
@@ -48,11 +49,17 @@ function Navbar() {
 
                 </div>
             </div>
+
             <ul id="menu" className={showMenu === true ? "menu--show" : ""}>
-                <li><Link to="/SignIn">Iniciar Sesion</Link></li>
-                <li><Link to="/Register">Registrarse</Link></li>
-                <li><Link to="/PersonalArea">Area Personal</Link></li>
+                {props.sessionUserCredentials ? <>
+                    <li><a href="?" onClick={() => props.setSessionUserCredentials(false)}>Logout</a></li>
+                    <li><Link to="/PersonalArea">Area Personal</Link></li>
+                </> : <>
+                    <li><Link to="/SignIn">Iniciar Sesion</Link></li>
+                    <li><Link to="/Register">Registrarse</Link></li>
+                </>}
                 <li><Link to="/PersonalArea">Contacto</Link></li>
+
             </ul>
         </header>
 

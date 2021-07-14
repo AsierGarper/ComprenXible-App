@@ -33,8 +33,6 @@ function Navbar(props) {
         }
     }
 
-
-
     return (
         <header>
             <div className="navbar">

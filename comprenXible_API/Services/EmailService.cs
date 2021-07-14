@@ -23,12 +23,16 @@ namespace comprenXible_API.Services
         }
         public async Task SendEmailAsync(EmailInfo emailInfo, double totalResults, string resultType, string userName, string[] psychologistsInfo)
         {
-            string psychologistsInfoString= "";
-            foreach (var psychologist in psychologistsInfo)
+                string psychologistsInfoString = "";
+            if (psychologistsInfo.Length > 0)
             {
-                string[] array = JsonConvert.DeserializeObject<string[]>(psychologist);
-                psychologistsInfoString += $"<p><b>{ array[0]}</b><br/> { array[1]}</p><hr></hr>";
+                foreach (var psychologist in psychologistsInfo)
+                {
+                    string[] array = JsonConvert.DeserializeObject<string[]>(psychologist);
+                    psychologistsInfoString += $"<p><b>{ array[0]}</b><br/> { array[1]}</p><hr></hr>";
+                }
             }
+
 
             var email = new MimeMessage();
             email.Sender = MailboxAddress.Parse(_mailSettings.Email);
@@ -48,24 +52,31 @@ namespace comprenXible_API.Services
             {
                 templateType = "SevereSymptomsEmail.html";
             }
-            
+
             //var emailTemplates = _env.WebRootPath;
             var pathToFile = _env.WebRootPath
                             + Path.DirectorySeparatorChar.ToString()
                             + templateType;
-                           
+
             var builder = new BodyBuilder();
 
             using (StreamReader SourceReader = File.OpenText(pathToFile))
             {
-                
                 builder.HtmlBody = SourceReader.ReadToEnd();
+                if (psychologistsInfo.Length>0)
+                {
+                    builder.HtmlBody = builder.HtmlBody.Replace("$psychologistsNearYou$", "Estos son los psicólogos cerca de ti:");
+                }
+                else
+                {
+                    builder.HtmlBody = builder.HtmlBody.Replace("$psychologistsNearYou$", "");
+                }
                 builder.HtmlBody = builder.HtmlBody.Replace("$UserName$", userName);
                 builder.HtmlBody = builder.HtmlBody.Replace("$psychologist$", psychologistsInfoString);
                 email.Body = builder.ToMessageBody();
-            }            
+            }
 
-            
+
             if (emailInfo.Attachments != null)
             {
                 byte[] fileBytes;
@@ -82,7 +93,7 @@ namespace comprenXible_API.Services
                     }
                 }
             }
-            
+
             using var smtp = new SmtpClient();
             try
             {

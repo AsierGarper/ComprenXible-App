@@ -7,9 +7,11 @@ function PersonalArea(props) {
 
     let sessionUserCredentials = sessionStorage.getItem("sessionUserCredentials");
     let convertUser = JSON.parse(sessionUserCredentials);
-    console.log("Los convertUser recuperados son: " + convertUser);
-    console.log("El nombre del usuario es: " + convertUser.name);
 
+    let tests = convertUser.tests;
+    
+    
+console.log(tests);
     return (<>
         <div className="PersonalArea">
             <Navbar sessionUserCredentials={props.sessionUserCredentials} setSessionUserCredentials={props.setSessionUserCredentials} />
@@ -32,29 +34,29 @@ function PersonalArea(props) {
                         <label htmlFor="O">Otro</label><br></br>
                         <button type="submit" className="button button--bgTransparent-white">Guardar cambios</button>
                     </form>
-
+                    
                     <br></br>
                     <h4>Análisis realizados:</h4>
                     <hr></hr>
                     <table id="testRecords">
+                       
                         <tr>
                             <th>Fecha</th>
-                            <th>Indicadores</th>
-                            <th>Conclusión</th>
                             <th>Resultados</th>
                         </tr>
-                        <tr>
-                            <td>20/04/2020</td>
-                            <td>12/15</td>
-                            <td>Necesita atención médica.</td>
-                            <button className="button button--bgTransparent-white">Enviar resultados</button>
-                        </tr>
-                        <tr>
-                            <td>20/05/2021</td>
-                            <td>3/15</td>
-                            <td>No necesita atención médica.</td>
-                            <button className="button button--bgTransparent-white">Enviar resultados</button>
-                        </tr>
+                        {
+                               tests.map((test,index) => {
+                                    let dateParse = new Date(test.date)
+                                    let date = `${dateParse.getDate()}-${dateParse.getMonth()+1}-${dateParse.getFullYear()}`
+                                    return(
+                                
+                                    <tr key={index}>
+                                        <td>{date}</td>
+                                        <td>{test.score}</td>                            
+                                    </tr>
+                                    )                  
+                                })
+                        }
                     </table>
                     {/* <iframe title="map"
                         width="600"
@@ -72,3 +74,35 @@ function PersonalArea(props) {
 }
 
 export default PersonalArea;
+
+{/* <html>
+  <head>
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script type="text/javascript">
+      google.charts.load('current', {'packages':['corechart']});
+      google.charts.setOnLoadCallback(drawChart);
+
+      function drawChart() {
+        var data = google.visualization.arrayToDataTable([
+            ['Date', 'Score'],
+            tests.forEach(test => {
+                [{test.date},  {test.score}],              
+            });
+         
+        ]);
+
+        var options = {
+          title: 'Company Performance',
+          hAxis: {title: 'Year',  titleTextStyle: {color: '#333'}},
+          vAxis: {minValue: 0}
+        };
+
+        var chart = new google.visualization.AreaChart(document.getElementById('chart_div'));
+        chart.draw(data, options);
+      }
+    </script>
+  </head>
+  <body>
+    <div id="chart_div" style="width: 100%; height: 500px;"></div>
+  </body>
+</html> */}

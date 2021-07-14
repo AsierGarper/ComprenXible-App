@@ -12,14 +12,23 @@
   }
   
   /* #testRecords tr:nth-child(even){background-color: #f2f2f2;} */
-  
+  #testRecords {
+      margin: 2em 0 3em;
+  }
   
   #testRecords th {
     padding-top: 12px;
     padding-bottom: 12px;
     text-align: left;
-    background-color: #F0EDE9;;
+    background-color: #F0EDE9;
     color: var(--light-turquoise-color);
+  }
+  #testRecords td {
+    padding-top: 12px;
+    padding-bottom: 12px;
+    text-align: left;
+    color: #F0EDE9;
+    background-color: var(--dark-turquoise-color);
   }
 
   tr{

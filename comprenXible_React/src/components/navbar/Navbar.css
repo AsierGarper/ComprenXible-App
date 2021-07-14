@@ -3,7 +3,7 @@
     font-style:italic;
     justify-content: space-between;
     align-items: center;
-    background-color: var(--darkreader-bg--light-turquoise-color);
+    background-color: var(--light-turquoise-color);
 }
 
 .logoAnsiedapp{
@@ -146,7 +146,7 @@
 #menu
 {
   height: 0;
-  background: var(--darkreader-bg--dark-turquoise-color);
+  background: var(--dark-turquoise-color);
   margin: 0;
   list-style-type: none;
   transition: height 0.3s 0.3s ease-in-out;

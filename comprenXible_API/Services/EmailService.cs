@@ -3,6 +3,7 @@ using MailKit.Security;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Options;
 using MimeKit;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -20,10 +21,18 @@ namespace comprenXible_API.Services
             _mailSettings = mailSettings.Value;
             _env = env;
         }
-        public async Task SendEmailAsync(EmailInfo emailInfo, double totalResults, string resultType, string userName)
+        public async Task SendEmailAsync(EmailInfo emailInfo, double totalResults, string resultType, string userName, string[] psychologistsInfo)
         {
+            string psychologistsInfoString= "";
+            foreach (var psychologist in psychologistsInfo)
+            {
+                string[] array = JsonConvert.DeserializeObject<string[]>(psychologist);
+                psychologistsInfoString += $"<p><b>{ array[0]}</b><br/> { array[1]}</p><hr></hr>";
+            }
+
             var email = new MimeMessage();
             email.Sender = MailboxAddress.Parse(_mailSettings.Email);
+            email.Subject = "Resultados Test - Comprenxible";
             email.To.Add(MailboxAddress.Parse(emailInfo.EmailTo));
 
             string templateType;
@@ -49,8 +58,10 @@ namespace comprenXible_API.Services
 
             using (StreamReader SourceReader = File.OpenText(pathToFile))
             {
+                
                 builder.HtmlBody = SourceReader.ReadToEnd();
                 builder.HtmlBody = builder.HtmlBody.Replace("$UserName$", userName);
+                builder.HtmlBody = builder.HtmlBody.Replace("$psychologist$", psychologistsInfoString);
                 email.Body = builder.ToMessageBody();
             }            
 

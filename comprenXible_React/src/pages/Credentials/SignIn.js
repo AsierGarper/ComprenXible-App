@@ -49,8 +49,8 @@ function SignIn(props) {
                         <input type="password" id="userPassword" name="userPassword" /><br></br>
                         <button type="submit" className="button button--bgTransparent-white" onClick={() => checkUser()}>Iniciar Sesión</button>
                     </form>
-                    {showModal ? <ModalCredential text="Sesión iniciada correctamente. Serás redirigido a la página principal." url="/SignIn" urlText="Iniciar sesión" /> : <span></span>}
                 </div>
+                {showModal ? <ModalCredential text="Sesión iniciada correctamente. Serás redirigido a la página principal." url="/" urlText="Ir a Inicio" /> : <span></span>}
             </div>
             <Footer />
         </div>

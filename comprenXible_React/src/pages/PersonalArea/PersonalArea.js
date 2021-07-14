@@ -5,6 +5,11 @@ import Footer from '../../components/footer/Footer.js';
 
 function PersonalArea(props) {
 
+    let sessionUserCredentials = sessionStorage.getItem("sessionUserCredentials");
+    let convertUser = JSON.parse(sessionUserCredentials);
+    console.log("Los convertUser recuperados son: " + convertUser);
+    console.log("El nombre del usuario es: " + convertUser.name);
+
     return (<>
         <div className="PersonalArea">
             <Navbar sessionUserCredentials={props.sessionUserCredentials} setSessionUserCredentials={props.setSessionUserCredentials} />

@@ -16,10 +16,10 @@ function SignIn() {
         console.log(user);
         axios.post('https://localhost:44350/api/authentication/', user)
             .then(function (response) {
-                console.log("Esta es la respuesta al post:")
-                console.log(response);
-                //Si esta bien metido, que nos meta a sessionstorage
-                sessionStorage.setItem("sessionUserCredentials", user)
+                console.log("Esta es la respuesta-data al post:")
+                console.log(response.data);
+                //Si esta bien metido, que nos meta el user a sessionstorage
+                sessionStorage.setItem("sessionUserCredentials", JSON.stringify(response.data));
             })
             .catch(function (error) {
                 console.log(error);

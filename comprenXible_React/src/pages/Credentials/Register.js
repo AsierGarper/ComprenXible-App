@@ -37,9 +37,11 @@ function Register() {
         var regexPassword = /(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,}/;
         var OKEmail = regexEmail.exec(emailInput.value);
         var OKPassword = regexPassword.exec(passwordImput.value);
-        if (OKPassword != null && OKEmail) {
+        console.log("OkPassword:" + OKPassword + ", OKEmail: " + OKEmail);
+        if (OKPassword && OKEmail) {
             sessionStorage.setItem("email", OKEmail)
             createUserObject();
+            //PENDIENTE ARREGLAAAAAAAAAAAAAAAAAARRR EL EMAIL Y SUS RESTRICCIONES
         }
     }
     function createUserObject() {

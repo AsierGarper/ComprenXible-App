@@ -41,7 +41,6 @@ function Navbar() {
                 <div className="credentials">
                     <div id="menuToggle">
                         <input type="checkbox" onClick={function () { toogleNavbar() }} />
-
                         <span></span>
                         <span></span>
                         <span></span>
@@ -55,7 +54,6 @@ function Navbar() {
                 <li><Link to="/PersonalArea">Area Personal</Link></li>
                 <li><Link to="/PersonalArea">Contacto</Link></li>
             </ul>
-
         </header>
 
     );

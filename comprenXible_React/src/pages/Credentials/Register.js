@@ -35,7 +35,6 @@ function Register(props) {
     }
 
     function checkCredentials() {
-        debugger
         let emailInput = document.getElementById("userEmail").value;
         let passwordInput = document.getElementById("userPassword").value;
         var regexEmail = /[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$/;
@@ -67,7 +66,7 @@ function Register(props) {
                 <div className="textContainer">
                     <h4>Registro:</h4>
                     <hr></hr>
-                    <form action="modifyUserData" className="userDataForm">
+                    <form action="modifyUserData" className="userDataForm" onSubmit={(e) => e.preventDefault()}>
                         <label htmlFor="userName">Nombre:</label><br></br>
                         <input type="text" id="userName" name="userName" /><br></br>
                         <label htmlFor="userEmail">Email:</label><br></br>
@@ -76,16 +75,16 @@ function Register(props) {
                         <input type="password" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,}" title="Debe contener al menos un número y una letra mayúscula y minúscula, y al menos 6 o más caracteres" id="userPassword" name="userPassword" /><br></br>
                         <label htmlFor="userSex">Sexo:</label><br></br>
                         <input type="radio" className="userSex" name="userSex" value="man" />
-                        <label htmlFor="H">Hombre</label><br></br>
+                        <label className="radioLabel" htmlFor="H">Hombre</label><br></br>
                         <input type="radio" className="userSex" name="userSex" value="woman" />
-                        <label htmlFor="M">Mujer</label><br></br>
+                        <label className="radioLabel" htmlFor="M">Mujer</label><br></br>
                         <input type="radio" className="userSex" name="userSex" value="other" />
-                        <label htmlFor="O">Otro</label><br></br>
+                        <label className="radioLabel" htmlFor="O">Otro</label><br></br>
+                        <button className="button button--bgTransparent-white" onClick={() => { checkCredentials() }} >Registrarse</button>
                     </form>
-                    <button type="submit" className="button button--bgTransparent-white" onClick={() => checkCredentials()} >Registrarse</button>
                     {/* <button type="submit" className="button button--bgTransparent-white" onClick={() => createUserObject()} >Registrarse</button> */}
                 </div>
-                {showModal ? <ModalCredential text="Usuario registrado correctamente" url="/SignIn" urlText="Iniciar sesión" /> : <span></span>}
+                {showModal ? <ModalCredential text="Usuario registrado correctamente. Inicia sesión con tus nuevas credenciales." url="/SignIn" urlText="Iniciar sesión" /> : <span></span>}
             </div>
             <Footer />
         </div>

@@ -67,20 +67,21 @@ namespace comprenXible_API.Controllers
                 totalResults = ChatbotScoreCalculation(chatbotResponse.Response, wordsScore, Convert.ToDouble(chatbotResponse.TimeSpan)) + questionsScore;
                 if (totalResults <= 5)
                 {
-                    emailInfo.EmailTo = "mireitab@gmail.com";
+                    emailInfo.EmailTo = chatbotResponse.UserEmail;
                     resultType = "no symptoms";
                 }
                 else if (totalResults > 5 && totalResults <= 10)
                 {
-                    emailInfo.EmailTo = "mireitab@gmail.com";
+                    emailInfo.EmailTo = chatbotResponse.UserEmail;
                     resultType = "mild symptoms";
                 }
                 else if (totalResults > 10 && totalResults <= 15)
                 {
-                    emailInfo.EmailTo = "mireitab@gmail.com";//CHANGE THIS TO chatbotResponse.UserEmail!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+                    emailInfo.EmailTo = chatbotResponse.UserEmail;
                     resultType = "severe symptoms";
                 }
-                chatbotResponse.UserName = "Mireia";
+
+                chatbotResponse.UserName = "Enrique";
                 UserCredentials credentials = new UserCredentials();
                 credentials.UserEmail = chatbotResponse.UserEmail;
                 credentials.UserPassword = chatbotResponse.UserPassword;
@@ -88,7 +89,7 @@ namespace comprenXible_API.Controllers
                 //Now we need to save all this to the database
                 _testService.TestStorageAsync(totalResults, credentials);
                 //And send the email
-                _emailService.SendEmailAsync(emailInfo, totalResults, resultType, chatbotResponse.UserName);
+                _emailService.SendEmailAsync(emailInfo, totalResults, resultType, chatbotResponse.UserName, chatbotResponse.psychologistsInfo);
                 return true;
             }
             else
@@ -124,7 +125,7 @@ namespace comprenXible_API.Controllers
                     }
                 }
             }
-            
+
             return questionsScore;
         }
 

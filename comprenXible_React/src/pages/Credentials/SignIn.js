@@ -7,7 +7,7 @@ import Navbar from '../../components/navbar/Navbar';
 import Footer from '../../components/footer/Footer.js';
 import axios from 'axios';
 
-function SignIn() {
+function SignIn(props) {
 
     const [user, setUserData] = useState();
 
@@ -34,10 +34,11 @@ function SignIn() {
         console.log("Tu objeto temUserObject es: ")
         console.log(tempUserObject);
         setUserData(tempUserObject);
+        props.setSessionUserCredentials(true);
     }
     return (<>
         <div className="SignIn">
-            <Navbar />
+            <Navbar sessionUserCredentials={props.sessionUserCredentials} setSessionUserCredentials={props.setSessionUserCredentials} />
             <div className="wrapper wrapper-filled">
                 <div className="textContainer">
                     <h4>Introduce tus datos:</h4>

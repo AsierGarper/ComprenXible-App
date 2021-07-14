@@ -47,6 +47,17 @@
     width: 50%;
 }
 
+.tear {
+    width: 100%;
+    background-image: url(http://mireiatz.github.io/images/vital-tears-banner.png);
+    background-repeat: no-repeat;
+    background-position: top;
+    height: 70vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 30px;
+}
 
 
 /* Con min-width: 767px creamos los estilos de escritorio */

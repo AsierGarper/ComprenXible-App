@@ -1,12 +1,40 @@
-import React from "react";
+import React, { useState } from "react";
 import './personalArea.css';
 import Navbar from '../../components/navbar/Navbar';
 import Footer from '../../components/footer/Footer.js';
+import axios from "axios";
 
 function PersonalArea(props) {
 
-    let sessionUserCredentials = sessionStorage.getItem("sessionUserCredentials");
-    let convertUser = JSON.parse(sessionUserCredentials);
+    let sessionUserCredentials = JSON.parse(sessionStorage.getItem("sessionUserCredentials"));
+    console.log(sessionUserCredentials.name);
+    console.log(sessionUserCredentials.email);
+
+    const [name, setName] = useState(sessionUserCredentials.name)
+    const [email, setEmail] = useState(sessionUserCredentials.email)
+
+    function changeName(event) {
+        setName(event.target.value);
+    }
+
+    function changeEmail(event) {
+        setEmail(event.target.value);
+    }
+
+
+    function saveChanges() {
+        let changedUser = { "name": name, "email": sessionUserCredentials.email, "newEmail": email, "password": sessionUserCredentials.password };
+        console.log("Esto es tu changedUser:")
+        console.log(changedUser);
+        axios.put('https://localhost:44350/api/users/', changedUser)
+            .then(function (response) {
+                console.log(response);
+                let newSessionUserCredentials = { "name": { name }, "gender": sessionUserCredentials.gender, "email": { email }, "newEmail": null, "password": sessionUserCredentials.password, "tests": sessionUserCredentials.tests };
+                sessionStorage.setItem("sessionUserCredentials", JSON.stringify(newSessionUserCredentials));
+            })
+            .catch(function (error) {
+                console.log(error);
+            })
 
     let tests = convertUser.tests;
     
@@ -20,19 +48,12 @@ console.log(tests);
                     <h4>Modifica tus datos:</h4>
                     <hr></hr>
 
-                    <form action="modifyUserData" className="userDataForm">
+                    <form action="modifyUserData" className="userDataForm" onSubmit={(e) => e.preventDefault()}>
                         <label htmlFor="userName">Nombre:</label><br></br>
-                        <input type="text" id="optionA" name="userForm" /><br></br>
+                        <input type="text" id="userName" name="userForm" value={name} onChange={event => changeName(event)} /><br></br>
                         <label htmlFor="userEmail">Email:</label><br></br>
-                        <input type="mail" id="optionB" name="userForm" /><br></br>
-                        <label htmlFor="userSex">Sexo:</label><br></br>
-                        <input type="radio" id="userSex" name="userForm" />
-                        <label htmlFor="H">Hombre</label><br></br>
-                        <input type="radio" id="userSex" name="userForm" />
-                        <label htmlFor="M">Mujer</label><br></br>
-                        <input type="radio" id="userSex" name="userForm" />
-                        <label htmlFor="O">Otro</label><br></br>
-                        <button type="submit" className="button button--bgTransparent-white">Guardar cambios</button>
+                        <input type="mail" id="userEmail" name="userForm" value={email} onChange={event => changeEmail(event)} /><br></br>
+                        <button type="submit" className="button button--bgTransparent-white" onClick={saveChanges}>Guardar cambios</button>
                     </form>
                     
                     <br></br>

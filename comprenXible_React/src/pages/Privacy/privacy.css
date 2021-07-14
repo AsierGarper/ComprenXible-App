@@ -1,0 +1,28 @@
+.privacyContainer {
+    /* background-color: #ffffff; */
+    color: #ffffff;
+    border-radius: 15px;
+    padding: 20px 35px;
+    margin: 20px 25px 40px;
+}
+
+hr{
+    border: solid white 2px;
+    background-color: #ffffff;
+    border-radius: 20px;
+}
+
+.privacyContainer .modalClose {
+    color: #aaa;
+    font-size: 28px;
+    height: 24px;
+    display: block;
+    margin-left: auto;
+  }
+  
+  .privacyContainer .modalClose:hover,
+  .privacyContainer .modalClose:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+  }

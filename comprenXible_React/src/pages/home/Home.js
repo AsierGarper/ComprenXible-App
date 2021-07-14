@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import {
     Link
 } from "react-router-dom";
@@ -12,21 +12,45 @@ import Navbar from '../../components/navbar/Navbar';
 import Footer from '../../components/footer/Footer.js';
 
 function Home(props) {
-    return (
 
+    const [userLogged, setUserLogged] = useState(false);
+    const [tryTest, setTryTest] = useState(false);
+    const [route, setRoute] = useState("")
+    const [error, setError] = useState(false);
+
+    useEffect(() => {
+        if (sessionStorage.getItem("sessionUserCredentials")) {
+            setRoute("/TestStart");
+
+        }
+
+    }, [])
+
+    function tried() {
+
+        if (sessionStorage.getItem("sessionUserCredentials") === null) {
+            setTryTest(true);
+        }
+    }
+
+    return (
         <div className="Home">
             <Navbar sessionUserCredentials={props.sessionUserCredentials} setSessionUserCredentials={props.setSessionUserCredentials} />
-            <div className="wrapper wrapper-filled">
+            <div class="tear">
                 <div className="initTestContainer">
-                    <Link to="/TestStart" className="button button--bgTransparent-white">COMENZAR TEST</Link>
+                    <Link onClick={tried} to={route} className="button button--bgTransparent-white" >COMENZAR TEST</Link>
+                    {tryTest ? <p className="incorrectUser">Debes iniciar sesion para realizar el test.</p> : ""}
                 </div>
+                </div>
+            <div className="wrapper wrapper-filled">
                 <div className="textSection">
                     <h4>¿En que consiste?</h4>
                     <hr></hr>
-                    <p>ComprenXible App es sistema de prueba para la detección de sintomas depresivos, cuadros de ansiedad y demás afecciones derivadas del aislamiento.
-                        Durante la pandemia, la población general ha recibido menos llamadas y se ha incrementado el sentimiento de apatía. El aislamiento ha generado soledad o angustia, y se han incrementado los trastornos alimenticios. «Los jóvenes no podían encontrarse con los amigos, conocer gente, ligar, enamorarse... Todo eso tiene unas consecuencias».
-                    </p>
-                    <p> La falta de intimidad y no poder separarse de la familia también han sido factores importantes. Se cree que «el no poder exteriorizar los problemas ha generado grandes angustias». Realizando nuestro test podrás comprobar si necesitas o no atención médica, y prevenir cuadros sintomáticos mayores provocados por el aislamiento.</p>
+                    <p>ComprenXible App es un sistema de detección de sintomas depresivos, cuadros de ansiedad y demás afecciones derivadas del aislamiento.
+                        Durante la pandemia, la población general ha tenido menos contacto con sus amigos y conocidos y se ha incrementado el sentimiento de apatía. El aislamiento ha generado soledad y angustia, y se han incrementado los trastornos alimenticios.
+                    </p> 
+                    <p> Sobre todo para los más jóvenes, la imposibilidad de estar con sus amigos y desarrollarse en un entorno social normal ha sido devastadora. La incomunicación, la falta de intimidad y el hecho de no poder separarse de la familia han sido factores importantes en este proceso. </p>                        
+                    <p> Comprenxible utiliza la analítica predictiva para detectar posibles cuadros sintomáticos de ansiedad y depresión. Tras hacer nuestro test en dos pasos, los usuarios reciben al instante los análisis y, en caso de ser positivos, los pasos recomendados a seguir.</p>                    
                 </div>
                 <div className="textSection">
                     <h4>¿Quienes somos?</h4>
@@ -37,8 +61,7 @@ function Home(props) {
                         <div className="infoContainer">
                             <img src={ProfilePicture1} alt="" className="profilePicture"></img>
                             <p>Mireia Taboada Zapatero</p>
-                            <p>taboadamirella@gmail.com</p>
-                            <FontAwesomeIcon icon={faTimesCircle} />
+                            <p>taboadamirella@gmail.com</p>                            
                             <p>PENDIENTE PONER EMOTICONOOOOOOOOOOOS LINKEDIN Y GITHUB</p>
                             <hr></hr>
                         </div>

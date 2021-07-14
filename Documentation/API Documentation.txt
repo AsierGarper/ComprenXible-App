@@ -31,6 +31,7 @@ result: gets an UserData object like this
 	"name": "Luisa",
     	"gender": "female",
    	"email": "luisa@gmail.com",
+	"newEmail": null, ----> this should be null!
     	"password": "123",
     	"tests": []
 	}
@@ -40,9 +41,9 @@ CHATBOT*
 -- POST ..api/ChatbotResponses
 
 {
-"Response": ["hola mundo", "estoy bien, gracias"],
+"Response": ["suicidio suicidio suicidio suicidio suicidio suicidio suicidio suicidio"],
 "Timespan": "0.0005436",
-"AnswersToQuestionnaire": "A,B,C,B,A,etc",
+"AnswersToQuestionnaire": "A,B,C,B,A,C,A,B,C",
 "UserEmail": "luisa@gmail.com",
 "UserName": "Enrique",
 "UserPassword": "Paco1234"
@@ -52,7 +53,7 @@ It will return true if enough, and send result to the database
 
 GET TESTS*
 
--- ..api/Tests
+--GET  ..api/Tests
 
 {
 "UserEmail": "paco@comprenxible.com",
@@ -60,3 +61,18 @@ GET TESTS*
 }
 
 returns a list of tests
+
+
+UPDATE USER'S DATA
+
+-- PUT ..api/Users
+
+{
+	"name": "Luisa",
+    	"gender": "female",
+   	"email": "luisa@gmail.com",
+	"newEmail": "luisa@hotmail.com",
+    	"password": "123"
+}                               (all fields are nullable except for the password and email.
+				 newEmail is for changing the email, but email should always be the current email)
+

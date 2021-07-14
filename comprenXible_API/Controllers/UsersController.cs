@@ -82,7 +82,7 @@ namespace comprenXible_API.Controllers
             //Note that now we need to change the email of all tests linked with this user, only in case their email has changed
             if (data.NewEmail != null)
             {
-                byte[] hashMail = pbkdf2.Hash(data.NewEmail);
+                byte[] hashMail = pbkdf2.Hash(data.Email);
 
                 if (user.HashedEmail != hashMail)
                 {
@@ -98,6 +98,7 @@ namespace comprenXible_API.Controllers
             }
             _context.User.Update(user);
             _context.CryptographicEntry.Update(keys);
+            await _context.SaveChangesAsync();
             return AcceptedAtAction("PutUser", new { id = user.Id }, user);
 
         }

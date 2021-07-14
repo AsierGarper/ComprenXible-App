@@ -28,7 +28,7 @@ namespace comprenXible_API.Controllers
             {
                 this.authenticationService = authenticationService;
                 _context = context;
-            _testService = testService;
+                _testService = testService;
             }
 
 
@@ -55,17 +55,17 @@ namespace comprenXible_API.Controllers
                     }
                     else
                     {
-                        return Unauthorized("Password seems to be incorrect");
+                        return Unauthorized("No account found with these credentials");
                     }
                 }
                 else
                 {
-                return Unauthorized("No account found with this email");
+                return Unauthorized("No account found with these credentials");
                 }
             }
             catch (Exception)
             {
-                return Unauthorized("Oops! And unknown error happened");
+                return Unauthorized("And unknown error happened");
             }
         }
 

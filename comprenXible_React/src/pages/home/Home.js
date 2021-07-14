@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import {
     Link
 } from "react-router-dom";
@@ -12,13 +12,34 @@ import Navbar from '../../components/navbar/Navbar';
 import Footer from '../../components/footer/Footer.js';
 
 function Home(props) {
-    return (
 
+    const [userLogged, setUserLogged] = useState(false);
+    const [tryTest, setTryTest] = useState(false);
+    const [route, setRoute] = useState("")
+    const [error, setError] = useState(false);
+
+    useEffect(() => {
+        if (sessionStorage.getItem("sessionUserCredentials")) {
+            setRoute("/TestStart");
+
+        }
+
+    }, [])
+
+    function tried() {
+
+        if (sessionStorage.getItem("sessionUserCredentials") === null) {
+            setTryTest(true);
+        }
+    }
+
+    return (
         <div className="Home">
             <Navbar sessionUserCredentials={props.sessionUserCredentials} setSessionUserCredentials={props.setSessionUserCredentials} />
             <div className="wrapper wrapper-filled">
                 <div className="initTestContainer">
-                    <Link to="/TestStart" className="button button--bgTransparent-white">COMENZAR TEST</Link>
+                    <Link onClick={tried} to={route} className="button button--bgTransparent-white" >COMENZAR TEST</Link>
+                    {tryTest ? <p className="incorrectUser">Debes iniciar sesion para realizar el test.</p> : ""}
                 </div>
                 <div className="textSection">
                     <h4>¿En que consiste?</h4>

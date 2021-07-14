@@ -11,11 +11,11 @@ import { faTimesCircle } from '@fortawesome/free-regular-svg-icons'
 import Navbar from '../../components/navbar/Navbar';
 import Footer from '../../components/footer/Footer.js';
 
-function Home() {
+function Home(props) {
     return (
 
         <div className="Home">
-            <Navbar />
+            <Navbar sessionUserCredentials={props.sessionUserCredentials} setSessionUserCredentials={props.setSessionUserCredentials} />
             <div className="wrapper wrapper-filled">
                 <div className="initTestContainer">
                     <Link to="/TestStart" className="button button--bgTransparent-white">COMENZAR TEST</Link>

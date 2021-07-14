@@ -4,12 +4,8 @@
     justify-content: space-between;
     align-items: center;
     background-color: var(--darkreader-bg--light-turquoise-color);
-    /* background-color: var(--dark-turquoise-color); */
 }
 
-/* .navbar a{
-  height: 100
-} */
 .logoAnsiedapp{
   width: 250px;
   height: 50%;
@@ -23,17 +19,6 @@
   margin: 0 10px;
 }
 
-/* -----------------------------Hamburguesaaaaa---------------------- */
-
-
-
-
-
-/* --------------------------------------------------- */
-
-/* .navbarLinks a, .credentials{
-  display: none;
-} */
 
 .navbarLinks a:hover {
   background-color: #B5E3D8;
@@ -72,8 +57,6 @@
   }
 }
 
-
-
 #menuToggle
 {
   display: block;
@@ -110,9 +93,6 @@
   -webkit-touch-callout: none;
 }
 
-/*
- * Just a quick hamburger
- */
 #menuToggle span
 {
   display: block;
@@ -145,10 +125,6 @@
 }
 
 
-/* 
- * Transform all the slices of hamburger
- * into a crossmark.
- */
 #menuToggle input:checked ~ span
 {
   opacity: 1;
@@ -156,31 +132,20 @@
   background: white;
 }
 
-/*
- * But let's hide the middle one.
- */
 #menuToggle input:checked ~ span:nth-last-child(3)
 {
   opacity: 0;
   transform: rotate(0deg) scale(0.2, 0.2);
 }
 
-/*
- * Ohyeah and the last one should go the other direction
- */
 #menuToggle input:checked ~ span:nth-last-child(2)
 {
   transform: rotate(-45deg) translate(0, -1px);
 }
 
-/*
- * Make this absolute positioned
- * at the top left of the screen
- */
 #menu
 {
   height: 0;
-  /* opacity: 0; */
   background: var(--darkreader-bg--dark-turquoise-color);
   margin: 0;
   list-style-type: none;
@@ -207,10 +172,11 @@
 
 #menu.menu--show
 {
-  height: 210px;
-  /* opacity: 1; */
+  height: 150px;
   transition: height 0.2s;
 }
+
+
 #menu.menu--show li
 {
  pointer-events: initial;
@@ -221,10 +187,6 @@
   transform: translateX(0);
 }
 
-
-/*
- * And let's slide it in from the left
- */
 #menuToggle input:checked ~ ul
 {
   transform: none;

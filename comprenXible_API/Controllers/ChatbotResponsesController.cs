@@ -35,7 +35,7 @@ namespace comprenXible_API.Controllers
             string chatbotResponseWithoutPunctuation = string.Empty;
             foreach (var response in chatbotResponse.Response)
             {
-                chatbotResponseWithoutPunctuation = Regex.Replace(response, @"[^\w\s]", "");
+                chatbotResponseWithoutPunctuation += Regex.Replace(response, @"[^\w\s]", "");
             }
 
             string[] chatbotResponseStrings = chatbotResponseWithoutPunctuation.Split(' ');

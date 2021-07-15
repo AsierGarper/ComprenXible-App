@@ -58,7 +58,7 @@ function Navbar(props) {
                     <li><Link to="/SignIn">Iniciar Sesion</Link></li>
                     <li><Link to="/Register">Registrarse</Link></li>
                 </>}
-                <li><Link to="/PersonalArea">Contacto</Link></li>
+                <li><Link to="/ContactUs">Contacto</Link></li>
 
             </ul>
         </header>

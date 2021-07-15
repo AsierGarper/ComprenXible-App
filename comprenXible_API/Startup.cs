@@ -79,6 +79,7 @@ namespace comprenXible_API
             services.AddTransient<TokenService>();
             services.Configure<EmailSettings>(Configuration.GetSection("EmailSettings"));
             services.AddTransient<IEmailService, EmailService>();
+            services.AddTransient<IContactEmailService, ContactEmailService>();
             services.AddTransient<ITestService, TestService>();
         }
 

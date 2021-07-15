@@ -36,7 +36,7 @@ function Home(props) {
     return (
         <div className="Home">
             <Navbar sessionUserCredentials={props.sessionUserCredentials} setSessionUserCredentials={props.setSessionUserCredentials} />
-            <div class="tear">
+            <div className="tear">
                 <div className="initTestContainer">
                     <Link onClick={tried} to={route} className="button button--bgTransparent-white" >COMENZAR TEST</Link>
                     {tryTest ? <p className="incorrectUser">Debes iniciar sesion para realizar el test.</p> : ""}

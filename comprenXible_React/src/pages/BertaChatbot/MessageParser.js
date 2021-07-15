@@ -23,7 +23,7 @@ class MessageParser {
                 console.log(response.data.location);
                 lat = response.data.location.lat;
                 lng = response.data.location.lng;
-                axios.post(`https://maps.googleapis.com/maps/api/place/textsearch/json?query=psicologos&location=${lat},${lng}&radius=10000&key=AIzaSyCD7_n8XXIePLC2kvdA8ZjCFvwj2ltrWOk`)
+                axios.post(`https://maps.googleapis.com/maps/api/place/textsearch/json?query=psicologos&location=${lat},${lng}&radius=5000&key=AIzaSyCD7_n8XXIePLC2kvdA8ZjCFvwj2ltrWOk`)
                     .then(function (response2) {
                         console.log(response2)
                         locations = response2.data.results;
@@ -42,7 +42,7 @@ class MessageParser {
                         console.log(locationName)
                     }).then(() => {
                         bertaAPICall(message, self, psychologists);
- 
+
                     })
                     .catch(function (error) {
                         bertaAPICall(message, self, []);
@@ -57,22 +57,21 @@ class MessageParser {
 export default MessageParser;
 
 
+function bertaAPICall(message, self, psychologists) {
 
-function bertaAPICall(message, self, psychologists){
-  
-        const lowerCaseMessage = " " + message.toLowerCase() + " ";
-        let wordsInMessage = lowerCaseMessage.split(" ");
+    const lowerCaseMessage = " " + message.toLowerCase() + " ";
+    let wordsInMessage = lowerCaseMessage.split(" ");
 
-        let userCredentials = sessionStorage.getItem("sessionUserCredentials");
-        userCredentials = JSON.parse(userCredentials);
-        let userAnswersString = sessionStorage.getItem("userAsnwersString");
-        chatbotResponses = chatbotResponses.concat(lowerCaseMessage);
+    let userCredentials = sessionStorage.getItem("sessionUserCredentials");
+    userCredentials = JSON.parse(userCredentials);
+    let userAnswersString = sessionStorage.getItem("userAsnwersString");
+    chatbotResponses = chatbotResponses.concat(lowerCaseMessage);
 
-        let date = new Date();
-        let endTime = date.getTime();
-        let startTime = sessionStorage.getItem("startTime");
-        let timeSpan = endTime - startTime;
-        var timeSpanMinutes = timeSpan / 60000;
+    let date = new Date();
+    let endTime = date.getTime();
+    let startTime = sessionStorage.getItem("startTime");
+    let timeSpan = endTime - startTime;
+    var timeSpanMinutes = timeSpan / 60000;
     let chatbotResponsesObj = {
         response: chatbotResponses,
         timeSpan: timeSpanMinutes.toString(),

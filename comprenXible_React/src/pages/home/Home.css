@@ -50,11 +50,25 @@
     background-image: url(http://mireiatz.github.io/images/vital-tears-banner.png);
     background-repeat: no-repeat;
     background-position: top;
-    height: 70vh;
+    height: calc(100vh - 63.05px);
     display: flex;
     align-items: center;
     justify-content: center;
     margin-bottom: 30px;
+    position: relative;
+}
+
+.slogan{
+    position: absolute;
+    bottom: 30%;
+    text-align: center;
+    padding: 12px;
+     
+}
+
+.slogan h2 {
+    color: #ffffff;   
+    font-weight: lighter;
 }
 
 

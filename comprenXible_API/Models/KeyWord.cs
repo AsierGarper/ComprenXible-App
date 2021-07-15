@@ -12,6 +12,5 @@ namespace comprenXible_API.Models
         public int Id { get; set; }
         public string Value { get; set; }
         public double Score { get; set; }
-        public List<KeyWordReiteration> Reiteration { get; set; }
     }
 }

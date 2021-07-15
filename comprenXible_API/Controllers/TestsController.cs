@@ -28,29 +28,30 @@ namespace comprenXible_API.Controllers
         }
 
         //GET: api/Tests
-        [HttpGet]
-        public async Task<ActionResult<IEnumerable<TestData>>> GetTest(UserCredentials userCredentials)
+        [HttpPost]
+        public ActionResult<IEnumerable<TestData>> GetTest([FromBody] UserCredentials userCredentials)
         {
-            CryptographicEntry keys = await _context.CryptographicEntry.Where(c => c.UserEmail == pbkdf2.Hash(userCredentials.UserEmail)).FirstOrDefaultAsync();
+            //CryptographicEntry keys = await _context.CryptographicEntry.Where(c => c.UserEmail == pbkdf2.Hash(userCredentials.UserEmail)).FirstOrDefaultAsync();
 
-            List<TestData> data = _testService.GetTests(keys, userCredentials);
+            //List<TestData> data = _testService.GetTests(keys, userCredentials);
+            List<TestData> data = new List<TestData>();
 
             return data;
         }
 
         // GET: api/Tests/5
-        [HttpGet("{id}")]
-        public async Task<ActionResult<Test>> GetTest(int id)
-        {
-            var test = await _context.Test.FindAsync(id);
+        //[HttpGet("{id}")]
+        //public async Task<ActionResult<Test>> GetTest(int id)
+        //{
+        //    var test = await _context.Test.FindAsync(id);
 
-            if (test == null)
-            {
-                return NotFound();
-            }
+        //    if (test == null)
+        //    {
+        //        return NotFound();
+        //    }
 
-            return test;
-        }
+        //    return test;
+        //}
 
         // PUT: api/Tests/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754

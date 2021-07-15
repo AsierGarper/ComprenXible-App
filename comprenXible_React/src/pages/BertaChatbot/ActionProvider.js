@@ -72,7 +72,7 @@ let responsesToTired = [
 
 let responsesToSuicide = [
     "Tiene que ser duro sentirte así. ¿Hay algo que mejore esa sensación?",
-    "Siento que te encuentres un un momento tan bajo. Estoy contigo. ¿Qué hace que te sientas así?",
+    "Siento que te encuentres en un momento tan bajo. Estoy contigo. ¿Qué hace que te sientas así?",
     "Comprendo que tu situación es grave, lo siento. Dime, ¿cómo te influye esto en tu día a día?"];
 
 let responsesToInsomnia = [

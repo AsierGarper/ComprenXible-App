@@ -14,7 +14,7 @@ namespace comprenXible_API.Models
         public double Score { get; set; }
 
         //FFKK
-        public int QuestionResultId { get; set; }
+        public int QuestionsResultId { get; set; }
         public QuestionsResult QuestionsResult { get; set; }
 
         public int ChatResultId { get; set; }

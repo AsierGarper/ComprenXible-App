@@ -19,14 +19,12 @@
     border-radius: 20px;
 }
 
-#finalLine{
-    display: none;
-}
 
 .infoContainer{
     display: flex;
     flex-direction: column;
     align-items: center;
+    margin: 20px 0;
 }
 
 .infoContainer img{
@@ -66,9 +64,5 @@
     .picturesContainer{
         display: flex;
         flex-direction: row;
-    }
-
-    #finalLine{
-        display:block;
     }
 }

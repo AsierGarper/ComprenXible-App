@@ -80,7 +80,7 @@ function Register(props) {
                         <label className="radioLabel" htmlFor="M">Mujer</label><br></br>
                         <input type="radio" className="userSex" name="userSex" value="other" />
                         <label className="radioLabel" htmlFor="O">Otro</label><br></br>
-                        <button className="button button--bgTransparent-white" onClick={() => { checkCredentials() }} >Registrarse</button>
+                        <button className="button registerButton button--bgTransparent-white" onClick={() => { checkCredentials() }} >Registrarse</button>
                     </form>
                     {/* <button type="submit" className="button button--bgTransparent-white" onClick={() => createUserObject()} >Registrarse</button> */}
                 </div>

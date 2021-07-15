@@ -3,14 +3,15 @@ import Navbar from '../../components/navbar/Navbar';
 import Footer from '../../components/footer/Footer';
 import '../Credentials/signIn.css';
 import './ContactUs.css';
+import ModalCredential from '../../components/modals/ModalCredential';
 import axios from 'axios';
 
 function ContactUs(props) {
 
-  const [status, setStatus] = useState("Submit");
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [message, setMessage] = useState("");
+  const [showModal, setShowModal] = useState(false);
 
   function changeName(event) {
     setName(event.target.value)
@@ -30,10 +31,21 @@ function ContactUs(props) {
       emailAddress: email,
       message: message
     }
-    debugger;
     axios.post("https://localhost:44350/api/ContactEmails", emailBody)
       .then(function (response) {
+        console.log(response);
+        setShowModal(true);
+        resetForm();
       })
+      .catch(function (error) {
+        console.log(error);
+      })
+  }
+
+  function resetForm() {
+    var ele = document.getElementsByName("formArea");
+    for (var i = 0; i < ele.length; i++)
+      ele[i].value = "";
   }
 
 
@@ -47,23 +59,24 @@ function ContactUs(props) {
             <hr></hr>
             <form className="contactForm" action="sendEmail" onSubmit={(e) => e.preventDefault()}>
               <div >
-                <label htmlFor="name">Name:</label>
-                <input type="text" id="name" required value={name} onChange={event => changeName(event)} />
+                <label htmlFor="name">Nombre:</label>
+                <input type="text" id="name" name="formArea" required value={name} onChange={event => changeName(event)} />
               </div>
               <p></p>
               <div >
                 <label htmlFor="email">Email:</label>
-                <input type="email" id="email" required value={email} onChange={event => changeEmail(event)} />
+                <input type="email" id="email" name="formArea" required value={email} onChange={event => changeEmail(event)} />
               </div>
               <p></p>
               <div >
-                <label htmlFor="message">Message:</label>
+                <label htmlFor="message">Mensaje:</label>
                 <p></p>
-                <textarea id="message" required value={message} onChange={event => changeMessage(event)} />
+                <textarea id="message" name="formArea" required value={message} onChange={event => changeMessage(event)} />
               </div>
-              <button type="submit" onClick={sendEmail}>{status}</button>
+              <button type="submit" className="button button--bgTransparent-white" onClick={sendEmail}>Enviar</button>
             </form>
           </div>
+          {showModal ? <ModalCredential text="Mensaje enviado correctamente." url="/" urlText="Ir a Inicio" /> : <span></span>}
         </div>
       </div>
       <Footer />

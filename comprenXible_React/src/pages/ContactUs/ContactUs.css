@@ -1,3 +1,8 @@
 .contactForm label {
     display: block;
 }
+
+textarea{
+ width: 100%;
+ height: 40vh;
+}

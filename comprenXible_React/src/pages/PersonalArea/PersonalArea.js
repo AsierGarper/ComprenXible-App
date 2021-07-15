@@ -13,25 +13,15 @@ function PersonalArea(props) {
     let authenticationUser = tempAuthenticationUser;
     const [funciona, setFunciona] = useState(false)
 
-    // const [authenticationUser, setAuthenticationUser] = useState()
-
     useEffect(() => {
         axios.post('https://localhost:44350/api/authentication/', authenticationUser)
             .then(function (response) {
-                // console.log("Esto te da el post, data");
-                // console.log(response.data);
-                // console.log("Esto da el stringify")
-                // console.log(JSON.stringify(response.data))
-                // console.log("Esto da el parse")
-                // console.log(JSON.parse(response.data))
                 sessionStorage.setItem("sessionUserCredentials", JSON.stringify(response.data));
                 setFunciona(true)
             })
             .catch(function (error) {
                 console.log(error);
             })
-
-        debugger
     }, [authenticationUser])
 
     debugger
@@ -63,9 +53,7 @@ function PersonalArea(props) {
             .catch(function (error) {
                 console.log(error);
             })
-
     }
-
     return (<>
         {funciona ?
 
@@ -93,15 +81,15 @@ function PersonalArea(props) {
 
                             {(sessionUserCredentials.tests).length !== 0 && sessionUserCredentials != null ?
                                 tests.map((test, index) => {
-                                    console.log(tempUserObject)
-                                    debugger
                                     let dateParse = new Date(test.date)
                                     let date = `${dateParse.getDate()}-${dateParse.getMonth() + 1}-${dateParse.getFullYear()}`
                                     return (
 
                                         <tr key={index}>
                                             <td>{date}</td>
-                                            <td>{test.score}</td>
+                                            {test.score < 5 ? <td>No se muestran rasgos depresivos.</td> : <></>}
+                                            {test.score >= 5 && test.score <= 10 ? <td>Síntomas leves.</td> : <></>}
+                                            {test.score > 10 && test.score <= 15 ? <td>Síntomas severos, debe acudir a especialista.</td> : <></>}
                                         </tr>
                                     )
                                 })
@@ -112,13 +100,6 @@ function PersonalArea(props) {
                                 </tr>
                             }
                         </table>
-                        {/* <iframe title="map"
-                        width="600"
-                        height="450"
-                        loading="lazy"
-                        allowfullscreen
-                        src="https://www.google.com/maps/embed/v1/place?key=AIzaSyD9ecVzHiRU3frlwA9-R-q40p5GlVEXilU&q=current+location">
-                    </iframe> */}
                     </div>
 
                 </div>
@@ -130,3 +111,4 @@ function PersonalArea(props) {
 }
 
 export default PersonalArea;
+

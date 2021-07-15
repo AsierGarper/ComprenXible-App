@@ -32,13 +32,9 @@ function SignIn(props) {
                 setIncorrectUser(true);
             })
     }
-
     function changeValue() {
         setIncorrectUser(false)
     }
-
-
-
     return (<>
         <div className="SignIn">
             <Navbar sessionUserCredentials={props.sessionUserCredentials} setSessionUserCredentials={props.setSessionUserCredentials} />

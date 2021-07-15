@@ -65,12 +65,12 @@ namespace comprenXible_API.Controllers
                     wordsScore = 3;
                 }
                 totalResults = ChatbotScoreCalculation(chatbotResponse.Response, wordsScore, Convert.ToDouble(chatbotResponse.TimeSpan)) + questionsScore;
-                if (totalResults <= 5)
+                if (totalResults < 5)
                 {
                     emailInfo.EmailTo = chatbotResponse.UserEmail;
                     resultType = "no symptoms";
                 }
-                else if (totalResults > 5 && totalResults <= 10)
+                else if (totalResults >= 5 && totalResults <= 10)
                 {
                     emailInfo.EmailTo = chatbotResponse.UserEmail;
                     resultType = "mild symptoms";

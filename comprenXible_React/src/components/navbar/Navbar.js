@@ -12,11 +12,12 @@ import './Navbar.css';
 
 function Navbar(props) {
     const [showMenu, setShowMenu] = useState(false);
-
     useEffect(() => {
         if (!props.sessionUserCredentials) {
             if (sessionStorage.getItem("sessionUserCredentials")) {
                 sessionStorage.removeItem("sessionUserCredentials");
+                sessionStorage.removeItem("startTime");
+                sessionStorage.removeItem("userAsnwersString");
             }
             console.log("sessionUserCredentials true")
         } else {
@@ -52,7 +53,7 @@ function Navbar(props) {
 
             <ul id="menu" className={showMenu === true ? "menu--show" : ""}>
                 {props.sessionUserCredentials ? <>
-                    <li><a href="?" onClick={() => props.setSessionUserCredentials(false)}>Logout</a></li>
+                    <li><Link to="/" onClick={() => props.setSessionUserCredentials(false)}>Logout</Link></li>
                     <li><Link to="/PersonalArea">Area Personal</Link></li>
                 </> : <>
                     <li><Link to="/SignIn">Iniciar Sesion</Link></li>

@@ -14,7 +14,6 @@ namespace comprenXible_API.Models
         public byte[] Date { get; set; }
 
         public byte[] UserEmail { get; set; }
-        public User User { get; set; }
 
         public Test(byte[] score, byte[] date, byte[] userEmail)
         {

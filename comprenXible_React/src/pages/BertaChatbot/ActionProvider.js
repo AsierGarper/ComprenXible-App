@@ -42,33 +42,38 @@ let responsesToNegativity = [
     "Has dicho tóxico o negativo. Cuéntame más sobre eso."];
 
 let responsesToLoneliness = [
-    "¿Cómo te hace sentir estar en soledad?",
-    "Y, ¿qué te hace sentir la soledad?",
+    // "¿Cómo te hace sentir estar en soledad?",
+    // "Y, ¿qué te hace sentir la soledad?",
     "¿Cómo te afecta la soledad?",
-    "Comprendo. Y, ¿cuándo estás en soledad?"];
+    // "Comprendo. Y, ¿cuándo estás en soledad?"
+];
 
 let responsesToSadness = [
-    "A parte de triste, ¿qué otros estados de ánimo aparecen a lo largo de tu día?",
-    "¿Cómo te afecta estar triste?",
+    // "A parte de triste, ¿qué otros estados de ánimo aparecen a lo largo de tu día?",
+    // "¿Cómo te afecta estar triste?",
     "Y, ¿por qué te sientes triste?",
-    "Comprendo. Y, ¿cuándo te sueles sentir triste?"];
+    // "Comprendo. Y, ¿cuándo te sueles sentir triste?"
+];
 
 let responsesToDepression = [
     "Comprendo que te sientes muy mal. ¿Qué hace que te sientas así?",
-    "Y, ¿cuándo sientes depresión?",
+    // "Y, ¿cuándo sientes depresión?",
     "Vale. Y, ¿cómo te afecta este sentimiento de depresión en el día a día?",
-    "¿Qué hace que mejore tu sensación de depresión?"];
+    "¿Qué hace que mejore tu sensación de depresión?"
+];
 
 let responsesToAnger = [
     "A parte de enfado, ¿qué otros estados de ánimo aparecen a lo largo de tu día?",
-    "Parece que sientes rabia o enfado, ¿qué hace que te sientas así?",
-    "Comprendo. ¿Cuándo sueles sentir frustración o irritación?",
-    "Vale. Y, ¿cómo te influye el enfado?"];
+    // "Parece que sientes rabia o enfado, ¿qué hace que te sientas así?",
+    // // "Comprendo. ¿Cuándo sueles sentir frustración o irritación?",
+    // "Vale. Y, ¿cómo te influye el enfado?"
+];
 
 let responsesToTired = [
     "Comprendo que sientes cansancio. ¿Qué más sientes?",
     "Parece que sientes cansancio. ¿Cómo afecta eso a tu estado de ánimo?",
-    "Y, ¿cuándo estás cansado?"];
+    // "Y, ¿cuándo estás cansado?"
+];
 
 let responsesToSuicide = [
     "Tiene que ser duro sentirte así. ¿Hay algo que mejore esa sensación?",
@@ -78,7 +83,8 @@ let responsesToSuicide = [
 let responsesToInsomnia = [
     "Me parece que has mencionado que te cuesta dormir. ¿Sabrías describir por qué?",
     "Y, ¿hay algo que mejore tu insomnio?",
-    "¿Cuándo te cuesta dormir?"];
+    // "¿Cuándo te cuesta dormir?"
+];
 
 let responsesToGuilt = [
     "Comprendo que quizá te sientes culpable. ¿Puedes contarme más sobre eso?",
@@ -113,7 +119,7 @@ let responsesToAntonyms = [
 let responsesToBadFeelings = [
     "Ya veo. ¿Hay algún otro sentimiento negativo que tengas a lo largo del día?",
     "Y, ¿podrías contarme en más detalle por qué te sientes así?",
-    "Comprendo. Y, ¿cuándo te sueles sentir así?",
+    // "Comprendo. Y, ¿cuándo te sueles sentir así?",
     "¿Cómo te influye eso en el día a día?",
     "Vale, cuéntame, ¿hay algo que mejore o empeore esa sensación?",
     "Y, ¿cómo cambia tu ánimo a lo largo del día?"];
@@ -129,9 +135,9 @@ let responsesToNoKeywords = [
     "Vale, cuéntame más sobre eso.",
     "¿Hay algún otro adjetivo con el que describirías tu estado de ánimo o estado emocional?",
     "Ya veo, sigue contándome cómo te sientes en ese sentido.",
-    "Vale, Comprendo. Ahora, cuéntame sobre cómo te sientes a lo largo del día.",
+    "Vale, comprendo. Ahora, cuéntame sobre cómo te sientes a lo largo del día.",
     "Cuéntame más, te leo.",
-    "Vale, Comprendo. Otra cosa. Y, cuando estás con tus amistades, ¿cómo te encuentras?",
+    "Vale, comprendo. Otra cosa. Y, cuando estás con tus amistades, ¿cómo te encuentras?",
     "¿Me podrías hablar más detalladamente sobre esto?",
     "Vale. Y, ¿qué tal te encuentras cuando estás con tu familia?",
     "Me gustaría saber más qué piensas sobre este tema.",
@@ -387,7 +393,7 @@ class ActionProvider {
         this.updateChatbotState(responseToNoKeywordsMessage)
     }
     endConversation() {
-        const endConversationMessage = this.createChatBotMessage("Ya tengo suficiente información para hacer una evaluación de tu estado. Para finalizar el test, por favor, haz click en Finalizar Test. Gracias por compartir este rato conmigo, ¡hasta la próxima!", { widget: "EndTest" })
+        const endConversationMessage = this.createChatBotMessage("Muy bien, ya tengo suficiente información para hacer una evaluación de tu estado. Para finalizar el test, por favor, haz click en Finalizar Test. Gracias por compartir este rato conmigo.", { widget: "EndTest" })
         this.updateChatbotState(endConversationMessage)
     }
 

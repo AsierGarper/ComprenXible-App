@@ -24,7 +24,6 @@ function PersonalArea(props) {
             })
     }, [authenticationUser])
 
-    debugger
     let sessionUserCredentials = sessionStorage.getItem("sessionUserCredentials");
     sessionUserCredentials = JSON.parse(sessionUserCredentials);
     var tests = sessionUserCredentials.tests;

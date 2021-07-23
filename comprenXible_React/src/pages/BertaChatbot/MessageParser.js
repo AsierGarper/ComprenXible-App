@@ -18,12 +18,12 @@ class MessageParser {
         let locationName;
         let psychologists = [];
         let psychologist = [];
-        axios.post("https://www.googleapis.com/geolocation/v1/geolocate?key=AIzaSyCD7_n8XXIePLC2kvdA8ZjCFvwj2ltrWOk")
+        axios.post("https://www.googleapis.com/geolocation/v1/geolocate?key=here_goes_your_key")
             .then(function (response) {
                 console.log(response.data.location);
                 lat = response.data.location.lat;
                 lng = response.data.location.lng;
-                axios.post(`https://maps.googleapis.com/maps/api/place/textsearch/json?query=psicologos&location=${lat},${lng}&radius=5000&key=AIzaSyCD7_n8XXIePLC2kvdA8ZjCFvwj2ltrWOk`)
+                axios.post(`https://maps.googleapis.com/maps/api/place/textsearch/json?query=psicologos&location=${lat},${lng}&radius=5000&key=here_your_key_again`)
                     .then(function (response2) {
                         console.log(response2)
                         locations = response2.data.results;

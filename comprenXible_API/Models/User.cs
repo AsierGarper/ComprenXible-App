@@ -15,6 +15,5 @@ namespace comprenXible_API.Models
         public byte[] Gender { get; set; }
         public byte[] Email { get; set; }
         public byte[] Password { get; set; }
-        public List<Test> Tests { get; set; }
     }
 }

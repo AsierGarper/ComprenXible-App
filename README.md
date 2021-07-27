@@ -42,12 +42,12 @@ If you want to run Comprenxible in your computer, you'll need several things fir
 
 ## Contact
 
-If you found this project interesting, check out our GitHub portfolios: 
+If you found this project interesting, you can check out our GitHub portfolios: 
 - [Mireia][Mireia_git]
 - [Asier][Asier_git]
 - [Enrique][Enrique_git]
 
-and also contact us via LinkedIn
+and also contact us via LinkedIn:
 - [Mireia][Mireia_link]
 - [Asier][Asier_link]
 - [Enrique][Enrique_link]
